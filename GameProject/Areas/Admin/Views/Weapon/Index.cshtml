@@ -1,0 +1,11 @@
+﻿@model IEnumerable<GameProject.Models.Entities.Weapon>
+@{
+    ViewBag.Title = "Bronie";
+}
+
+<h2>Bronie</h2>
+
+@foreach(var weapon in Model)
+{
+    <p>@weapon.Id</p>
+}

@@ -12,9 +12,6 @@ namespace GameProject.Models.Entities
         public int Id { get; set; }
 
         [Required]
-        public ArmorType Type { get; set; }
-
-        [Required]
         public string Name { get; set; }
 
         [Required]
@@ -22,6 +19,9 @@ namespace GameProject.Models.Entities
 
         [Required]
         public int MaxArmorClass { get; set; }
+
+        [Required]
+        public int RequireStrength { get; set; }
 
         [Required]
         public int QualityLevel { get; set; }

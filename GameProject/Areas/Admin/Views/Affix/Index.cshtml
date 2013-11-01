@@ -1,4 +1,4 @@
-﻿@model IEnumerable<GameProject.Models.Entities.Weapon>
+﻿@model IEnumerable<GameProject.Models.Entities.Affix>
 
 @{
     ViewBag.Title = "Index";
@@ -18,13 +18,22 @@
             @Html.DisplayNameFor(model => model.Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.MinDamage)
+            @Html.DisplayNameFor(model => model.ForWeapon)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.MaxDamage)
+            @Html.DisplayNameFor(model => model.ForShield)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.RequireStrength)
+            @Html.DisplayNameFor(model => model.ForArmor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ForJewelry)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MinStrength)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaxStrength)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.QualityLevel)
@@ -44,13 +53,22 @@
             @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.MinDamage)
+            @Html.DisplayFor(modelItem => item.ForWeapon)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.MaxDamage)
+            @Html.DisplayFor(modelItem => item.ForShield)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.RequireStrength)
+            @Html.DisplayFor(modelItem => item.ForArmor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ForJewelry)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MinStrength)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaxStrength)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.QualityLevel)

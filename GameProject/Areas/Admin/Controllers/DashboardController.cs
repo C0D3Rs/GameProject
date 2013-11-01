@@ -8,8 +8,6 @@ namespace GameProject.Areas.Admin.Controllers
 {
     public class DashboardController : Controller
     {
-        //
-        // GET: /Admin/Default/
         public ActionResult Index()
         {
             return View();

@@ -121,12 +121,14 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AffixController.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Admin\Controllers\WeaponController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\EnumHelper.cs" />
     <Compile Include="Models\DatabaseContext.cs" />
     <Compile Include="Models\Entities\Shield.cs" />
     <Compile Include="Models\Entities\Affix.cs" />
@@ -135,7 +137,6 @@
     <Compile Include="Models\Entities\Armor.cs" />
     <Compile Include="Models\Enums\UserRole.cs" />
     <Compile Include="Models\Enums\ItemType.cs" />
-    <Compile Include="Models\Enums\ArmorType.cs" />
     <Compile Include="Models\Enums\JewelryType.cs" />
     <Compile Include="Models\Enums\WeaponType.cs" />
     <Compile Include="Models\Enums\AffixType.cs" />
@@ -150,11 +151,22 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Admin\Views\Weapon\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Dashboard\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Affix\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Affix\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Affix\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Affix\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Affix\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Weapon\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Weapon\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Weapon\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Weapon\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Weapon\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -186,7 +198,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
-    <None Include="Project_Readme.html" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -24,6 +24,9 @@ namespace GameProject.Models.Entities
         public int MaxDamage { get; set; }
 
         [Required]
+        public int RequireStrength { get; set; }
+
+        [Required]
         public int QualityLevel { get; set; }
 
         [Required]

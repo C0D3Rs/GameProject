@@ -1,13 +1,13 @@
-﻿@model GameProject.Models.Entities.Weapon
+﻿@model GameProject.Models.Entities.Item
 
 @{
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Details Jewelry</h2>
 
 <div>
-    <h4>Weapon</h4>
+    <h4>Item</h4>
 	<hr />
     <dl class="dl-horizontal">
         <dt>
@@ -19,35 +19,19 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.JewelryType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JewelryType)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.Name)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MinDamage)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MinDamage)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MaxDamage)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MaxDamage)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.RequireStrength)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.RequireStrength)
         </dd>
 
         <dt>

@@ -11,11 +11,6 @@ namespace GameProject.Models
     public class DatabaseContext : DbContext
     {
         public DbSet<Item> Items { get; set; }
-        public DbSet<Weapon> Weapons { get; set; }
-        public DbSet<Shield> Shields { get; set; }
-        public DbSet<Armor> Armors { get; set; }
-        public DbSet<Jewelry> Jewelries { get; set; }
-
         public DbSet<Affix> Affixes { get; set; }
 
         public DatabaseContext()

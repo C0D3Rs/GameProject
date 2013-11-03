@@ -1,0 +1,82 @@
+﻿@model GameProject.Models.Entities.Item
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details Weapon</h2>
+
+<div>
+    <h4>Item</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WeaponType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WeaponType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MinDamage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MinDamage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaxDamage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaxDamage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RequireStrength)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RequireStrength)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QualityLevel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QualityLevel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

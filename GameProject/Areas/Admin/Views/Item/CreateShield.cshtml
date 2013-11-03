@@ -1,28 +1,19 @@
-﻿@model GameProject.Models.Entities.Weapon
+﻿@model Item
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Create";
 }
 
-<h2>Edit</h2>
+<h2>Create Shield</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Weapon</h4>
-        <hr />
-        @Html.ValidationSummary(true)
-        @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.Type)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Type, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Type, EnumHelper.GetSelectList<WeaponType>())
-                @Html.ValidationMessageFor(model => model.Type)
-            </div>
-        </div>
+    <div class="form-horizontal">
+        <h4>Item</h4>
+        <hr />
 
         <div class="form-group">
             @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
@@ -41,10 +32,18 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.MaxDamage, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.MinArmorClass, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.MaxDamage)
-                @Html.ValidationMessageFor(model => model.MaxDamage)
+                @Html.EditorFor(model => model.MinArmorClass)
+                @Html.ValidationMessageFor(model => model.MinArmorClass)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MaxArmorClass, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MaxArmorClass)
+                @Html.ValidationMessageFor(model => model.MaxArmorClass)
             </div>
         </div>
 
@@ -74,7 +73,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
     </div>

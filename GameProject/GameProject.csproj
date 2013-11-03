@@ -114,16 +114,21 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\ViewModels\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_GlobalResources\Resources.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AffixController.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
-    <Compile Include="Areas\Admin\Controllers\WeaponController.cs" />
-    <Compile Include="Areas\Admin\ViewModels\CreateWeaponViewModel.cs" />
+    <Compile Include="Areas\Admin\Controllers\ItemController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Enums\FlashMessageType.cs" />
     <Compile Include="Global.asax.cs">
@@ -133,11 +138,7 @@
     <Compile Include="Helpers\FlashMessageHelper.cs" />
     <Compile Include="Models\DatabaseContext.cs" />
     <Compile Include="Models\Entities\Item.cs" />
-    <Compile Include="Models\Entities\Shield.cs" />
     <Compile Include="Models\Entities\Affix.cs" />
-    <Compile Include="Models\Entities\Weapon.cs" />
-    <Compile Include="Models\Entities\Jewelry.cs" />
-    <Compile Include="Models\Entities\Armor.cs" />
     <Compile Include="Enums\UserRole.cs" />
     <Compile Include="Enums\ItemType.cs" />
     <Compile Include="Enums\JewelryType.cs" />
@@ -159,15 +160,27 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\Dashboard\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Affix\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Affix\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Affix\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Affix\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Affix\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Weapon\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Weapon\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Item\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Item\EditWeapon.cshtml" />
+    <Content Include="Areas\Admin\Views\Item\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\Item\CreateWeapon.cshtml" />
+    <Content Include="Areas\Admin\Views\Item\CreateShield.cshtml" />
+    <Content Include="Areas\Admin\Views\Item\CreateJewelry.cshtml" />
+    <Content Include="Areas\Admin\Views\Item\CreateArmor.cshtml" />
+    <Content Include="Areas\Admin\Views\Item\EditArmor.cshtml" />
+    <Content Include="Areas\Admin\Views\Item\EditJewelry.cshtml" />
+    <Content Include="Areas\Admin\Views\Item\EditShield.cshtml" />
+    <Content Include="Areas\Admin\Views\Item\DetailsArmor.cshtml" />
+    <Content Include="Areas\Admin\Views\Item\DetailsShield.cshtml" />
+    <Content Include="Areas\Admin\Views\Item\DetailsJewelry.cshtml" />
+    <Content Include="Areas\Admin\Views\Item\DetailsWeapon.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -199,6 +212,12 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\Resources.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Resources.designer.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

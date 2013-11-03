@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -19,8 +20,7 @@
                 @Html.ActionLink("Panel Administracyjny", "Index", "Dashboard", null, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                </ul>
+                <ul class="nav navbar-nav"></ul>
             </div>
         </div>
     </div>
@@ -34,13 +34,25 @@
                 <p>@FlashMessageHelper.GetMessage(TempData, FlashMessageType.Success)</p>
             </div>
         }
+        @if (FlashMessageHelper.HasMessage(TempData, FlashMessageType.Info))
+        {
+            <div class="alert alert-info">
+                <p>@FlashMessageHelper.GetMessage(TempData, FlashMessageType.Info)</p>
+            </div>
+        }
+        @if (FlashMessageHelper.HasMessage(TempData, FlashMessageType.Warning))
+        {
+            <div class="alert alert-warning">
+                <p>@FlashMessageHelper.GetMessage(TempData, FlashMessageType.Warning)</p>
+            </div>
+        }
         @if (FlashMessageHelper.HasMessage(TempData, FlashMessageType.Danger))
         {
             <div class="alert alert-danger">
                 <p>@FlashMessageHelper.GetMessage(TempData, FlashMessageType.Danger)</p>
             </div>
         }
-        
+
         @RenderBody()
         <hr />
         <footer>

@@ -48,5 +48,8 @@ namespace GameProject.Models.Entities
 
         [Required]
         public int Price { get; set; }
+
+        [Timestamp]
+        public byte[] CurrentVersion { get; set; }
     }
 }

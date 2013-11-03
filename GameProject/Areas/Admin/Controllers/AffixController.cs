@@ -11,6 +11,7 @@ using GameProject.Models;
 using GameProject.Enums;
 using GameProject.Services;
 using GameProject.Helpers;
+using System.Data.Entity.Infrastructure;
 
 namespace GameProject.Areas.Admin.Controllers
 {
@@ -69,13 +70,14 @@ namespace GameProject.Areas.Admin.Controllers
                     db.Affixes.Add(affix);
                     db.SaveChanges();
 
-                    FlashMessageHelper.SetMessage(this, FlashMessageType.Success, "Affix został pomyślnie dodany.");
+                    FlashMessageHelper.SetMessage(this, FlashMessageType.Success, Resources.Resources.FlashMessageCreateSuccess);
                     return RedirectToAction("Index");
                 }
+                FlashMessageHelper.SetMessage(this, FlashMessageType.Info, Resources.Resources.FlashMessageCreateInfo);
             }
-            catch(Exception)
+            catch (Exception)
             {
-                FlashMessageHelper.SetMessage(this, FlashMessageType.Danger, "Wystąpił nieoczekiwany błąd.");
+                FlashMessageHelper.SetMessage(this, FlashMessageType.Danger, Resources.Resources.FlashMessageCreateError);
             }
 
             return View(affix);
@@ -118,13 +120,18 @@ namespace GameProject.Areas.Admin.Controllers
                     db.Entry(affix).State = EntityState.Modified;
                     db.SaveChanges();
 
-                    FlashMessageHelper.SetMessage(this, FlashMessageType.Success, "Affix został pomyślnie zaktualizowany.");
+                    FlashMessageHelper.SetMessage(this, FlashMessageType.Success, Resources.Resources.FlashMessageEditSuccess);
                     return RedirectToAction("Index");
                 }
+                FlashMessageHelper.SetMessage(this, FlashMessageType.Info, Resources.Resources.FlashMessageEditInfo);
             }
-            catch(Exception)
+            catch (DbUpdateConcurrencyException)
             {
-                FlashMessageHelper.SetMessage(this, FlashMessageType.Danger, "Wystąpił nieoczekiwany błąd.");
+                FlashMessageHelper.SetMessage(this, FlashMessageType.Warning, Resources.Resources.FlashMessageConcurrencyWarning);
+            }
+            catch (Exception)
+            {
+                FlashMessageHelper.SetMessage(this, FlashMessageType.Danger, Resources.Resources.FlashMessageEditError);
             }
 
             return View(affix);
@@ -171,10 +178,20 @@ namespace GameProject.Areas.Admin.Controllers
                 return HttpNotFound();
             }
 
-            db.Affixes.Remove(affix);
-            db.SaveChanges();
+            try
+            {
+                db.Affixes.Remove(affix);
+                db.SaveChanges();
 
-            return RedirectToAction("Index");
+                FlashMessageHelper.SetMessage(this, FlashMessageType.Success, Resources.Resources.FlashMessageDeleteSucces);
+                return RedirectToAction("Index");
+            }
+            catch(Exception)
+            {
+                FlashMessageHelper.SetMessage(this, FlashMessageType.Danger, Resources.Resources.FlashMessageDeleteError);
+            }
+
+            return View(affix);
         }
 
         protected override void Dispose(bool disposing)

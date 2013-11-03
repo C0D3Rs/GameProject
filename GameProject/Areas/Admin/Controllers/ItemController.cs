@@ -115,15 +115,15 @@ namespace GameProject.Areas.Admin.Controllers
                     db.Items.Add(item);
                     db.SaveChanges();
 
-                    FlashMessageHelper.SetMessage(this, FlashMessageType.Success, Resources.Resources.FlashMessageCreateSuccess);
+                    FlashMessageHelper.SetMessage(this, FlashMessageType.Success, "Zapisanie nowych danych przebiegło pomyślnie.");
                     return RedirectToAction("Index");
                 }
 
-                FlashMessageHelper.SetMessage(this, FlashMessageType.Info, Resources.Resources.FlashMessageCreateInfo);
+                FlashMessageHelper.SetMessage(this, FlashMessageType.Info, "Nie można zapisać nowych danych. Należy poprawić zaistniałe błędy.");
             }
             catch (Exception)
             {
-                FlashMessageHelper.SetMessage(this, FlashMessageType.Danger, Resources.Resources.FlashMessageCreateError);
+                FlashMessageHelper.SetMessage(this, FlashMessageType.Danger, "Wystąpił nieoczekiwany błąd związany z zapisem nowych danych.");
             }
 
 
@@ -208,19 +208,19 @@ namespace GameProject.Areas.Admin.Controllers
                     db.Entry(item).State = EntityState.Modified;
                     db.SaveChanges();
 
-                    FlashMessageHelper.SetMessage(this, FlashMessageType.Success, Resources.Resources.FlashMessageEditSuccess);
+                    FlashMessageHelper.SetMessage(this, FlashMessageType.Success, "Aktualizacja danych przebiegła pomyślnie.");
                     return RedirectToAction("Index");
                 }
 
-                FlashMessageHelper.SetMessage(this, FlashMessageType.Info, Resources.Resources.FlashMessageEditInfo);
+                FlashMessageHelper.SetMessage(this, FlashMessageType.Info, "Nie można zaktualizować danych. Należy poprawić zaistniałe błędy.");
             }
             catch (DbUpdateConcurrencyException)
             {
-                FlashMessageHelper.SetMessage(this, FlashMessageType.Warning, Resources.Resources.FlashMessageConcurrencyWarning);
+                FlashMessageHelper.SetMessage(this, FlashMessageType.Warning, "Dane został zaktualizowane przez inną osobę. Należy odświeżyć stronę w celu wczytania nowych danych.");
             }
             catch (Exception)
             {
-                FlashMessageHelper.SetMessage(this, FlashMessageType.Danger, Resources.Resources.FlashMessageEditError);
+                FlashMessageHelper.SetMessage(this, FlashMessageType.Danger, "Wystąpił nieoczekiwany błąd związany z aktualizowaniem danych.");
             }
 
             if (item.Type == ItemType.Weapon)
@@ -288,12 +288,12 @@ namespace GameProject.Areas.Admin.Controllers
                 db.Items.Remove(item);
                 db.SaveChanges();
 
-                FlashMessageHelper.SetMessage(this, FlashMessageType.Success, Resources.Resources.FlashMessageDeleteSucces);
+                FlashMessageHelper.SetMessage(this, FlashMessageType.Success, "Usunięcie danych przebiegło pomyślnie.");
                 return RedirectToAction("Index");
             }
             catch (Exception)
             {
-                FlashMessageHelper.SetMessage(this, FlashMessageType.Danger, Resources.Resources.FlashMessageDeleteError);
+                FlashMessageHelper.SetMessage(this, FlashMessageType.Danger, "Wystąpił nieoczekiwany błąd związany z usuwaniem danych.");
             }
 
             return View(item);

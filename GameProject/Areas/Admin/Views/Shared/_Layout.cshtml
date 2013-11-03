@@ -27,6 +27,20 @@
 
     <div class="container body-content">
         <h1>Panel Administracyjny</h1>
+
+        @if (FlashMessageHelper.HasMessage(TempData, FlashMessageType.Success))
+        {
+            <div class="alert alert-success">
+                <p>@FlashMessageHelper.GetMessage(TempData, FlashMessageType.Success)</p>
+            </div>
+        }
+        @if (FlashMessageHelper.HasMessage(TempData, FlashMessageType.Danger))
+        {
+            <div class="alert alert-danger">
+                <p>@FlashMessageHelper.GetMessage(TempData, FlashMessageType.Danger)</p>
+            </div>
+        }
+        
         @RenderBody()
         <hr />
         <footer>

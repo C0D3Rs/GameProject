@@ -1,4 +1,4 @@
-﻿using GameProject.Models.Enums;
+﻿using GameProject.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -12,10 +12,10 @@ namespace GameProject.Models.Entities
         public int Id { get; set; }
 
         [Required]
-        public WeaponType Type { get; set; }
+        public int ItemId { get; set; }
 
         [Required]
-        public string Name { get; set; }
+        public WeaponType Type { get; set; }
 
         [Required]
         public int MinDamage { get; set; }
@@ -25,11 +25,5 @@ namespace GameProject.Models.Entities
 
         [Required]
         public int RequireStrength { get; set; }
-
-        [Required]
-        public int QualityLevel { get; set; }
-
-        [Required]
-        public int Price { get; set; }
     }
 }

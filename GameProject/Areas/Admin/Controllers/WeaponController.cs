@@ -8,30 +8,24 @@ using System.Web;
 using System.Web.Mvc;
 using GameProject.Models.Entities;
 using GameProject.Models;
+using GameProject.Services;
+using GameProject.Enums;
+using GameProject.Areas.Admin.ViewModels;
 
 namespace GameProject.Areas.Admin.Controllers
 {
     public class WeaponController : Controller
     {
         private DatabaseContext db = new DatabaseContext();
+        private ItemService itemService = new ItemService();
 
         public ActionResult Index()
         {
-            return View(db.Weapons.ToList());
-        }
+            var query = from w in db.Weapons
+                        orderby w.Id descending
+                        select w;
 
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Weapon weapon = db.Weapons.Find(id);
-            if (weapon == null)
-            {
-                return HttpNotFound();
-            }
-            return View(weapon);
+            return View(query.ToList());
         }
 
         public ActionResult Create()
@@ -41,67 +35,40 @@ namespace GameProject.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="Id,Type,Name,MinDamage,MaxDamage,RequireStrength,QualityLevel,Price")] Weapon weapon)
+        public ActionResult Create(CreateWeaponViewModel createWeaponViewModel)
         {
-            if (ModelState.IsValid)
+            if (!Enum.IsDefined(typeof(WeaponType), createWeaponViewModel.Weapon.Type))
             {
-                db.Weapons.Add(weapon);
+                ModelState.AddModelError("Type", new Exception());
+            }
+
+            DbContextTransaction transaction = db.Database.BeginTransaction();
+
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return View(createWeaponViewModel);
+                }
+
+                createWeaponViewModel.Item.Type = ItemType.Weapon;
+                db.Items.Add(createWeaponViewModel.Item);
                 db.SaveChanges();
+
+                createWeaponViewModel.Weapon.ItemId = createWeaponViewModel.Item.Id;
+                db.Weapons.Add(createWeaponViewModel.Weapon);
+                db.SaveChanges();
+
+                transaction.Commit();
+
                 return RedirectToAction("Index");
             }
-
-            return View(weapon);
-        }
-
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
+            catch(Exception)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                transaction.Rollback();
             }
-            Weapon weapon = db.Weapons.Find(id);
-            if (weapon == null)
-            {
-                return HttpNotFound();
-            }
-            return View(weapon);
-        }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="Id,Type,Name,MinDamage,MaxDamage,RequireStrength,QualityLevel,Price")] Weapon weapon)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(weapon).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(weapon);
-        }
-
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Weapon weapon = db.Weapons.Find(id);
-            if (weapon == null)
-            {
-                return HttpNotFound();
-            }
-            return View(weapon);
-        }
-
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Weapon weapon = db.Weapons.Find(id);
-            db.Weapons.Remove(weapon);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            return View(createWeaponViewModel);
         }
 
         protected override void Dispose(bool disposing)

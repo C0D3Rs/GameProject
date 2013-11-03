@@ -114,7 +114,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Models\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -124,23 +123,28 @@
     <Compile Include="Areas\Admin\Controllers\AffixController.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Admin\Controllers\WeaponController.cs" />
+    <Compile Include="Areas\Admin\ViewModels\CreateWeaponViewModel.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Enums\FlashMessageType.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\EnumHelper.cs" />
+    <Compile Include="Helpers\FlashMessageHelper.cs" />
     <Compile Include="Models\DatabaseContext.cs" />
+    <Compile Include="Models\Entities\Item.cs" />
     <Compile Include="Models\Entities\Shield.cs" />
     <Compile Include="Models\Entities\Affix.cs" />
     <Compile Include="Models\Entities\Weapon.cs" />
     <Compile Include="Models\Entities\Jewelry.cs" />
     <Compile Include="Models\Entities\Armor.cs" />
-    <Compile Include="Models\Enums\UserRole.cs" />
-    <Compile Include="Models\Enums\ItemType.cs" />
-    <Compile Include="Models\Enums\JewelryType.cs" />
-    <Compile Include="Models\Enums\WeaponType.cs" />
-    <Compile Include="Models\Enums\AffixType.cs" />
+    <Compile Include="Enums\UserRole.cs" />
+    <Compile Include="Enums\ItemType.cs" />
+    <Compile Include="Enums\JewelryType.cs" />
+    <Compile Include="Enums\WeaponType.cs" />
+    <Compile Include="Enums\AffixType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ItemService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -162,11 +166,8 @@
     <Content Include="Areas\Admin\Views\Affix\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Affix\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Affix\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Weapon\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Weapon\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\Weapon\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\Weapon\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Weapon\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Weapon\Create.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

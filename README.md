@@ -1,2 +1,2 @@
 # do pracy rodacy#
-####Po push-owaniu aplikacja online automatycznie siê aktualizuje ;)
+####Po push-owaniu aplikacja online automatycznie siÄ™ aktualizuje ;)

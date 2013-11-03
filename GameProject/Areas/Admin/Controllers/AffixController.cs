@@ -8,7 +8,9 @@ using System.Web;
 using System.Web.Mvc;
 using GameProject.Models.Entities;
 using GameProject.Models;
-using GameProject.Models.Enums;
+using GameProject.Enums;
+using GameProject.Services;
+using GameProject.Helpers;
 
 namespace GameProject.Areas.Admin.Controllers
 {
@@ -53,7 +55,7 @@ namespace GameProject.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="Type,Name,ForWeapon,ForShield,ForArmor,ForJewelry,MinStrength,MaxStrength,QualityLevel,Price")] Affix affix)
+        public ActionResult Create(Affix affix)
         {
             if (!Enum.IsDefined(typeof(AffixType), affix.Type))
             {
@@ -66,12 +68,14 @@ namespace GameProject.Areas.Admin.Controllers
                 {
                     db.Affixes.Add(affix);
                     db.SaveChanges();
+
+                    FlashMessageHelper.SetMessage(this, FlashMessageType.Success, "Affix został pomyślnie dodany.");
                     return RedirectToAction("Index");
                 }
             }
             catch(Exception)
             {
-                // wyświetlenie komunikatu o błędzie
+                FlashMessageHelper.SetMessage(this, FlashMessageType.Danger, "Wystąpił nieoczekiwany błąd.");
             }
 
             return View(affix);
@@ -100,7 +104,7 @@ namespace GameProject.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="Id,Type,Name,ForWeapon,ForShield,ForArmor,ForJewelry,MinStrength,MaxStrength,QualityLevel,Price")] Affix affix)
+        public ActionResult Edit(Affix affix)
         {
             if (!Enum.IsDefined(typeof(AffixType), affix.Type))
             {
@@ -113,12 +117,14 @@ namespace GameProject.Areas.Admin.Controllers
                 {
                     db.Entry(affix).State = EntityState.Modified;
                     db.SaveChanges();
+
+                    FlashMessageHelper.SetMessage(this, FlashMessageType.Success, "Affix został pomyślnie zaktualizowany.");
                     return RedirectToAction("Index");
                 }
             }
             catch(Exception)
             {
-                // wyświetlenie komunikatu o błędzie
+                FlashMessageHelper.SetMessage(this, FlashMessageType.Danger, "Wystąpił nieoczekiwany błąd.");
             }
 
             return View(affix);

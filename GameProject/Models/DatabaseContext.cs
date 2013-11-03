@@ -10,6 +10,7 @@ namespace GameProject.Models
 {
     public class DatabaseContext : DbContext
     {
+        public DbSet<Item> Items { get; set; }
         public DbSet<Weapon> Weapons { get; set; }
         public DbSet<Shield> Shields { get; set; }
         public DbSet<Armor> Armors { get; set; }

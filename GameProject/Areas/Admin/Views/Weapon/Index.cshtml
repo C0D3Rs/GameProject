@@ -12,10 +12,13 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Type)
+            @Html.DisplayNameFor(model => model.Id)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.ItemId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Type)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.MinDamage)
@@ -26,22 +29,19 @@
         <th>
             @Html.DisplayNameFor(model => model.RequireStrength)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.QualityLevel)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Type)
+            @Html.DisplayFor(modelItem => item.Id)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Name)
+            @Html.DisplayFor(modelItem => item.ItemId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Type)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.MinDamage)
@@ -51,12 +51,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.RequireStrength)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.QualityLevel)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

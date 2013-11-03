@@ -7,17 +7,20 @@ using System.Web;
 
 namespace GameProject.Models.Entities
 {
-    public class Shield
+    public class Item
     {
         public int Id { get; set; }
 
         [Required]
-        public int MinArmorClass { get; set; }
+        public ItemType Type { get; set; }
 
         [Required]
-        public int MaxArmorClass { get; set; }
+        public string Name { get; set; }
 
         [Required]
-        public int RequireStrength { get; set; }
+        public int QualityLevel { get; set; }
+
+        [Required]
+        public int Price { get; set; }
     }
 }

@@ -8,8 +8,18 @@
 
 @using (Html.BeginForm("Create", "Image", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    <input type="file" name="file" />
-    <input type="submit" value="OK" />
+   <div class="form-horizontal">
+        <h4>Image</h4>
+        <hr />
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="file" name="file" />
+                <input type="submit" value="OK" />
+            </div>
+        </div>
+    </div>
 }
 
 <div>

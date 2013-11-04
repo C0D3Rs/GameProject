@@ -123,6 +123,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AffixController.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ImageController.cs" />
     <Compile Include="Areas\Admin\Controllers\ItemController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Enums\FlashMessageType.cs" />
@@ -132,6 +133,7 @@
     <Compile Include="Helpers\EnumHelper.cs" />
     <Compile Include="Helpers\FlashMessageHelper.cs" />
     <Compile Include="Models\DatabaseContext.cs" />
+    <Compile Include="Models\Entities\Image.cs" />
     <Compile Include="Models\Entities\Item.cs" />
     <Compile Include="Models\Entities\Affix.cs" />
     <Compile Include="Enums\UserRole.cs" />
@@ -176,6 +178,8 @@
     <Content Include="Areas\Admin\Views\Item\DetailsShield.cshtml" />
     <Content Include="Areas\Admin\Views\Item\DetailsJewelry.cshtml" />
     <Content Include="Areas\Admin\Views\Item\DetailsWeapon.cshtml" />
+    <Content Include="Areas\Admin\Views\Image\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Image\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

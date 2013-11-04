@@ -1,0 +1,17 @@
+﻿@model Image
+
+@{
+    ViewBag.Title = "Create Image";
+}
+
+<h2>Create Image</h2>
+
+@using (Html.BeginForm("Create", "Image", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <input type="file" name="file" />
+    <input type="submit" value="OK" />
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

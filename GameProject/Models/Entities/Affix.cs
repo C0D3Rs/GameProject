@@ -41,6 +41,24 @@ namespace GameProject.Models.Entities
         [Required]
         public int MaxStrength { get; set; }
 
+        [Required]
+        public int MinDexterity { get; set; }
+
+        [Required]
+        public int MaxDexterity { get; set; }
+
+        [Required]
+        public int MinIntelligence { get; set; }
+
+        [Required]
+        public int MaxIntelligence { get; set; }
+
+        [Required]
+        public int MinVitality { get; set; }
+
+        [Required]
+        public int MaxVitality { get; set; }
+
         // poziom jakości affix'u
 
         [Required]

@@ -64,7 +64,7 @@ namespace GameProject.Areas.Admin.Controllers
             return HttpNotFound();
         }
 
-        public ActionResult Create(ItemType? type)
+        private ActionResult GetCreateItemView(ItemType? type)
         {
             if (type == null || !Enum.IsDefined(typeof(ItemType), type))
             {
@@ -90,6 +90,11 @@ namespace GameProject.Areas.Admin.Controllers
             return HttpNotFound();
         }
 
+        public ActionResult Create(ItemType? type)
+        {
+            return GetCreateItemView(type);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Item item)
@@ -99,13 +104,11 @@ namespace GameProject.Areas.Admin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            if (item.Type == ItemType.Weapon && !Enum.IsDefined(typeof(WeaponType), item.WeaponType))
+            if ((item.Type == ItemType.Weapon &&
+                !Enum.IsDefined(typeof(WeaponType), (WeaponType)item.SubType)) ||
+                (item.Type == ItemType.Jewelry && !Enum.IsDefined(typeof(JewelryType), (JewelryType)item.SubType)))
             {
-                ModelState.AddModelError("WeaponType", new Exception());
-            }
-            else if (item.Type == ItemType.Jewelry && !Enum.IsDefined(typeof(JewelryType), item.JewelryType))
-            {
-                ModelState.AddModelError("JewelryType", new Exception());
+                ModelState.AddModelError("SubType", new Exception());
             }
 
             try
@@ -126,22 +129,26 @@ namespace GameProject.Areas.Admin.Controllers
                 FlashMessageHelper.SetMessage(this, FlashMessageType.Danger, "Wystąpił nieoczekiwany błąd związany z zapisem nowych danych.");
             }
 
+            return GetCreateItemView(item.Type);
+        }
 
+        private ActionResult GetEditItemView(Item item)
+        {
             if (item.Type == ItemType.Weapon)
             {
-                return View("CreateWeapon", item);
+                return View("EditWeapon", item);
             }
             else if (item.Type == ItemType.Shield)
             {
-                return View("CreateShield", item);
+                return View("EditShield", item);
             }
             else if (item.Type == ItemType.Armor)
             {
-                return View("CreateArmor", item);
+                return View("EditArmor", item);
             }
             else if (item.Type == ItemType.Jewelry)
             {
-                return View("CreateJewelry", item);
+                return View("EditJewelry", item);
             }
             return HttpNotFound();
         }
@@ -164,23 +171,7 @@ namespace GameProject.Areas.Admin.Controllers
                 return HttpNotFound();
             }
 
-            if (item.Type == ItemType.Weapon)
-            {
-                return View("EditWeapon", item);
-            }
-            else if (item.Type == ItemType.Shield)
-            {
-                return View("EditShield", item);
-            }
-            else if (item.Type == ItemType.Armor)
-            {
-                return View("EditArmor", item);
-            }
-            else if (item.Type == ItemType.Jewelry)
-            {
-                return View("EditJewelry", item);
-            }
-            return HttpNotFound();
+            return GetEditItemView(item);
         }
 
         [HttpPost]
@@ -192,13 +183,11 @@ namespace GameProject.Areas.Admin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            if (item.Type == ItemType.Weapon && !Enum.IsDefined(typeof(WeaponType), item.WeaponType))
+            if ((item.Type == ItemType.Weapon && 
+                !Enum.IsDefined(typeof(WeaponType), (WeaponType)item.SubType)) ||
+                (item.Type == ItemType.Jewelry && !Enum.IsDefined(typeof(JewelryType), (JewelryType)item.SubType)))
             {
-                ModelState.AddModelError("WeaponType", new Exception());
-            }
-            else if (item.Type == ItemType.Jewelry && !Enum.IsDefined(typeof(JewelryType), item.JewelryType))
-            {
-                ModelState.AddModelError("JewelryType", new Exception());
+                ModelState.AddModelError("SubType", new Exception());
             }
 
             try
@@ -223,49 +212,10 @@ namespace GameProject.Areas.Admin.Controllers
                 FlashMessageHelper.SetMessage(this, FlashMessageType.Danger, "Wystąpił nieoczekiwany błąd związany z aktualizowaniem danych.");
             }
 
-            if (item.Type == ItemType.Weapon)
-            {
-                return View("EditWeapon", item);
-            }
-            else if (item.Type == ItemType.Shield)
-            {
-                return View("EditShield", item);
-            }
-            else if (item.Type == ItemType.Armor)
-            {
-                return View("EditArmor", item);
-            }
-            else if (item.Type == ItemType.Jewelry)
-            {
-                return View("EditJewelry", item);
-            }
-            return HttpNotFound();
+            return GetEditItemView(item);
         }
 
         public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            var query = from i in db.Items
-                        where i.Id == id
-                        select i;
-
-            var item = query.FirstOrDefault();
-
-            if (item == null)
-            {
-                return HttpNotFound();
-            }
-
-            return View(item);
-        }
-
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int? id)
         {
             if (id == null)
             {
@@ -289,14 +239,13 @@ namespace GameProject.Areas.Admin.Controllers
                 db.SaveChanges();
 
                 FlashMessageHelper.SetMessage(this, FlashMessageType.Success, "Usunięcie danych przebiegło pomyślnie.");
-                return RedirectToAction("Index");
             }
             catch (Exception)
             {
                 FlashMessageHelper.SetMessage(this, FlashMessageType.Danger, "Wystąpił nieoczekiwany błąd związany z usuwaniem danych.");
             }
 
-            return View(item);
+            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

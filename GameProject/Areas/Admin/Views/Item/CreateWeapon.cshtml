@@ -16,10 +16,10 @@
         <hr />
 
         <div class="form-group">
-            @Html.LabelFor(model => model.WeaponType, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.SubType, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.WeaponType, EnumHelper.GetSelectList<WeaponType>())
-                @Html.ValidationMessageFor(model => model.WeaponType)
+                @Html.DropDownListFor(model => model.SubType, EnumHelper.GetSelectList<WeaponType>())
+                @Html.ValidationMessageFor(model => model.SubType)
             </div>
         </div>
 

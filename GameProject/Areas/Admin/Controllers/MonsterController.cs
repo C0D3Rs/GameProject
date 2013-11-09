@@ -8,22 +8,21 @@ using System.Web;
 using System.Web.Mvc;
 using GameProject.Models.Entities;
 using GameProject.Models;
-using GameProject.Enums;
-using GameProject.Services;
 using GameProject.Helpers;
+using GameProject.Enums;
 using System.Data.Entity.Infrastructure;
 
 namespace GameProject.Areas.Admin.Controllers
 {
-    public class AffixController : Controller
+    public class MonsterController : Controller
     {
         private DatabaseContext db = new DatabaseContext();
 
         public ActionResult Index()
         {
-            var query = from a in db.Affixes
-                        orderby a.Id descending
-                        select a;
+            var query = from m in db.Monsters
+                        orderby m.Id descending
+                        select m;
 
             return View(query.ToList());
         }
@@ -35,18 +34,18 @@ namespace GameProject.Areas.Admin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var query = from a in db.Affixes
-                        where a.Id == id
-                        select a;
+            var query = from m in db.Monsters
+                        where m.Id == id
+                        select m;
 
-            var affix = query.FirstOrDefault();
+            var monster = query.FirstOrDefault();
 
-            if (affix == null)
+            if (monster == null)
             {
                 return HttpNotFound();
             }
 
-            return View(affix);
+            return View(monster);
         }
 
         public ActionResult Create()
@@ -56,18 +55,13 @@ namespace GameProject.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Affix affix)
+        public ActionResult Create(Monster monster)
         {
-            if (!Enum.IsDefined(typeof(AffixType), affix.Type))
-            {
-                ModelState.AddModelError("Type", new Exception());
-            }
-
             try
             {
                 if (ModelState.IsValid)
                 {
-                    db.Affixes.Add(affix);
+                    db.Monsters.Add(monster);
                     db.SaveChanges();
 
                     FlashMessageHelper.SetMessage(this, FlashMessageType.Success, "Zapisanie nowych danych przebiegło pomyślnie.");
@@ -80,7 +74,7 @@ namespace GameProject.Areas.Admin.Controllers
                 FlashMessageHelper.SetMessage(this, FlashMessageType.Danger, "Wystąpił nieoczekiwany błąd związany z zapisem nowych danych.");
             }
 
-            return View(affix);
+            return View(monster);
         }
 
         public ActionResult Edit(int? id)
@@ -90,34 +84,29 @@ namespace GameProject.Areas.Admin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var query = from a in db.Affixes
-                        where a.Id == id
-                        select a;
+            var query = from m in db.Monsters
+                        where m.Id == id
+                        select m;
 
-            var affix = query.FirstOrDefault();
+            var monster = query.FirstOrDefault();
 
-            if (affix == null)
+            if (monster == null)
             {
                 return HttpNotFound();
             }
 
-            return View(affix);
+            return View(monster);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Affix affix)
+        public ActionResult Edit(Monster monster)
         {
-            if (!Enum.IsDefined(typeof(AffixType), affix.Type))
-            {
-                ModelState.AddModelError("Type", new Exception());
-            }
-
             try
             {
                 if (ModelState.IsValid)
                 {
-                    db.Entry(affix).State = EntityState.Modified;
+                    db.Entry(monster).State = EntityState.Modified;
                     db.SaveChanges();
 
                     FlashMessageHelper.SetMessage(this, FlashMessageType.Success, "Aktualizacja danych przebiegła pomyślnie.");
@@ -134,7 +123,7 @@ namespace GameProject.Areas.Admin.Controllers
                 FlashMessageHelper.SetMessage(this, FlashMessageType.Danger, "Wystąpił nieoczekiwany błąd związany z aktualizowaniem danych.");
             }
 
-            return View(affix);
+            return View(monster);
         }
 
         public ActionResult Delete(int? id)
@@ -144,20 +133,20 @@ namespace GameProject.Areas.Admin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var query = from a in db.Affixes
-                        where a.Id == id
-                        select a;
+            var query = from m in db.Monsters
+                        where m.Id == id
+                        select m;
 
-            var affix = query.FirstOrDefault();
+            var monster = query.FirstOrDefault();
 
-            if (affix == null)
+            if (monster == null)
             {
                 return HttpNotFound();
             }
 
             try
             {
-                db.Affixes.Remove(affix);
+                db.Monsters.Remove(monster);
                 db.SaveChanges();
 
                 FlashMessageHelper.SetMessage(this, FlashMessageType.Success, "Usunięcie danych przebiegło pomyślnie.");
@@ -168,6 +157,31 @@ namespace GameProject.Areas.Admin.Controllers
             }
 
             return RedirectToAction("Index");
+        }
+
+        [HttpPost, ActionName("Delete")]
+        
+        public ActionResult DeleteConfirmed(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var query = from m in db.Monsters
+                        where m.Id == id
+                        select m;
+
+            var monster = query.FirstOrDefault();
+
+            if (monster == null)
+            {
+                return HttpNotFound();
+            }
+
+
+
+            return View(monster);
         }
 
         protected override void Dispose(bool disposing)

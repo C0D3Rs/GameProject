@@ -125,7 +125,10 @@
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Admin\Controllers\ImageController.cs" />
     <Compile Include="Areas\Admin\Controllers\ItemController.cs" />
+    <Compile Include="Areas\Admin\Controllers\MonsterController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MonsterLoreController.cs" />
+    <Compile Include="Enums\SubType.cs" />
     <Compile Include="Enums\FlashMessageType.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -138,9 +141,8 @@
     <Compile Include="Models\Entities\Affix.cs" />
     <Compile Include="Enums\UserRole.cs" />
     <Compile Include="Enums\ItemType.cs" />
-    <Compile Include="Enums\JewelryType.cs" />
-    <Compile Include="Enums\WeaponType.cs" />
     <Compile Include="Enums\AffixType.cs" />
+    <Compile Include="Models\Entities\Monster.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ItemService.cs" />
   </ItemGroup>
@@ -159,11 +161,9 @@
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Dashboard\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Affix\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Affix\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Affix\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Affix\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Affix\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Item\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Item\EditWeapon.cshtml" />
     <Content Include="Areas\Admin\Views\Item\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
@@ -180,6 +180,10 @@
     <Content Include="Areas\Admin\Views\Item\DetailsWeapon.cshtml" />
     <Content Include="Areas\Admin\Views\Image\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Image\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Monster\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Monster\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Monster\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Monster\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -202,6 +206,7 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\MonsterLore\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

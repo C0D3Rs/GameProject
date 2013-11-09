@@ -14,11 +14,8 @@ namespace GameProject.Models.Entities
         [Required]
         public ItemType Type { get; set; }
 
-        // podtypy przedmiotów
-
-        public WeaponType WeaponType { get; set; }
-
-        public JewelryType JewelryType { get; set; }
+        [Required]
+        public SubType SubType { get; set; }
 
         [Required]
         public string Name { get; set; }
@@ -29,9 +26,9 @@ namespace GameProject.Models.Entities
 
         public int MaxDamage { get; set; }
 
-        public int MinArmorClass { get; set; }
+        public int MinArmor { get; set; }
 
-        public int MaxArmorClass { get; set; }
+        public int MaxArmor { get; set; }
 
         // wymagania dla postaci noszącej
 

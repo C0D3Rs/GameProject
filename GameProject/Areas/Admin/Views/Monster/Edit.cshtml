@@ -1,0 +1,85 @@
+﻿@model GameProject.Models.Entities.Monster
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Monster</h4>
+        <hr />
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.CurrentVersion)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name)
+                @Html.ValidationMessageFor(model => model.Name)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Description)
+                @Html.ValidationMessageFor(model => model.Description)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Level, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Level)
+                @Html.ValidationMessageFor(model => model.Level)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Life, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Life)
+                @Html.ValidationMessageFor(model => model.Life)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MinDamage, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MinDamage)
+                @Html.ValidationMessageFor(model => model.MinDamage)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MaxDamage, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MaxDamage)
+                @Html.ValidationMessageFor(model => model.MaxDamage)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Defense, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Defense)
+                @Html.ValidationMessageFor(model => model.Defense)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

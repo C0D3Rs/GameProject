@@ -1,0 +1,74 @@
+﻿@model GameProject.Models.Entities.Monster
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Monster</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Level)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Level)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Life)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Life)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MinDamage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MinDamage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaxDamage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaxDamage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Defense)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Defense)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

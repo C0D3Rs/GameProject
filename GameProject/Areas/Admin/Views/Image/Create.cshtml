@@ -14,6 +14,8 @@
 
         <div class="form-group">
             <div class="col-md-10">
+                @Html.DropDownList("category", EnumHelper.GetSelectList<ImageCategory>())
+                <br /><br />
                 <input type="file" name="file" />
                 <input type="submit" value="OK" />
             </div>

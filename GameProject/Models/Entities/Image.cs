@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GameProject.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -18,6 +19,9 @@ namespace GameProject.Models.Entities
 
         [Required]
         public string Type { get; set; }
+
+        [Required]
+        public ImageCategory Category { get; set; }
 
         [Timestamp]
         public byte[] CurrentVersion { get; set; }

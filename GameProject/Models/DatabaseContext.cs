@@ -13,6 +13,7 @@ namespace GameProject.Models
         public DbSet<Item> Items { get; set; }
         public DbSet<Affix> Affixes { get; set; }
         public DbSet<Monster> Monsters { get; set; }
+        public DbSet<Image> Images { get; set; }
 
         public DatabaseContext()
         {

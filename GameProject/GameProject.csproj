@@ -128,6 +128,7 @@
     <Compile Include="Areas\Admin\Controllers\MonsterController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MonsterLoreController.cs" />
+    <Compile Include="Enums\ImageCategory.cs" />
     <Compile Include="Enums\SubType.cs" />
     <Compile Include="Enums\FlashMessageType.cs" />
     <Compile Include="Global.asax.cs">

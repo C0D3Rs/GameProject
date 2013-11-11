@@ -24,18 +24,18 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.MinArmor, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.PrimaryMinValue, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.MinArmor)
-                @Html.ValidationMessageFor(model => model.MinArmor)
+                @Html.EditorFor(model => model.PrimaryMinValue)
+                @Html.ValidationMessageFor(model => model.PrimaryMinValue)
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.MaxArmor, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.PrimaryMaxValue, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.MaxArmor)
-                @Html.ValidationMessageFor(model => model.MaxArmor)
+                @Html.EditorFor(model => model.PrimaryMaxValue)
+                @Html.ValidationMessageFor(model => model.PrimaryMaxValue)
             </div>
         </div>
 
@@ -52,6 +52,14 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.QualityLevel)
                 @Html.ValidationMessageFor(model => model.QualityLevel)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Durability, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Durability)
+                @Html.ValidationMessageFor(model => model.Durability)
             </div>
         </div>
 

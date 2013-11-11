@@ -4,71 +4,60 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details Weapon</h2>
+<h2>Szczegóły broni</h2>
 
 <div>
-    <h4>Item</h4>
 	<hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Type)
-        </dt>
+        <dt>Typ</dt>
 
         <dd>
             @Html.DisplayFor(model => model.Type)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.SubType)
-        </dt>
+        <dt>Podtyp</dt>
 
         <dd>
             @Html.DisplayFor(model => model.SubType)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+        <dt>Nazwa</dt>
 
         <dd>
             @Html.DisplayFor(model => model.Name)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.MinDamage)
-        </dt>
+        <dt>Minimalne Obrażenia</dt>
 
         <dd>
-            @Html.DisplayFor(model => model.MinDamage)
+            @Html.DisplayFor(model => model.PrimaryMinValue)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.MaxDamage)
-        </dt>
+        <dt>Maksymalne obrażenia</dt>
 
         <dd>
-            @Html.DisplayFor(model => model.MaxDamage)
+            @Html.DisplayFor(model => model.PrimaryMaxValue)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.RequireStrength)
-        </dt>
+        <dt>Wymagana Siła</dt>
 
         <dd>
             @Html.DisplayFor(model => model.RequireStrength)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.QualityLevel)
-        </dt>
+        <dt>Poziom Jakości</dt>
 
         <dd>
             @Html.DisplayFor(model => model.QualityLevel)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
+        <dt>Wytrzymałość</dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Durability)
+        </dd>
+
+        <dt>Cena</dt>
 
         <dd>
             @Html.DisplayFor(model => model.Price)

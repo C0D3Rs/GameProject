@@ -183,7 +183,7 @@ namespace GameProject.Areas.Admin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            if ((item.Type == ItemType.Weapon && 
+            if ((item.Type == ItemType.Weapon &&
                 !Enum.IsDefined(typeof(WeaponType), (WeaponType)item.SubType)) ||
                 (item.Type == ItemType.Jewelry && !Enum.IsDefined(typeof(JewelryType), (JewelryType)item.SubType)))
             {

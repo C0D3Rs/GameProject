@@ -19,6 +19,12 @@ namespace GameProject.Models.Entities
         [Required]
         public string Name { get; set; }
 
+        [Required]
+        public int QualityLevel { get; set; }
+
+        [Required]
+        public int Price { get; set; }
+
         // dla jakich przedmiotów występuje
 
         [Required]
@@ -60,12 +66,6 @@ namespace GameProject.Models.Entities
         public int MaxVitality { get; set; }
 
         // poziom jakości affix'u
-
-        [Required]
-        public int QualityLevel { get; set; }
-
-        [Required]
-        public int Price { get; set; }
 
         [Timestamp]
         public byte[] CurrentVersion { get; set; }

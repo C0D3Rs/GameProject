@@ -7,9 +7,17 @@ using System.Web;
 
 namespace GameProject.Models.Entities
 {
-    public class Item
+    // przedmioty należące do graczy
+
+    public class GeneratedItem
     {
         public int Id { get; set; }
+
+        [Required]
+        public int UserId { get; set; }
+
+        [Required]
+        public ItemStatus Status { get; set; }
 
         [Required]
         public ItemType Type { get; set; }
@@ -21,21 +29,27 @@ namespace GameProject.Models.Entities
         public string Name { get; set; }
 
         [Required]
-        public int QualityLevel { get; set; }
-
-        [Required]
         public int Durability { get; set; }
 
         [Required]
         public int Price { get; set; }
 
-        // główny atrybut dla przedmiotów (obrażenia / pancerz)
-
+        // główne właściwości przedmiotu
         public int PrimaryMinValue { get; set; }
 
         public int PrimaryMaxValue { get; set; }
 
-        // wymagania dla postaci noszącej
+        // właściwości affix'ów
+
+        public int Strength { get; set; }
+
+        public int Dexterity { get; set; }
+
+        public int Intelligence { get; set; }
+
+        public int Vitality { get; set; }
+
+        // wymagania do noszenia
 
         [Required]
         public int RequireStrength { get; set; }

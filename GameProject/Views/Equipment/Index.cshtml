@@ -1,0 +1,116 @@
+﻿@model EquipmentViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h4>Założone Przedmioty</h4>
+
+<table class="table">
+    <tr>
+        <th>Typ</th>
+        <th>Podtyp</th>
+        <th>Nazwa</th>
+        <th>Wytrzymałość</th>
+        <th>Cena</th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.EquippedItems)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Durability)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.ActionLink("Zdejmij", "ChangeStatusToChest", new { id = item.Id })
+            </td>
+        </tr>
+    }
+</table>
+
+<h4>Plecak</h4>
+
+<table class="table">
+    <tr>
+        <th>Typ</th>
+        <th>Podtyp</th>
+        <th>Nazwa</th>
+        <th>Wytrzymałość</th>
+        <th>Cena</th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.BackpackItems)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Durability)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.ActionLink("Przenieś do skrzyni", "ChangeStatusToChest", new { id = item.Id })
+            </td>
+        </tr>
+    }
+</table>
+
+<h4>Skrzynka</h4>
+
+<table class="table">
+    <tr>
+        <th>Typ</th>
+        <th>Podtyp</th>
+        <th>Nazwa</th>
+        <th>Wytrzymałość</th>
+        <th>Cena</th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.ChestItems)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Durability)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.ActionLink("Załóż", "ChangeStatusToEquipped", new { id = item.Id })
+            </td>
+        </tr>
+    }
+</table>

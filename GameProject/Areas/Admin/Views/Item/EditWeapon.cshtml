@@ -4,14 +4,13 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit Weapon</h2>
+<h2>Edytowanie Broni</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Item</h4>
         <hr />
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.Id)
@@ -19,10 +18,10 @@
         @Html.HiddenFor(model => model.Type)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.WeaponType, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.SubType, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.WeaponType, EnumHelper.GetSelectList<WeaponType>())
-                @Html.ValidationMessageFor(model => model.WeaponType)
+                @Html.DropDownListFor(model => model.SubType, EnumHelper.GetSelectList<WeaponType>())
+                @Html.ValidationMessageFor(model => model.SubType)
             </div>
         </div>
 
@@ -35,18 +34,18 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.MinDamage, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.PrimaryMinValue, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.MinDamage)
-                @Html.ValidationMessageFor(model => model.MinDamage)
+                @Html.EditorFor(model => model.PrimaryMinValue)
+                @Html.ValidationMessageFor(model => model.PrimaryMinValue)
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.MaxDamage, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.PrimaryMaxValue, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.MaxDamage)
-                @Html.ValidationMessageFor(model => model.MaxDamage)
+                @Html.EditorFor(model => model.PrimaryMaxValue)
+                @Html.ValidationMessageFor(model => model.PrimaryMaxValue)
             </div>
         </div>
 
@@ -63,6 +62,14 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.QualityLevel)
                 @Html.ValidationMessageFor(model => model.QualityLevel)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Durability, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Durability)
+                @Html.ValidationMessageFor(model => model.Durability)
             </div>
         </div>
 

@@ -78,12 +78,13 @@ namespace GameProject.Areas.Admin.Controllers
 
         public ActionResult Show(string imageName = "")
         {
-            if (imageName == null)
+            if (String.IsNullOrEmpty(imageName))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             var query = from a in db.Images
-                        where a.FileName.Equals(imageName)
+                        where a.FileName == imageName
                         select a;
 
             var img = query.FirstOrDefault();

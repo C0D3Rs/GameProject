@@ -33,7 +33,17 @@ namespace GameProject.Services
             return item;
         }
 
-        private Affix GetRandomAffix(AffixType affixType, ItemType itemType, int qualityLevel)
+        private string GetCorrectPrefixName(string prefixName, string itemName)
+        {
+            if (itemName.EndsWith("a"))
+            {
+                prefixName = prefixName.Remove(prefixName.Length - 1) + "a";
+            }
+
+            return prefixName;
+        }
+
+        public Affix GetRandomAffix(AffixType affixType, ItemType itemType, int qualityLevel)
         {
             var query = from a in db.Affixes
                         where (a.Type == affixType) && (a.QualityLevel <= qualityLevel)
@@ -78,10 +88,8 @@ namespace GameProject.Services
             return item;
         }
 
-        public GeneratedItem GetGeneratedItem(int qualityLevel)
+        public GeneratedItem GetGeneratedItem(Item item, Affix prefix, Affix suffix)
         {
-            var item = GetRandomItem(qualityLevel);
-
             if (item == null)
             {
                 return null;
@@ -98,12 +106,10 @@ namespace GameProject.Services
                 PrimaryMinValue = item.PrimaryMinValue,
                 PrimaryMaxValue = item.PrimaryMaxValue,
                 RequireStrength = item.RequireStrength,
+                QualityLevel = item.QualityLevel
             };
 
             Random dice = new Random();
-            
-            
-            var prefix = GetRandomAffix(AffixType.Prefix, item.Type, qualityLevel);
 
             if (prefix != null)
             {
@@ -112,19 +118,17 @@ namespace GameProject.Services
                 generatedItem.Intelligence = dice.Next(prefix.MinIntelligence, prefix.MinIntelligence + 1);
                 generatedItem.Vitality = dice.Next(prefix.MinVitality, prefix.MinVitality + 1);
                 generatedItem.Price += prefix.Price;
-                generatedItem.Name = String.Format("{0} {1}", prefix.Name, generatedItem.Name);
+                generatedItem.Name = String.Format("{0} {1}", GetCorrectPrefixName(prefix.Name, generatedItem.Name), generatedItem.Name);
             }
 
-            var suffix = GetRandomAffix(AffixType.Suffix, item.Type, qualityLevel);
-
-            if (prefix != null)
+            if (suffix != null)
             {
-                generatedItem.Strength = dice.Next(prefix.MinStrength, prefix.MinStrength + 1);
-                generatedItem.Dexterity = dice.Next(prefix.MinDexterity, prefix.MinDexterity + 1);
-                generatedItem.Intelligence = dice.Next(prefix.MinIntelligence, prefix.MinIntelligence + 1);
-                generatedItem.Vitality = dice.Next(prefix.MinVitality, prefix.MinVitality + 1);
-                generatedItem.Price += prefix.Price;
-                generatedItem.Name = String.Format("{0} {1}", generatedItem.Name, prefix.Name);
+                generatedItem.Strength = dice.Next(suffix.MinStrength, suffix.MinStrength + 1);
+                generatedItem.Dexterity = dice.Next(suffix.MinDexterity, suffix.MinDexterity + 1);
+                generatedItem.Intelligence = dice.Next(suffix.MinIntelligence, suffix.MinIntelligence + 1);
+                generatedItem.Vitality = dice.Next(suffix.MinVitality, suffix.MinVitality + 1);
+                generatedItem.Price += suffix.Price;
+                generatedItem.Name = String.Format("{0} {1}", generatedItem.Name, suffix.Name);
             }
 
             return generatedItem;

@@ -29,6 +29,9 @@ namespace GameProject.Models.Entities
         public string Name { get; set; }
 
         [Required]
+        public int QualityLevel { get; set; }
+
+        [Required]
         public int Durability { get; set; }
 
         [Required]

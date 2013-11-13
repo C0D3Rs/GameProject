@@ -166,8 +166,13 @@ namespace GameProject.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult GenerateItem()
+        public ActionResult GenerateItem(int qualityLevel = 0)
         {
+            if (qualityLevel <= 0)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
             int UserId = userService.GetUserLoggedId();
 
             var query = from i in db.GeneratedItems
@@ -179,18 +184,28 @@ namespace GameProject.Controllers
                 return RedirectToAction("Index");
             }
 
-            var item = itemService.GetGeneratedItem(10);
+            var item = itemService.GetRandomItem(qualityLevel);
 
             if (item == null)
             {
                 return RedirectToAction("Index");
             }
 
+            var prefix = itemService.GetRandomAffix(AffixType.Prefix, item.Type, qualityLevel);
+            var suffix = itemService.GetRandomAffix(AffixType.Suffix, item.Type, qualityLevel);
+
+            var generatedItem = itemService.GetGeneratedItem(item, prefix, suffix);
+
+            if (generatedItem == null)
+            {
+                return RedirectToAction("Index");
+            }
+
             try
             {
-                item.Status = ItemStatus.Bagpack;
-                item.UserId = UserId;
-                db.GeneratedItems.Add(item);
+                generatedItem.Status = ItemStatus.Bagpack;
+                generatedItem.UserId = UserId;
+                db.GeneratedItems.Add(generatedItem);
                 db.SaveChanges();
             }
             catch (Exception)

@@ -1,4 +1,6 @@
-﻿using GameProject.Models;
+﻿using GameProject.Enums;
+using GameProject.Filters;
+using GameProject.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +9,7 @@ using System.Web.Mvc;
 
 namespace GameProject.Controllers
 {
+    [AuthorizationFilter(UserRole.Normal)]
     public class MonsterLoreController : Controller
     {
         private DatabaseContext db = new DatabaseContext();

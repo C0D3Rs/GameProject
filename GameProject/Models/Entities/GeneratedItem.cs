@@ -16,6 +16,8 @@ namespace GameProject.Models.Entities
         [Required]
         public int UserId { get; set; }
 
+        public int ImageId { get; set; }
+
         [Required]
         public ItemStatus Status { get; set; }
 

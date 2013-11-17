@@ -11,6 +11,8 @@ namespace GameProject.Models.Entities
     {
         public int Id { get; set; }
 
+        public int ImageId { get; set; }
+
         [Required]
         public ItemType Type { get; set; }
 

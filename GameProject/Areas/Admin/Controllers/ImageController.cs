@@ -1,9 +1,11 @@
-﻿using GameProject.Enums;
+﻿using GameProject.Areas.Admin.ViewModels;
+using GameProject.Enums;
 using GameProject.Helpers;
 using GameProject.Models;
 using GameProject.Models.Entities;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -95,6 +97,111 @@ namespace GameProject.Areas.Admin.Controllers
             }
 
             return File(img.Data, img.Type);
+        }
+
+        public ActionResult SetToItem(int? id)
+        {
+            if(id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var query = from i in db.Items
+                        where i.Id == id
+                        select i;
+
+            var item = query.FirstOrDefault();
+
+            if (item == null)
+            {
+                return HttpNotFound();
+            }
+
+            var query2 = from i in db.Images
+                         where i.Category == ImageCategory.Item
+                         select i;
+
+            var images = query2.ToList();
+
+            if (images.Count() == 0)
+            {
+                return HttpNotFound();
+            }
+
+            SetImageViewModel setItemViewModel = new SetImageViewModel()
+            {
+                Images = images,
+                Id = (int)id
+            };
+
+            return View(setItemViewModel);
+        }
+
+        [HttpPost]
+        public ActionResult SetToItem(int? id, int? imageId)
+        {
+            if(id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            if(imageId == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var query = from i in db.Items
+                        where i.Id == id
+                        select i;
+
+            var item = query.FirstOrDefault();
+
+            if (item == null)
+            {
+                return HttpNotFound();
+            }
+
+            var query2 = from i in db.Images
+                         where i.ID == imageId
+                         select i;
+
+            var image = query2.FirstOrDefault();
+
+            if (item == null)
+            {
+                return HttpNotFound();
+            }
+
+            try
+            {
+                item.ImageId = (int)imageId;
+                db.Entry(item).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index", "Item");
+            }
+            catch (Exception)
+            {
+
+            }
+
+            var query3 = from i in db.Images
+                         where i.Category == ImageCategory.Item
+                         select i;
+
+            var images = query2.ToList();
+
+            if (item == null)
+            {
+                return HttpNotFound();
+            }
+
+            SetImageViewModel setItemViewModel = new SetImageViewModel()
+            {
+                Images = images,
+                Id = (int)id
+            };
+
+            return View(setItemViewModel);
         }
     }
 }

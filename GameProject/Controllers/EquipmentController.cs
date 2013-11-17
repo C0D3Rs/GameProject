@@ -10,21 +10,29 @@ using GameProject.Enums;
 using GameProject.ViewModels;
 using System.Net;
 using System.Data.Entity;
+using GameProject.Filters;
 
 namespace GameProject.Controllers
 {
+    [AuthorizationFilter(UserRole.Normal)]
     public class EquipmentController : Controller
     {
         private DatabaseContext db = new DatabaseContext();
-        private UserService userService = new UserService();
+        private UserSessionContext us = new UserSessionContext();
         private ItemService itemService = new ItemService();
 
         public ActionResult Index()
         {
-            int id = userService.GetUserLoggedId();
+            us.SetHttpSessionStateBase(this.HttpContext.Session);
+            var user = us.GetUser();
+
+            if (user == null)
+            {
+                HttpNotFound();
+            }
 
             var query = from i in db.GeneratedItems
-                        where i.UserId == id
+                        where i.UserId == user.Id
                         select i;
 
             List<GeneratedItem> UserItems = query.ToList();
@@ -48,7 +56,8 @@ namespace GameProject.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            int UserId = userService.GetUserLoggedId();
+            us.SetHttpSessionStateBase(this.HttpContext.Session);
+            int UserId = us.GetUserId();
 
             var query = from i in db.GeneratedItems
                         where i.UserId == UserId
@@ -132,7 +141,8 @@ namespace GameProject.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            int UserId = userService.GetUserLoggedId();
+            us.SetHttpSessionStateBase(this.HttpContext.Session);
+            int UserId = us.GetUserId();
 
             var query = from i in db.GeneratedItems
                         where i.UserId == UserId
@@ -173,7 +183,8 @@ namespace GameProject.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            int UserId = userService.GetUserLoggedId();
+            us.SetHttpSessionStateBase(this.HttpContext.Session);
+            int UserId = us.GetUserId();
 
             var query = from i in db.GeneratedItems
                         where i.UserId == UserId && i.Status == ItemStatus.Bagpack

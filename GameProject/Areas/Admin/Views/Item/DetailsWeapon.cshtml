@@ -1,4 +1,4 @@
-﻿@model GameProject.Models.Entities.Item
+﻿@model DetailsItemViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -12,60 +12,64 @@
         <dt>Typ</dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Type)
+            @Html.DisplayFor(model => model.Item.Type)
         </dd>
 
         <dt>Podtyp</dt>
 
         <dd>
-            @Html.DisplayFor(model => model.SubType)
+            @Html.DisplayFor(model => model.Item.SubType)
         </dd>
 
         <dt>Nazwa</dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Name)
+            @Html.DisplayFor(model => model.Item.Name)
         </dd>
 
         <dt>Minimalne Obrażenia</dt>
 
         <dd>
-            @Html.DisplayFor(model => model.PrimaryMinValue)
+            @Html.DisplayFor(model => model.Item.PrimaryMinValue)
         </dd>
 
         <dt>Maksymalne obrażenia</dt>
 
         <dd>
-            @Html.DisplayFor(model => model.PrimaryMaxValue)
+            @Html.DisplayFor(model => model.Item.PrimaryMaxValue)
         </dd>
 
         <dt>Wymagana Siła</dt>
 
         <dd>
-            @Html.DisplayFor(model => model.RequireStrength)
+            @Html.DisplayFor(model => model.Item.RequireStrength)
         </dd>
 
         <dt>Poziom Jakości</dt>
 
         <dd>
-            @Html.DisplayFor(model => model.QualityLevel)
+            @Html.DisplayFor(model => model.Item.QualityLevel)
         </dd>
 
         <dt>Wytrzymałość</dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Durability)
+            @Html.DisplayFor(model => model.Item.Durability)
         </dd>
 
         <dt>Cena</dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Price)
+            @Html.DisplayFor(model => model.Item.Price)
         </dd>
 
+        <dt>Obrazek</dt>
+
+        @if (Model.Image != null)
+        {
+            <dd>
+                <img src="@Url.Action("Show","Image", new { imageName = Model.Image.FileName })" />
+            </dd> 
+        }
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

@@ -1,0 +1,30 @@
+﻿@model SetImageViewModel
+
+@{
+    ViewBag.Title = "SetToItem";
+}
+
+<h2>SetToItem</h2>
+
+<table class="table">
+    <tr>
+        <th></th>
+        <th></th>
+    </tr>
+@foreach (var item in Model.Images)
+{
+    <tr>
+        <td>
+            <img src="@Url.Action("Show","Image", new { imageName = item.FileName })" />
+        </td>
+        <td>
+            @using (Html.BeginForm())
+            {
+                @Html.HiddenFor(model => model.Id)
+                @Html.Hidden("imageId", item.ID)
+                <input type="submit" value="Ustaw" class="btn btn-default" />
+            }
+        </td>
+    </tr>
+}
+</table>

@@ -49,12 +49,24 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.0.0\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.0.0\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.0.0\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -114,17 +126,22 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="obj\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AffixController.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Admin\Controllers\ImageController.cs" />
     <Compile Include="Areas\Admin\Controllers\ItemController.cs" />
     <Compile Include="Areas\Admin\Controllers\MonsterController.cs" />
+    <Compile Include="Areas\Admin\ViewModels\DetailsItemViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\SetImageViewModel.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\EquipmentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MonsterLoreController.cs" />
@@ -132,6 +149,7 @@
     <Compile Include="Enums\ImageCategory.cs" />
     <Compile Include="Enums\SubType.cs" />
     <Compile Include="Enums\FlashMessageType.cs" />
+    <Compile Include="Filters\AuthorizationFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -139,6 +157,7 @@
     <Compile Include="Helpers\FlashMessageHelper.cs" />
     <Compile Include="Models\DatabaseContext.cs" />
     <Compile Include="Models\Entities\GeneratedItem.cs" />
+    <Compile Include="Models\Entities\User.cs" />
     <Compile Include="Models\Entities\Image.cs" />
     <Compile Include="Models\Entities\Item.cs" />
     <Compile Include="Models\Entities\Affix.cs" />
@@ -146,9 +165,12 @@
     <Compile Include="Enums\ItemType.cs" />
     <Compile Include="Enums\AffixType.cs" />
     <Compile Include="Models\Entities\Monster.cs" />
+    <Compile Include="Models\UserSessionContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ItemService.cs" />
-    <Compile Include="Services\UserService.cs" />
+    <Compile Include="Services\PasswordHashService.cs" />
+    <Compile Include="ViewModels\LoginUserViewModel.cs" />
+    <Compile Include="ViewModels\RegisterUserViewModel.cs" />
     <Compile Include="ViewModels\EquipmentViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -189,6 +211,8 @@
     <Content Include="Areas\Admin\Views\Monster\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Monster\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Monster\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Image\SetItemImage.cshtml" />
+    <Content Include="Areas\Admin\Views\Image\SetToItem.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -215,6 +239,9 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\MonsterLore\Index.cshtml" />
     <Content Include="Views\Equipment\Index.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

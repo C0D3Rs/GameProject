@@ -11,7 +11,7 @@ using GameProject.Models;
 using GameProject.Enums;
 using GameProject.Helpers;
 using System.Data.Entity.Infrastructure;
-
+using GameProject.Areas.Admin.ViewModels;
 namespace GameProject.Areas.Admin.Controllers
 {
     public class ItemController : Controller
@@ -45,21 +45,36 @@ namespace GameProject.Areas.Admin.Controllers
                 return HttpNotFound();
             }
 
+            DetailsItemViewModel displayItemViewModel = new DetailsItemViewModel();
+
+            displayItemViewModel.Item = item;
+
+            var query2 = from i in db.Images
+                         where i.ID == item.ImageId
+                         select i;
+
+            var image = query2.FirstOrDefault();
+
+            if (image != null)
+            {
+                displayItemViewModel.Image = image;
+            }
+
             if (item.Type == ItemType.Weapon)
             {
-                return View("DetailsWeapon", item);
+                return View("DetailsWeapon", displayItemViewModel);
             }
             else if (item.Type == ItemType.Shield)
             {
-                return View("DetailsShield", item);
+                return View("DetailsShield", displayItemViewModel);
             }
             else if (item.Type == ItemType.Armor)
             {
-                return View("DetailsArmor", item);
+                return View("DetailsArmor", displayItemViewModel);
             }
             else if (item.Type == ItemType.Jewelry)
             {
-                return View("DetailsJewelry", item);
+                return View("DetailsJewelry", displayItemViewModel);
             }
             return HttpNotFound();
         }

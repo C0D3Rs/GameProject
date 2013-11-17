@@ -1,5 +1,18 @@
-﻿@{
+﻿@model IEnumerable<GameProject.Models.Entities.Image>
+@{
     ViewBag.Title = "Index Image";
 }
 
 <h2>Image</h2>
+
+@foreach (var image in Model) {
+<ul class="thumbnails">
+<li>
+    <a href="@Url.Action("Details","Image", new { id = image.ID })">
+        <img src="@Url.Action("Show","Image", new { imageName = image.FileName })" class="img-rounded" width="150px" />
+    </a>
+</li>
+</ul>
+}
+
+</table>

@@ -1,0 +1,35 @@
+﻿@model Image
+
+@{
+    ViewBag.Title = "Detail Image";
+}
+
+<h2>Detail Image</h2>
+
+
+<div class="well well-sm">
+    <div class="row">
+        <div class="col-sm-6 col-md-4">
+            <img src="@Url.Action("Show","Image", new { imageName = Model.FileName })" class="img-rounded" width="150px" />
+        </div>
+            <h4>@Model.FileName</h4>
+            <small><cite title="Typ Zdjęcia"><i class="glyphicon glyphicon-picture"></i> @Model.Type</cite></small>
+            <p>
+                <i class="glyphicon glyphicon-paperclip"></i> @Model.Category
+            </p>
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary">
+                    Social
+                </button>
+                <button type="button" class="btn btn-primary">
+                    Social
+                </button>
+            </div>
+          </dl>
+    </div>
+</div>
+ 
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

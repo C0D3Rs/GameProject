@@ -213,6 +213,7 @@
     <Content Include="Areas\Admin\Views\Monster\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Image\SetItemImage.cshtml" />
     <Content Include="Areas\Admin\Views\Image\SetToItem.cshtml" />
+    <Content Include="Areas\Admin\Views\Image\Details.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

@@ -21,7 +21,10 @@ namespace GameProject.Areas.Admin.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            var query = from a in db.Images
+                        orderby a.FileName
+                        select a;
+            return View(query.ToList());
         }
 
         public ActionResult Create()
@@ -76,6 +79,25 @@ namespace GameProject.Areas.Admin.Controllers
                 FlashMessageHelper.SetMessage(this, FlashMessageType.Danger, "Uwaga nie wybrano pliku lub jego wielkość przekracza 200kb.");
                 return RedirectToAction("Create");
             }
+        }
+
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var query = from i in db.Images
+                        where i.ID == id
+                        select i;
+            var image = query.FirstOrDefault();
+
+            if (image == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(image);
         }
 
         public ActionResult Show(string imageName = "")

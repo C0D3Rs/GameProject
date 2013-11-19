@@ -23,7 +23,10 @@ namespace GameProject.Areas.Admin.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            var query = from a in db.Images
+                        orderby a.FileName
+                        select a;
+            return View(query.ToList());
         }
 
         public ActionResult Create()
@@ -80,6 +83,25 @@ namespace GameProject.Areas.Admin.Controllers
             }
         }
 
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var query = from i in db.Images
+                        where i.ID == id
+                        select i;
+            var image = query.FirstOrDefault();
+
+            if (image == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(image);
+        }
+
         public ActionResult Show(string imageName = "")
         {
             if (String.IsNullOrEmpty(imageName))
@@ -100,6 +122,114 @@ namespace GameProject.Areas.Admin.Controllers
 
             return File(img.Data, img.Type);
         }
+
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var query = from i in db.Images
+                        where i.ID == id
+                        select i;
+
+            var image = query.FirstOrDefault();
+
+            if (image == null)
+            {
+                return HttpNotFound();
+            }
+
+            try
+            {
+                db.Images.Remove(image);
+                db.SaveChanges();
+
+                FlashMessageHelper.SetMessage(this, FlashMessageType.Success, "Usunięcie danych przebiegło pomyślnie.");
+            }
+            catch (Exception)
+            {
+                FlashMessageHelper.SetMessage(this, FlashMessageType.Danger, "Wystąpił nieoczekiwany błąd związany z usuwaniem danych.");
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var query = from i in db.Images
+                        where i.ID == id
+                        select i;
+
+            var image = query.FirstOrDefault();
+
+            if (image == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(image);
+        }
+        /*
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int? id, HttpPostedFileBase file)
+        {
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            try
+            {
+                if (file != null && file.ContentLength > 0 && file.ContentLength < 204800)
+                {
+                    // Get file info
+                    var fileName = Path.GetFileName(file.FileName); //nazwa pliku
+                    var imageName = Path.GetFileNameWithoutExtension(fileName);
+                    var imageExtension = "";
+                    var contentLength = file.ContentLength; //wielkosc pliku
+                    var contentType = file.ContentType; //typ pliku
+
+                    byte[] imageBytes = new byte[contentLength - 1];
+                    using (var binaryReader = new BinaryReader(file.InputStream))
+                    {
+                        imageBytes = binaryReader.ReadBytes(file.ContentLength);
+                    }
+                    img.FileName = String.Format("{0:yyyyMMddHHmmss}.{1}", DateTime.Now, imageExtension);
+                    img.Data = imageBytes;
+                    img.Type = contentType;
+                    img.Category = category;
+                    db.Images.Add(img);
+                    db.SaveChanges();
+                    db.Entry(item).State = EntityState.Modified;
+                    db.SaveChanges();
+
+                    FlashMessageHelper.SetMessage(this, FlashMessageType.Success, "Aktualizacja danych przebiegła pomyślnie.");
+                    return RedirectToAction("Index");
+                }
+
+                FlashMessageHelper.SetMessage(this, FlashMessageType.Info, "Nie można zaktualizować danych. Należy poprawić zaistniałe błędy.");
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                FlashMessageHelper.SetMessage(this, FlashMessageType.Warning, "Dane został zaktualizowane przez inną osobę. Należy odświeżyć stronę w celu wczytania nowych danych.");
+            }
+            catch (Exception)
+            {
+                FlashMessageHelper.SetMessage(this, FlashMessageType.Danger, "Wystąpił nieoczekiwany błąd związany z aktualizowaniem danych.");
+            }
+
+            return GetEditItemView(item);
+        }
+         */
 
         public ActionResult SetToItem(int? id)
         {

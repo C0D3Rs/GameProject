@@ -35,7 +35,11 @@ namespace GameProject.Services
 
         private string GetCorrectPrefixName(string prefixName, string itemName)
         {
-            if (itemName.EndsWith("a"))
+            if (itemName.EndsWith("a") && prefixName.EndsWith("r"))
+            {
+                return prefixName;
+            }
+            else if (itemName.EndsWith("a"))
             {
                 prefixName = prefixName.Remove(prefixName.Length - 1) + "a";
             }

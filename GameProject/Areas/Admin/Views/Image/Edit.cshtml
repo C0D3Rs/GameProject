@@ -1,0 +1,32 @@
+﻿@model GameProject.Models.Entities.Image
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edytowanie Zdjęcia</h2>
+
+@using (Html.BeginForm("Edit", "Image", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+@Html.AntiForgeryToken()
+
+@Html.HiddenFor(model => model.ID)
+@Html.HiddenFor(model => model.CurrentVersion)
+
+   <div class="form-horizontal">
+        <h4>Image</h4>
+        <hr />
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="file" name="file" />
+                <input type="submit" value="OK" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

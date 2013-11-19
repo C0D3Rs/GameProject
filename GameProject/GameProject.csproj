@@ -195,7 +195,7 @@
     <Content Include="Areas\Admin\Views\Affix\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Item\EditWeapon.cshtml" />
     <Content Include="Areas\Admin\Views\Item\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_LayoutForLoggedUser.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\Item\CreateWeapon.cshtml" />
     <Content Include="Areas\Admin\Views\Item\CreateShield.cshtml" />
     <Content Include="Areas\Admin\Views\Item\CreateJewelry.cshtml" />
@@ -215,14 +215,11 @@
     <Content Include="Areas\Admin\Views\Monster\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Image\SetItemImage.cshtml" />
     <Content Include="Areas\Admin\Views\Image\SetToItem.cshtml" />
-<<<<<<< HEAD
-    <Content Include="Areas\Admin\Views\Account\Login.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_FlashMessagePartial.cshtml" />
-=======
     <Content Include="Areas\Admin\Views\Image\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Image\Edit.cshtml" />
->>>>>>> f27d042d4d67f31523a56f53918ee8aad1003e27
+    <Content Include="Areas\Admin\Views\Shared\_FlashMessagePartial.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_LayoutForLoggedUser.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\Login.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -242,7 +239,7 @@
     </Content>
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_LayoutForLoggedUser.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -252,7 +249,7 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_LayoutForLoggedUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

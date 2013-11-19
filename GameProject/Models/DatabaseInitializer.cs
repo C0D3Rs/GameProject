@@ -9,7 +9,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Security;
 
-namespace EasyERP.Models
+namespace GameProject.Models
 {
     public class DatabaseInitializer : DropCreateDatabaseIfModelChanges<DatabaseContext>
     {

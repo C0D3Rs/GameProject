@@ -8,32 +8,16 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", null, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-
-                    <li>@Html.ActionLink("Ekwipunek", "Index", "Equipment")</li>
-                    <li>@Html.ActionLink("Bestiariusz", "Index", "MonsterLore")</li>
-                    <li>@Html.ActionLink("Wyloguj", "Logout", "Account")</li>
-                </ul>
-            </div>
-        </div>
-    </div>
     <div class="container body-content">
+        <h1>Game Project</h1>
+
         @RenderBody()
-        <hr />
+
+        <ul>
+            <li>@Html.ActionLink("Zarejestruj się", "Register", "Account")</li>
+            <li>@Html.ActionLink("Zaloguj", "Login", "Account")</li>
+        </ul>
+
         <footer>
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>

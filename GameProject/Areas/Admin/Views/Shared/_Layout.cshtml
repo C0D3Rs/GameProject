@@ -1,5 +1,5 @@
-﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
+
 <html>
 <head>
     <meta charset="utf-8" />
@@ -9,52 +9,11 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Panel Administracyjny", "Index", "Dashboard", null, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav"></ul>
-            </div>
-        </div>
-    </div>
-
     <div class="container body-content">
         <h1>Panel Administracyjny</h1>
 
-        @if (FlashMessageHelper.HasMessage(TempData, FlashMessageType.Success))
-        {
-            <div class="alert alert-success">
-                <p>@FlashMessageHelper.GetMessage(TempData, FlashMessageType.Success)</p>
-            </div>
-        }
-        @if (FlashMessageHelper.HasMessage(TempData, FlashMessageType.Info))
-        {
-            <div class="alert alert-info">
-                <p>@FlashMessageHelper.GetMessage(TempData, FlashMessageType.Info)</p>
-            </div>
-        }
-        @if (FlashMessageHelper.HasMessage(TempData, FlashMessageType.Warning))
-        {
-            <div class="alert alert-warning">
-                <p>@FlashMessageHelper.GetMessage(TempData, FlashMessageType.Warning)</p>
-            </div>
-        }
-        @if (FlashMessageHelper.HasMessage(TempData, FlashMessageType.Danger))
-        {
-            <div class="alert alert-danger">
-                <p>@FlashMessageHelper.GetMessage(TempData, FlashMessageType.Danger)</p>
-            </div>
-        }
-
         @RenderBody()
-        <hr />
+
         <footer>
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>

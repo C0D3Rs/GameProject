@@ -11,9 +11,11 @@ using GameProject.Models;
 using GameProject.Helpers;
 using GameProject.Enums;
 using System.Data.Entity.Infrastructure;
+using GameProject.Filters;
 
 namespace GameProject.Areas.Admin.Controllers
 {
+    [AuthorizationFilter(UserRole.Admin)]
     public class MonsterController : Controller
     {
         private DatabaseContext db = new DatabaseContext();

@@ -1,5 +1,6 @@
 ﻿using GameProject.Areas.Admin.ViewModels;
 using GameProject.Enums;
+using GameProject.Filters;
 using GameProject.Helpers;
 using GameProject.Models;
 using GameProject.Models.Entities;
@@ -14,6 +15,7 @@ using System.Web.Mvc;
 
 namespace GameProject.Areas.Admin.Controllers
 {
+    [AuthorizationFilter(UserRole.Admin)]
     public class ImageController : Controller
     {
 

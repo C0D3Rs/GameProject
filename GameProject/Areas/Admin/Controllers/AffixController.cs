@@ -12,9 +12,11 @@ using GameProject.Enums;
 using GameProject.Services;
 using GameProject.Helpers;
 using System.Data.Entity.Infrastructure;
+using GameProject.Filters;
 
 namespace GameProject.Areas.Admin.Controllers
 {
+    [AuthorizationFilter(UserRole.Admin)]
     public class AffixController : Controller
     {
         private DatabaseContext db = new DatabaseContext();

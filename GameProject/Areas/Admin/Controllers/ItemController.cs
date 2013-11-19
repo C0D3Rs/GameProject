@@ -12,8 +12,11 @@ using GameProject.Enums;
 using GameProject.Helpers;
 using System.Data.Entity.Infrastructure;
 using GameProject.Areas.Admin.ViewModels;
+using GameProject.Filters;
+
 namespace GameProject.Areas.Admin.Controllers
 {
+    [AuthorizationFilter(UserRole.Admin)]
     public class ItemController : Controller
     {
         private DatabaseContext db = new DatabaseContext();

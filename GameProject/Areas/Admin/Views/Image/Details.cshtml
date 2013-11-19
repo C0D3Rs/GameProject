@@ -5,31 +5,41 @@
 }
 
 <h2>Detail Image</h2>
+<div class="container" style="display:block;">
+<img src="@Url.Action("Show","Image", new { imageName = Model.FileName })" class="img-rounded col-md-4" width="150px" />
 
-
-<div class="well well-sm">
-    <div class="row">
-        <div class="col-sm-6 col-md-4">
-            <img src="@Url.Action("Show","Image", new { imageName = Model.FileName })" class="img-rounded" width="150px" />
-        </div>
-            <h4>@Model.FileName</h4>
-            <small><cite title="Typ Zdjęcia"><i class="glyphicon glyphicon-picture"></i> @Model.Type</cite></small>
-            <p>
-                <i class="glyphicon glyphicon-paperclip"></i> @Model.Category
-            </p>
-            <div class="btn-group">
-                <button type="button" class="btn btn-primary">
-                    Social
-                </button>
-                <button type="button" class="btn btn-primary">
-                    Social
-                </button>
-            </div>
-          </dl>
+<dl class="dl-horizontal col-md-8">
+    <dt>
+        <i class="glyphicon glyphicon-bookmark"></i> @Html.DisplayNameFor(model => model.FileName)
+    </dt>      
+    <dd>
+        @Model.FileName
+    </dd>
+    <dt>
+       <i class="glyphicon glyphicon-picture"></i> @Html.DisplayNameFor(model => model.Type)
+    </dt>
+    <dd>
+        @Model.Type
+    </dd>
+    <dt>
+        <i class="glyphicon glyphicon-paperclip"></i> @Html.DisplayNameFor(model => model.Category)
+    </dt>
+    <dd>
+        @Model.Category
+    </dd>
+    <br />
+    <div class="btn-group">
+        <dt>
+       
+        <a type="button" class="btn btn-warning" href="@Url.Action("Edit/"+@Model.ID, "Image")">
+            <i class="glyphicon glyphicon-edit"></i> Edytuj
+        </a>
+        </dt>
+        <dd>
+        <a type="button" class="btn btn-danger" href="@Url.Action("Delete/"+@Model.ID, "Image")">
+            <i class="glyphicon glyphicon-trash"></i> Usuń
+        </a>
+        </dd>
     </div>
-</div>
- 
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
+</dl>
 </div>

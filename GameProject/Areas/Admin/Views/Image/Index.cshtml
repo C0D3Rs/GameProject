@@ -4,15 +4,13 @@
 }
 
 <h2>Image</h2>
-
+<div class="row">
 @foreach (var image in Model) {
-<ul class="thumbnails">
-<li>
-    <a href="@Url.Action("Details","Image", new { id = image.ID })">
+  <div class="col-sm-6 col-md-2">
+    <a href="@Url.Action("Details","Image", new { id = image.ID })" class="thumbnai">
         <img src="@Url.Action("Show","Image", new { imageName = image.FileName })" class="img-rounded" width="150px" />
     </a>
-</li>
-</ul>
+  </div>
 }
-
+</div>
 </table>

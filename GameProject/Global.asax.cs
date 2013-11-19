@@ -14,8 +14,6 @@ namespace GameProject
     {
         protected void Application_Start()
         {
-            Database.SetInitializer<DatabaseContext>(new DatabaseInitializer());
-
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

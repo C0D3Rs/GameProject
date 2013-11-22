@@ -10,72 +10,39 @@ namespace GameProject.Helpers
     {
         public static string GetCorrectPrefixName(string prefixName, string itemName)
         {
-            var splitItem = itemName.Split(' ');
-            string[] words = splitItem;
+            string[] words = itemName.Split(' ');
 
-            if (words[0].EndsWith("o") && prefixName.EndsWith("ki"))
+            if (prefixName == null)
+            {
+                return null;
+            }
+            if (words[0].EndsWith("o") && prefixName.EndsWith("ki") ||
+                (words[0].EndsWith("o") && prefixName.EndsWith("i"))
+                )
             {
                 prefixName = prefixName.Remove(prefixName.Length - 1) + "ie";
             }
-            else if (words[0].EndsWith("o") && prefixName.EndsWith("ny"))
+            else if ((words[0].EndsWith("o") && prefixName.EndsWith("ny")) ||
+                (words[0].EndsWith("o") && prefixName.EndsWith("ty")) ||
+                (words[0].EndsWith("o") && prefixName.EndsWith("cy")) ||
+                (words[0].EndsWith("o") && prefixName.EndsWith("wy")) ||
+                (words[0].EndsWith("o") && prefixName.EndsWith("ły")) ||
+                (words[0].EndsWith("e")) ||
+                (words[0].EndsWith("ja")) ||
+                (words[0].EndsWith("i"))
+                )
             {
                 prefixName = prefixName.Remove(prefixName.Length - 1) + "e";
             }
-            else if (words[0].EndsWith("o") && prefixName.EndsWith("ty"))
-            {
-                prefixName = prefixName.Remove(prefixName.Length - 1) + "e";
-            }
-            else if (words[0].EndsWith("o") && prefixName.EndsWith("cy"))
-            {
-                prefixName = prefixName.Remove(prefixName.Length - 1) + "e";
-            }
-            else if (words[0].EndsWith("o") && prefixName.EndsWith("wy"))
-            {
-                prefixName = prefixName.Remove(prefixName.Length - 1) + "e";
-            }
-            else if (words[0].EndsWith("o") && prefixName.EndsWith("ły"))
-            {
-                prefixName = prefixName.Remove(prefixName.Length - 1) + "e";
-            }
-            else if (words[0].EndsWith("e"))
-            {
-                prefixName = prefixName.Remove(prefixName.Length - 1) + "e";
-            }
-            else if (words[0].EndsWith("ja"))
-            {
-                prefixName = prefixName.Remove(prefixName.Length - 1) + "e";
-            }
-            else if (words[0].EndsWith("i"))
-            {
-                prefixName = prefixName.Remove(prefixName.Length - 1) + "e";
-            }
-            else if (words[0].EndsWith("o") && prefixName.EndsWith("i"))
-            {
-                prefixName = prefixName.Remove(prefixName.Length - 1) + "ie";
-            }
-            else if (words[0].EndsWith("a") && prefixName.EndsWith("y"))
+            else if (words[0].EndsWith("a") && prefixName.EndsWith("y") ||
+                (words[0].EndsWith("a") && prefixName.EndsWith("i"))
+                )
             {
                 prefixName = prefixName.Remove(prefixName.Length - 1) + "a";
-            }
-            else if (words[0].EndsWith("a") && prefixName.EndsWith("r"))
-            {
-                return prefixName;
-            }
-            else if (words[0].EndsWith("o") && prefixName.EndsWith("r"))
-            {
-                return prefixName;
             }
             else if (words[0].EndsWith("o") && prefixName.EndsWith("ki"))
             {
                 prefixName = prefixName + "e";
-            }
-            else if (words[0].EndsWith("a") && prefixName.EndsWith("y"))
-            {
-                prefixName = prefixName.Remove(prefixName.Length - 1) + "a";
-            }
-            else if (words[0].EndsWith("a") && prefixName.EndsWith("i"))
-            {
-                prefixName = prefixName.Remove(prefixName.Length - 1) + "a";
             }
             return prefixName;
         }

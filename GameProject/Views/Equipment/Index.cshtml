@@ -20,22 +20,22 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Type)
+                @Html.DisplayFor(modelItem => item.Item.Type)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.SubType)
+                @Html.DisplayFor(modelItem => item.Item.SubType)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @Html.DisplayFor(modelItem => item.Item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Durability)
+                @Html.DisplayFor(modelItem => item.Item.Durability)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Price)
+                @Html.DisplayFor(modelItem => item.Item.Price)
             </td>
             <td>
-                @Html.ActionLink("Zdejmij", "ChangeStatusToChest", new { id = item.Id })
+                @Html.ActionLink("Zdejmij", "ChangeStatusToChest", new { id = item.GeneratedItem.Id })
             </td>
         </tr>
     }
@@ -57,22 +57,22 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Type)
+                @Html.DisplayFor(modelItem => item.Item.Type)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.SubType)
+                @Html.DisplayFor(modelItem => item.Item.SubType)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @Html.DisplayFor(modelItem => item.Item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Durability)
+                @Html.DisplayFor(modelItem => item.Item.Durability)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Price)
+                @Html.DisplayFor(modelItem => item.Item.Price)
             </td>
             <td>
-                @Html.ActionLink("Przenieś do skrzyni", "ChangeStatusToChest", new { id = item.Id })
+                @Html.ActionLink("Przenieś do skrzyni", "ChangeStatusToChest", new { id = item.GeneratedItem.Id })
             </td>
         </tr>
     }
@@ -94,22 +94,22 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Type)
+                @Html.DisplayFor(modelItem => item.Item.Type)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.SubType)
+                @Html.DisplayFor(modelItem => item.Item.SubType)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @Html.DisplayFor(modelItem => item.Item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Durability)
+                @Html.DisplayFor(modelItem => item.Item.Durability)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Price)
+                @Html.DisplayFor(modelItem => item.Item.Price)
             </td>
             <td>
-                @Html.ActionLink("Załóż", "ChangeStatusToEquipped", new { id = item.Id })
+                @Html.ActionLink("Załóż", "ChangeStatusToEquipped", new { id = item.GeneratedItem.Id })
             </td>
         </tr>
     }

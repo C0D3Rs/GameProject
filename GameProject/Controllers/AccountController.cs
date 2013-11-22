@@ -18,19 +18,6 @@ namespace GameProject.Controllers
         private DatabaseContext db = new DatabaseContext();
         private UserSessionContext us = new UserSessionContext();
 
-        public ActionResult Index()
-        {
-            us.SetHttpSessionStateBase(this.HttpContext.Session);
-            var user = us.GetUser();
-
-            if (user == null)
-            {
-                return RedirectToAction("Login");
-            }
-
-            return View(user);
-        }
-
         public ActionResult Login()
         {
             return View();
@@ -58,7 +45,7 @@ namespace GameProject.Controllers
             us.SetHttpSessionStateBase(this.HttpContext.Session);
             us.SetUserId(user.Id);
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Character");
         }
 
         public ActionResult Register()
@@ -95,19 +82,12 @@ namespace GameProject.Controllers
         }
 
         [AuthorizationFilter(UserRole.Normal)]
-        public ActionResult Manage()
-        {
-            return RedirectToAction("Index", "Home");
-        }
-
-        [AuthorizationFilter(UserRole.Normal)]
         public ActionResult Logout()
         {
             us.SetHttpSessionStateBase(this.HttpContext.Session);
             us.RemoveUserId();
-            us.RemoveUser();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "Account");
         }
 
         protected override void Dispose(bool disposing)

@@ -59,7 +59,6 @@ namespace GameProject.Areas.Admin.Controllers
         {
             us.SetHttpSessionStateBase(this.HttpContext.Session);
             us.RemoveUserId();
-            us.RemoveUser();
 
             return RedirectToAction("Login", "Account");
         }

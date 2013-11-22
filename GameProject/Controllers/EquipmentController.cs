@@ -14,7 +14,8 @@ using GameProject.Filters;
 
 namespace GameProject.Controllers
 {
-    [AuthorizationFilter(UserRole.Normal)]
+    [AuthorizationFilter(UserRole.Normal, Order = 1)]
+    [CharacterCreatorFilter(Order = 2)]
     public class EquipmentController : Controller
     {
         private DatabaseContext db = new DatabaseContext();
@@ -23,32 +24,38 @@ namespace GameProject.Controllers
 
         public ActionResult Index()
         {
-            us.SetHttpSessionStateBase(this.HttpContext.Session);
-            var user = us.GetUser();
+            Character character = this.HttpContext.Items["Character"] as Character;
 
-            if (user == null)
+            if (character == null)
             {
-                HttpNotFound();
+                return HttpNotFound();
             }
 
-            var query = from i in db.GeneratedItems
-                        where i.UserId == user.Id
-                        select i;
+            var query2 = from r1 in db.GeneratedItems
+                         from r2 in db.Items
+                         from r3 in db.Images
+                         where r1.CharacterId == character.Id && r1.ItemId == r2.Id && r2.ImageId == r3.ID
+                         select new ItemViewModel
+                         {
+                             GeneratedItem = r1,
+                             Item = r2,
+                             Image = r3
+                         };
 
-            List<GeneratedItem> UserItems = query.ToList();
+            List<ItemViewModel> characterItems = query2.ToList();
 
             EquipmentViewModel equipmentViewModel = new EquipmentViewModel();
 
-            equipmentViewModel.EquippedItems = 
-                UserItems.FindAll(i => i.Status == ItemStatus.Equipped);
-            equipmentViewModel.BackpackItems = 
-                UserItems.FindAll(i => i.Status == ItemStatus.Bagpack);
-            equipmentViewModel.ChestItems = 
-                UserItems.FindAll(i => i.Status == ItemStatus.Chest);
+            equipmentViewModel.EquippedItems =
+                characterItems.FindAll(i => i.GeneratedItem.Status == ItemStatus.Equipped);
+            equipmentViewModel.BackpackItems =
+                characterItems.FindAll(i => i.GeneratedItem.Status == ItemStatus.Bagpack);
+            equipmentViewModel.ChestItems =
+                characterItems.FindAll(i => i.GeneratedItem.Status == ItemStatus.Chest);
 
             return View(equipmentViewModel);
         }
-
+        
         public ActionResult ChangeStatusToEquipped(int? id)
         {
             if (id == null)
@@ -56,74 +63,86 @@ namespace GameProject.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            us.SetHttpSessionStateBase(this.HttpContext.Session);
-            int UserId = us.GetUserId();
+            Character character = this.HttpContext.Items["Character"] as Character;
 
-            var query = from i in db.GeneratedItems
-                        where i.UserId == UserId
-                        select i;
+            if (character == null)
+            {
+                return HttpNotFound();
+            }
 
-            List<GeneratedItem> userItems = query.ToList();
+            var query = from r1 in db.GeneratedItems
+                        from r2 in db.Items
+                        where r1.CharacterId == character.Id && r1.ItemId == r2.Id
+                        select new ItemViewModel
+                        {
+                            GeneratedItem = r1,
+                            Item = r2,
+                        };
 
-            var item = userItems.FirstOrDefault(i => i.Id == id && i.Status == ItemStatus.Chest);
+            // lista przedmiotów postaci
+            List<ItemViewModel> characterItems = query.ToList();
+
+            // przedmiot, który chcemy założyć
+            var item = characterItems.FirstOrDefault(i => i.GeneratedItem.Id == id && i.GeneratedItem.Status == ItemStatus.Chest);
 
             if (item == null)
             {
                 return RedirectToAction("Index");
             }
 
-            List<GeneratedItem> equippedItems = userItems.FindAll(i => i.Status == ItemStatus.Equipped);
+            // lista przedmiotów założonych
+            List<ItemViewModel> equippedItems = characterItems.FindAll(i => i.GeneratedItem.Status == ItemStatus.Equipped);
 
-            if (item.Type == ItemType.Armor)
+            if (item.Item.Type == ItemType.Armor)
             {
-                if (equippedItems.Count(i => i.Type == ItemType.Armor) == 0)
+                if (equippedItems.Count(i => i.Item.Type == ItemType.Armor) == 0)
                 {
-                    item.Status = ItemStatus.Equipped;
+                    item.GeneratedItem.Status = ItemStatus.Equipped;
                 }
             }
-            else if (item.Type == ItemType.Jewelry)
+            else if (item.Item.Type == ItemType.Jewelry)
             {
-                if (item.SubType == SubType.Amulet)
+                if (item.Item.SubType == SubType.Amulet)
                 {
-                    if (equippedItems.Count(i => i.SubType == SubType.Amulet) == 0)
+                    if (equippedItems.Count(i => i.Item.SubType == SubType.Amulet) == 0)
                     {
-                        item.Status = ItemStatus.Equipped;
+                        item.GeneratedItem.Status = ItemStatus.Equipped;
                     }
                 }
                 else
                 {
-                    if (equippedItems.Count(i => i.SubType == SubType.Ring) < 2)
+                    if (equippedItems.Count(i => i.Item.SubType == SubType.Ring) < 2)
                     {
-                        item.Status = ItemStatus.Equipped;
+                        item.GeneratedItem.Status = ItemStatus.Equipped;
                     }
                 }
             }
-            else if (item.Type == ItemType.Weapon)
+            else if (item.Item.Type == ItemType.Weapon)
             {
-                if (equippedItems.Count(i => i.Type == ItemType.Weapon) == 0)
+                if (equippedItems.Count(i => i.Item.Type == ItemType.Weapon) == 0)
                 {
-                    if (equippedItems.Count(i => i.Type == ItemType.Shield) == 0)
+                    if (equippedItems.Count(i => i.Item.Type == ItemType.Shield) == 0)
                     {
-                        item.Status = ItemStatus.Equipped;
+                        item.GeneratedItem.Status = ItemStatus.Equipped;
                     }
                 }
             }
-            else if (equippedItems.Count(i => i.Type == ItemType.Shield) == 0)
+            else if (equippedItems.Count(i => i.Item.Type == ItemType.Shield) == 0)
             {
-                if (equippedItems.Count(i => i.SubType == SubType.TwoHanded) == 0)
+                if (equippedItems.Count(i => i.Item.SubType == SubType.TwoHanded) == 0)
                 {
-                    item.Status = ItemStatus.Equipped;
+                    item.GeneratedItem.Status = ItemStatus.Equipped;
                 }
             }
 
-            if (item.Status != ItemStatus.Equipped)
+            if (item.GeneratedItem.Status != ItemStatus.Equipped)
             {
                 return RedirectToAction("Index");
             }
 
             try
             {
-                db.Entry(item).State = EntityState.Modified;
+                db.Entry(item.GeneratedItem).State = EntityState.Modified;
                 db.SaveChanges();
             }
             catch(Exception)
@@ -141,11 +160,15 @@ namespace GameProject.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            us.SetHttpSessionStateBase(this.HttpContext.Session);
-            int UserId = us.GetUserId();
+            Character character = this.HttpContext.Items["Character"] as Character;
+
+            if (character == null)
+            {
+                return HttpNotFound();
+            }
 
             var query = from i in db.GeneratedItems
-                        where i.UserId == UserId
+                        where i.CharacterId == character.Id
                         select i;
 
             List<GeneratedItem> items = query.ToList();
@@ -183,11 +206,15 @@ namespace GameProject.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            us.SetHttpSessionStateBase(this.HttpContext.Session);
-            int UserId = us.GetUserId();
+            Character character = this.HttpContext.Items["Character"] as Character;
+
+            if (character == null)
+            {
+                return HttpNotFound();
+            }
 
             var query = from i in db.GeneratedItems
-                        where i.UserId == UserId && i.Status == ItemStatus.Bagpack
+                        where i.CharacterId == character.Id && i.Status == ItemStatus.Bagpack
                         select i;
 
             if (query.Count() != 0)
@@ -215,7 +242,7 @@ namespace GameProject.Controllers
             try
             {
                 generatedItem.Status = ItemStatus.Bagpack;
-                generatedItem.UserId = UserId;
+                generatedItem.CharacterId = character.Id;
                 db.GeneratedItems.Add(generatedItem);
                 db.SaveChanges();
             }

@@ -9,7 +9,8 @@ using System.Web.Mvc;
 
 namespace GameProject.Controllers
 {
-    [AuthorizationFilter(UserRole.Normal)]
+    [AuthorizationFilter(UserRole.Normal, Order = 1)]
+    [CharacterCreatorFilter(Order = 2)]
     public class MonsterLoreController : Controller
     {
         private DatabaseContext db = new DatabaseContext();

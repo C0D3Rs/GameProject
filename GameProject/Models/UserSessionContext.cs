@@ -13,9 +13,6 @@ namespace GameProject.Models
         private const string SessionUserIdKey = "SessionUserIdKey";
         private int userId = 0;
 
-        private const string SessionUserKey = "SessionUserKey";
-        private User user;
-
         public void SetHttpSessionStateBase(HttpSessionStateBase session)
         {
             this.session = session;
@@ -41,29 +38,6 @@ namespace GameProject.Models
         {
             userId = 0;
             session[SessionUserIdKey] = 0;
-        }
-
-        public User GetUser()
-        {
-            if (session != null && session[SessionUserKey] != null)
-            {
-                user = (User)session[SessionUserKey];
-
-            }
-
-            return user;
-        }
-
-        public void SetUser(User user)
-        {
-            this.user = user;
-            session[SessionUserKey] = user;
-        }
-
-        public void RemoveUser()
-        {
-            user = null;
-            session.Remove(SessionUserKey);
         }
     }
 }

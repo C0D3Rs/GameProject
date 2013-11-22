@@ -8,8 +8,8 @@ namespace GameProject.ViewModels
 {
     public class EquipmentViewModel
     {
-        public List<GeneratedItem> EquippedItems;
-        public List<GeneratedItem> BackpackItems;
-        public List<GeneratedItem> ChestItems;
+        public List<ItemViewModel> EquippedItems;
+        public List<ItemViewModel> BackpackItems;
+        public List<ItemViewModel> ChestItems;
     }
 }

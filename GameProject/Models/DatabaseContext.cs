@@ -16,6 +16,7 @@ namespace GameProject.Models
         public DbSet<Image> Images { get; set; }
         public DbSet<GeneratedItem> GeneratedItems { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Character> Characters { get; set; }
 
         public DatabaseContext()
         {

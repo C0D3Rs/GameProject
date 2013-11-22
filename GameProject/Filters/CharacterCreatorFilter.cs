@@ -1,5 +1,6 @@
 ﻿using GameProject.Enums;
 using GameProject.Models;
+using GameProject.Models.Entities;
 using GameProject.Services;
 using System;
 using System.Collections.Generic;
@@ -10,40 +11,38 @@ using System.Web.Routing;
 
 namespace GameProject.Filters
 {
-    public class AuthorizationFilter : ActionFilterAttribute, IActionFilter
+    public class CharacterCreatorFilter : ActionFilterAttribute, IActionFilter
     {
         private DatabaseContext db = new DatabaseContext();
         private UserSessionContext us = new UserSessionContext();
-        private UserRole userRole;
-
-        public AuthorizationFilter(UserRole userRole)
-        {
-            this.userRole = userRole;
-        }
 
         void IActionFilter.OnActionExecuting(ActionExecutingContext filterContext)
         {
-            us.SetHttpSessionStateBase(filterContext.HttpContext.Session);
+            if(!filterContext.HttpContext.Items.Contains("User"))
+            {
+                this.OnActionExecuting(filterContext);
+                return;
+            }
 
-            var userId = us.GetUserId();
+            User user = filterContext.HttpContext.Items["User"] as User;
 
-            var query = from u in db.Users
-                        where u.Id == userId && u.Role == userRole
-                        select u;
+            var query = from c in db.Characters
+                        where c.UserId == user.Id
+                        select c;
 
-            var user = query.FirstOrDefault();
+            var character = query.FirstOrDefault();
 
-            if (user == null)
+            if (character == null)
             {
                 RouteValueDictionary redirectTargetDictionary = new RouteValueDictionary();
-                redirectTargetDictionary.Add("action", "Login");
-                redirectTargetDictionary.Add("controller", "Account");
+                redirectTargetDictionary.Add("action", "Create");
+                redirectTargetDictionary.Add("controller", "Character");
 
                 filterContext.Result = new RedirectToRouteResult(redirectTargetDictionary);
             }
             else
             {
-                filterContext.HttpContext.Items.Add("User", user);
+                filterContext.HttpContext.Items.Add("Character", character);
             }
 
             this.OnActionExecuting(filterContext);

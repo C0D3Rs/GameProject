@@ -13,6 +13,7 @@ using GameProject.Helpers;
 using System.Data.Entity.Infrastructure;
 using GameProject.Areas.Admin.ViewModels;
 using GameProject.Filters;
+using PagedList;
 
 namespace GameProject.Areas.Admin.Controllers
 {
@@ -21,13 +22,14 @@ namespace GameProject.Areas.Admin.Controllers
     {
         private DatabaseContext db = new DatabaseContext();
 
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
             var query = from i in db.Items
                         orderby i.Id descending
                         select i;
 
-            return View(query.ToList());
+            int pageNumber = (page ?? 1);
+            return View(query.ToPagedList(pageNumber, 10));
         }
 
         public ActionResult Details(int? id)
@@ -82,52 +84,32 @@ namespace GameProject.Areas.Admin.Controllers
             return HttpNotFound();
         }
 
-        private ActionResult GetCreateItemView(ItemType? type)
+        public ActionResult CreateWeapon()
         {
-            if (type == null || !Enum.IsDefined(typeof(ItemType), type))
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            else if (type == ItemType.Weapon)
-            {
-                return View("CreateWeapon", new Item() { Type = ItemType.Weapon });
-            }
-            else if (type == ItemType.Shield)
-            {
-                return View("CreateShield", new Item() { Type = ItemType.Shield });
-            }
-            else if (type == ItemType.Armor)
-            {
-                return View("CreateArmor", new Item() { Type = ItemType.Armor });
-            }
-            else if (type == ItemType.Jewelry)
-            {
-                return View("CreateJewelry", new Item() { Type = ItemType.Jewelry });
-            }
-
-            return HttpNotFound();
-        }
-
-        public ActionResult Create(ItemType? type)
-        {
-            return GetCreateItemView(type);
+            return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Item item)
+        public ActionResult CreateWeapon(WeaponItemViewModel weaponItemViewModel)
         {
-            if (!Enum.IsDefined(typeof(ItemType), item.Type))
+            if (!Enum.IsDefined(typeof(WeaponType), (WeaponType)weaponItemViewModel.Type))
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                ModelState.AddModelError("Type", new Exception());
             }
 
-            if ((item.Type == ItemType.Weapon &&
-                !Enum.IsDefined(typeof(WeaponType), (WeaponType)item.SubType)) ||
-                (item.Type == ItemType.Jewelry && !Enum.IsDefined(typeof(JewelryType), (JewelryType)item.SubType)))
+            Item item = new Item()
             {
-                ModelState.AddModelError("SubType", new Exception());
-            }
+                Type = ItemType.Weapon,
+                SubType = (SubType)weaponItemViewModel.Type,
+                Name = weaponItemViewModel.Name,
+                Durability = weaponItemViewModel.Durability,
+                Price = weaponItemViewModel.Price,
+                PrimaryMinValue = weaponItemViewModel.MinDamage,
+                PrimaryMaxValue = weaponItemViewModel.MaxDamage,
+                QualityLevel = weaponItemViewModel.QualityLevel,
+                RequireStrength = weaponItemViewModel.RequireStrength,
+            };
 
             try
             {
@@ -147,7 +129,136 @@ namespace GameProject.Areas.Admin.Controllers
                 FlashMessageHelper.SetMessage(this, FlashMessageType.Danger, "Wystąpił nieoczekiwany błąd związany z zapisem nowych danych.");
             }
 
-            return GetCreateItemView(item.Type);
+            return View(weaponItemViewModel);
+        }
+
+        public ActionResult CreateShield()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateShield(ShieldItemViewModel shieldItemViewModel)
+        {
+            Item item = new Item()
+            {
+                Type = ItemType.Shield,
+                Name = shieldItemViewModel.Name,
+                Durability = shieldItemViewModel.Durability,
+                Price = shieldItemViewModel.Price,
+                PrimaryMinValue = shieldItemViewModel.Armor,
+                PrimaryMaxValue = shieldItemViewModel.Armor,
+                QualityLevel = shieldItemViewModel.QualityLevel,
+                RequireStrength = shieldItemViewModel.RequireStrength,
+            };
+
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    db.Items.Add(item);
+                    db.SaveChanges();
+
+                    FlashMessageHelper.SetMessage(this, FlashMessageType.Success, "Zapisanie nowych danych przebiegło pomyślnie.");
+                    return RedirectToAction("Index");
+                }
+
+                FlashMessageHelper.SetMessage(this, FlashMessageType.Info, "Nie można zapisać nowych danych. Należy poprawić zaistniałe błędy.");
+            }
+            catch (Exception)
+            {
+                FlashMessageHelper.SetMessage(this, FlashMessageType.Danger, "Wystąpił nieoczekiwany błąd związany z zapisem nowych danych.");
+            }
+
+            return View(shieldItemViewModel);
+        }
+
+        public ActionResult CreateArmor()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateArmor(ShieldItemViewModel armorItemViewModel)
+        {
+            Item item = new Item()
+            {
+                Type = ItemType.Armor,
+                Name = armorItemViewModel.Name,
+                Durability = armorItemViewModel.Durability,
+                Price = armorItemViewModel.Price,
+                PrimaryMinValue = armorItemViewModel.Armor,
+                PrimaryMaxValue = armorItemViewModel.Armor,
+                QualityLevel = armorItemViewModel.QualityLevel,
+                RequireStrength = armorItemViewModel.RequireStrength,
+            };
+
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    db.Items.Add(item);
+                    db.SaveChanges();
+
+                    FlashMessageHelper.SetMessage(this, FlashMessageType.Success, "Zapisanie nowych danych przebiegło pomyślnie.");
+                    return RedirectToAction("Index");
+                }
+
+                FlashMessageHelper.SetMessage(this, FlashMessageType.Info, "Nie można zapisać nowych danych. Należy poprawić zaistniałe błędy.");
+            }
+            catch (Exception)
+            {
+                FlashMessageHelper.SetMessage(this, FlashMessageType.Danger, "Wystąpił nieoczekiwany błąd związany z zapisem nowych danych.");
+            }
+
+            return View(armorItemViewModel);
+        }
+
+        public ActionResult CreateJewelry()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateJewelry(JewelryItemViewModel jewelryItemViewModel)
+        {
+            if (!Enum.IsDefined(typeof(JewelryType), (JewelryType)jewelryItemViewModel.Type))
+            {
+                ModelState.AddModelError("Type", new Exception());
+            }
+
+            Item item = new Item()
+            {
+                Type = ItemType.Jewelry,
+                SubType = (SubType)jewelryItemViewModel.Type,
+                Name = jewelryItemViewModel.Name,
+                Durability = jewelryItemViewModel.Durability,
+                Price = jewelryItemViewModel.Price,
+                QualityLevel = jewelryItemViewModel.QualityLevel,
+            };
+
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    db.Items.Add(item);
+                    db.SaveChanges();
+
+                    FlashMessageHelper.SetMessage(this, FlashMessageType.Success, "Zapisanie nowych danych przebiegło pomyślnie.");
+                    return RedirectToAction("Index");
+                }
+
+                FlashMessageHelper.SetMessage(this, FlashMessageType.Info, "Nie można zapisać nowych danych. Należy poprawić zaistniałe błędy.");
+            }
+            catch (Exception)
+            {
+                FlashMessageHelper.SetMessage(this, FlashMessageType.Danger, "Wystąpił nieoczekiwany błąd związany z zapisem nowych danych.");
+            }
+
+            return View(jewelryItemViewModel);
         }
 
         private ActionResult GetEditItemView(Item item)

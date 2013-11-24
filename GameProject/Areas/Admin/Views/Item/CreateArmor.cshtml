@@ -1,4 +1,4 @@
-﻿@model Item
+﻿@model ArmorItemViewModel
 
 @{
     ViewBag.Title = "Create";
@@ -9,10 +9,8 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    @Html.HiddenFor(model => model.Type)
 
     <div class="form-horizontal">
-        <h4>Item</h4>
         <hr />
 
         <div class="form-group">
@@ -24,18 +22,10 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.PrimaryMinValue, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Armor, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.PrimaryMinValue)
-                @Html.ValidationMessageFor(model => model.PrimaryMinValue)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.PrimaryMaxValue, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.PrimaryMaxValue)
-                @Html.ValidationMessageFor(model => model.PrimaryMaxValue)
+                @Html.EditorFor(model => model.Armor)
+                @Html.ValidationMessageFor(model => model.Armor)
             </div>
         </div>
 
@@ -78,7 +68,3 @@
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>

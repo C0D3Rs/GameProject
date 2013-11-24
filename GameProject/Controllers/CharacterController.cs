@@ -2,6 +2,8 @@
 using GameProject.Filters;
 using GameProject.Models;
 using GameProject.Models.Entities;
+using GameProject.Services;
+using GameProject.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +17,7 @@ namespace GameProject.Controllers
     {
         private DatabaseContext db = new DatabaseContext();
         private UserSessionContext us = new UserSessionContext();
+        private CharacterService cs = new CharacterService();
 
         [CharacterCreatorFilter]
         public ActionResult Index()
@@ -26,7 +29,20 @@ namespace GameProject.Controllers
                 return HttpNotFound();
             }
 
-            return View(character);
+            var query = from gi in db.GeneratedItems
+                        from i in db.Items
+                        where gi.CharacterId == character.Id &&
+                            gi.ItemId == i.Id &&
+                            gi.Status == ItemStatus.Equipped
+                        select new ItemViewModel
+                        {
+                            GeneratedItem = gi,
+                            Item = i
+                        };
+
+            List<ItemViewModel> items = query.ToList();
+            
+            return View(cs.GetCharacterViewModel(character, items));
         }
 
         public ActionResult Create()

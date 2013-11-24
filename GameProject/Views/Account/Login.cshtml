@@ -7,6 +7,11 @@
 
 <h2>Login</h2>
 
+<ul>
+    <li>@Html.ActionLink("Zarejestruj się", "Register", "Account")</li>
+    <li>@Html.ActionLink("Zaloguj", "Login", "Account")</li>
+</ul>
+
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()

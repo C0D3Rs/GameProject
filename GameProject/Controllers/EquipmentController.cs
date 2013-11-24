@@ -34,12 +34,20 @@ namespace GameProject.Controllers
             var query2 = from r1 in db.GeneratedItems
                          from r2 in db.Items
                          from r3 in db.Images
-                         where r1.CharacterId == character.Id && r1.ItemId == r2.Id && r2.ImageId == r3.ID
+                         join r4 in db.Affixes on r1.PrefixId equals r4.Id into R4
+                         from r5 in R4.DefaultIfEmpty()
+                         join r6 in db.Affixes on r1.SuffixId equals r6.Id into R6
+                         from r7 in R6.DefaultIfEmpty()
+                         where r1.CharacterId == character.Id && 
+                            r1.ItemId == r2.Id &&
+                            r2.ImageId == r3.ID
                          select new ItemViewModel
                          {
                              GeneratedItem = r1,
                              Item = r2,
-                             Image = r3
+                             Image = r3,
+                             Prefix = r5 != null ? r5 : null,
+                             Suffix = r7 != null ? r7 : null
                          };
 
             List<ItemViewModel> characterItems = query2.ToList();

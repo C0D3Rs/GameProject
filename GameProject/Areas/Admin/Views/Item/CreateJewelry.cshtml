@@ -1,4 +1,4 @@
-﻿@model Item
+﻿@model JewelryItemViewModel
 
 @{
     ViewBag.Title = "Create";
@@ -9,17 +9,16 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    @Html.HiddenFor(model => model.Type)
     
     <div class="form-horizontal">
     <h4>Item</h4>
     <hr />
 
         <div class="form-group">
-            @Html.LabelFor(model => model.SubType, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Type, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.SubType, EnumHelper.GetSelectList<JewelryType>())
-                @Html.ValidationMessageFor(model => model.SubType)
+                @Html.DropDownListFor(model => model.Type, EnumHelper.GetSelectList<JewelryType>())
+                @Html.ValidationMessageFor(model => model.Type)
             </div>
         </div>
 
@@ -62,7 +61,3 @@
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>

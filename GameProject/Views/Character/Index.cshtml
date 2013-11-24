@@ -1,29 +1,27 @@
-﻿@model GameProject.Models.Entities.Character
+﻿@model CharacterViewModel
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Karta Postaci</h2>
 
 <div>
-    <h4>Character</h4>
-	<hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.UserId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UserId)
-        </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.Class)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Class)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Level)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Level)
         </dd>
 
         <dt>
@@ -39,20 +37,69 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Experience)
+            @Html.DisplayFor(model => model.Experience) / @Html.DisplayFor(model => model.ExperienceToLevel)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Gold)
+            @Html.DisplayNameFor(model => model.Strength)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Gold)
+            @Html.DisplayFor(model => model.Strength)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.Dexterity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dexterity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Intelligence)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Intelligence)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Vitality)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vitality)
+        </dd>
+
+        <dt>Obrażenia</dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MinDamage) - @Html.DisplayFor(model => model.MaxDamage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Armor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Armor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ChanceToHit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ChanceToHit)%
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AttackSpeed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AttackSpeed)
+        </dd>
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

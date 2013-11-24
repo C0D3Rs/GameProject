@@ -1,4 +1,4 @@
-﻿@model Item
+﻿@model WeaponItemViewModel
 
 @{
     ViewBag.Title = "Create";
@@ -9,17 +9,15 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    @Html.HiddenFor(model => model.Type)
 
     <div class="form-horizontal">
-        <h4>Item</h4>
         <hr />
 
         <div class="form-group">
-            @Html.LabelFor(model => model.SubType, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Type, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.SubType, EnumHelper.GetSelectList<WeaponType>())
-                @Html.ValidationMessageFor(model => model.SubType)
+                @Html.DropDownListFor(model => model.Type, EnumHelper.GetSelectList<WeaponType>())
+                @Html.ValidationMessageFor(model => model.Type)
             </div>
         </div>
 
@@ -32,18 +30,18 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.PrimaryMinValue, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.MinDamage, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.PrimaryMinValue)
-                @Html.ValidationMessageFor(model => model.PrimaryMinValue)
+                @Html.EditorFor(model => model.MinDamage)
+                @Html.ValidationMessageFor(model => model.MinDamage)
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.PrimaryMaxValue, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.MaxDamage, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.PrimaryMaxValue)
-                @Html.ValidationMessageFor(model => model.PrimaryMaxValue)
+                @Html.EditorFor(model => model.MaxDamage)
+                @Html.ValidationMessageFor(model => model.MaxDamage)
             </div>
         </div>
 

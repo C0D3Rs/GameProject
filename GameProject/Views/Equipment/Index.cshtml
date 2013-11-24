@@ -26,7 +26,17 @@
                 @Html.DisplayFor(modelItem => item.Item.SubType)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Item.Name)
+@if (item.Prefix != null)
+{
+    @item.Prefix.Name
+}
+
+@item.Item.Name
+
+@if (item.Suffix != null)
+{
+    @item.Suffix.Name
+}
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Item.Durability)
@@ -63,7 +73,17 @@
                 @Html.DisplayFor(modelItem => item.Item.SubType)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Item.Name)
+@if (item.Prefix != null)
+{
+    @item.Prefix.Name
+}
+
+@item.Item.Name
+
+@if (item.Suffix != null)
+{
+    @item.Suffix.Name
+}
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Item.Durability)
@@ -100,7 +120,17 @@
                 @Html.DisplayFor(modelItem => item.Item.SubType)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Item.Name)
+@if (item.Prefix != null)
+{
+    @item.Prefix.Name
+}
+
+@item.Item.Name
+
+@if (item.Suffix != null)
+{
+    @item.Suffix.Name
+}
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Item.Durability)

@@ -1,44 +1,32 @@
-﻿@model IEnumerable<GameProject.Models.Entities.Item>
+﻿@model PagedList.IPagedList<Item>
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Lista przedmiotów</h2>
 
 <p>
-    @Html.ActionLink("Create New Weapon", "Create", new { type = ItemType.Weapon } )
+    @Html.ActionLink("Nowa Broń", "CreateWeapon")
 </p>
 <p>
-    @Html.ActionLink("Create New Shield", "Create", new { type = ItemType.Shield })
+    @Html.ActionLink("Nowa Tarcza", "CreateShield")
 </p>
 <p>
-    @Html.ActionLink("Create New Armor", "Create", new { type = ItemType.Armor })
+    @Html.ActionLink("Nowa Zbroja", "CreateArmor")
 </p>
 <p>
-    @Html.ActionLink("Create New Jewelry", "Create", new { type = ItemType.Jewelry })
+    @Html.ActionLink("Nowa Biżuteria", "CreateJewelry")
 </p>
 
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Type)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SubType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.QualityLevel)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Durability)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
+        <th>Typ</th>
+        <th>Podtyp</th>
+        <th>Nazwa</th>
+        <th>Poziom Jakości</th>
+        <th>Wytrzymałość</th>
+        <th>Cena</th>
         <th></th>
     </tr>
 
@@ -72,3 +60,7 @@
 }
 
 </table>
+
+Strona @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) z @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

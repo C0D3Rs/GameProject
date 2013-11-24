@@ -11,5 +11,7 @@ namespace GameProject.ViewModels
         public GeneratedItem GeneratedItem { get; set; }
         public Item Item { get; set; }
         public Image Image { get; set; }
+        public Affix Prefix { get; set; }
+        public Affix Suffix { get; set; }
     }
 }

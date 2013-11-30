@@ -146,6 +146,7 @@
     <Compile Include="Areas\Admin\Controllers\ImageController.cs" />
     <Compile Include="Areas\Admin\Controllers\ItemController.cs" />
     <Compile Include="Areas\Admin\Controllers\MonsterController.cs" />
+    <Compile Include="Areas\Admin\ViewModels\DetailsMonsterViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\JewelryItemViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\ArmorItemViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\ShieldItemViewModel.cs" />
@@ -232,8 +233,7 @@
     <Content Include="Areas\Admin\Views\Monster\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Monster\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Monster\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Image\SetItemImage.cshtml" />
-    <Content Include="Areas\Admin\Views\Image\SetToItem.cshtml" />
+    <Content Include="Areas\Admin\Views\Image\Set.cshtml" />
     <Content Include="Areas\Admin\Views\Image\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Image\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_FlashMessagePartial.cshtml" />

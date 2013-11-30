@@ -1,0 +1,18 @@
+﻿@model SetImageViewModel
+
+@{
+    ViewBag.Title = "SetToItem";
+}
+
+<h2>Ustaw Obrazek</h2>
+
+<div class="row">
+    @foreach (var image in Model.Images)
+    {
+        <div class="col-sm-6 col-md-2">
+            <a href="@Url.Action("Set", "Image", new { category = Model.Category, Model.Id, imageId = image.ID })" class="thumbnai">
+                <img src="@Url.Action("Show","Image", new { imageName = image.FileName })" class="img-rounded" width="150px" />
+            </a>
+        </div>
+    }
+</div>

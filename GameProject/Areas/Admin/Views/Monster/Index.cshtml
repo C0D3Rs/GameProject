@@ -53,6 +53,7 @@
             @Html.DisplayFor(modelItem => item.Defense)
         </td>
         <td>
+            @Html.ActionLink("Ustaw Obrazek", "Set", "Image", new { category = ImageCategory.Monster, id = item.Id }, null)
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
             @Html.ActionLink("Details", "Details", new { id=item.Id }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.Id })

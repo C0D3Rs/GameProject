@@ -1,4 +1,4 @@
-﻿@model GameProject.Models.Entities.Monster
+﻿@model DetailsMonsterViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -11,64 +11,68 @@
 	<hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.Monster.Name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Name)
+            @Html.DisplayFor(model => model.Monster.Name)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Description)
+            @Html.DisplayNameFor(model => model.Monster.Description)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Description)
+            @Html.DisplayFor(model => model.Monster.Description)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Level)
+            @Html.DisplayNameFor(model => model.Monster.Level)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Level)
+            @Html.DisplayFor(model => model.Monster.Level)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Life)
+            @Html.DisplayNameFor(model => model.Monster.Life)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Life)
+            @Html.DisplayFor(model => model.Monster.Life)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.MinDamage)
+            @Html.DisplayNameFor(model => model.Monster.MinDamage)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.MinDamage)
+            @Html.DisplayFor(model => model.Monster.MinDamage)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.MaxDamage)
+            @Html.DisplayNameFor(model => model.Monster.MaxDamage)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.MaxDamage)
+            @Html.DisplayFor(model => model.Monster.MaxDamage)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Defense)
+            @Html.DisplayNameFor(model => model.Monster.Defense)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Defense)
+            @Html.DisplayFor(model => model.Monster.Defense)
         </dd>
 
+        <dt>Obrazek</dt>
+
+        @if (Model.Image != null)
+        {
+            <dd>
+                <img src="@Url.Action("Show","Image", new { imageName = Model.Image.FileName })" />
+            </dd>
+        }
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

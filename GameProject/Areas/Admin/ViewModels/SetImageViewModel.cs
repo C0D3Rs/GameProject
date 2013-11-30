@@ -1,4 +1,5 @@
-﻿using GameProject.Models.Entities;
+﻿using GameProject.Enums;
+using GameProject.Models.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,6 @@ namespace GameProject.Areas.Admin.ViewModels
     {
         public List<Image> Images { get; set; }
         public int Id { get; set; }
+        public ImageCategory Category { get; set; }
     }
 }

@@ -12,6 +12,7 @@ using GameProject.Helpers;
 using GameProject.Enums;
 using System.Data.Entity.Infrastructure;
 using GameProject.Filters;
+using GameProject.Areas.Admin.ViewModels;
 
 namespace GameProject.Areas.Admin.Controllers
 {
@@ -47,7 +48,22 @@ namespace GameProject.Areas.Admin.Controllers
                 return HttpNotFound();
             }
 
-            return View(monster);
+            DetailsMonsterViewModel detailsMonsterViewModel = new DetailsMonsterViewModel();
+
+            detailsMonsterViewModel.Monster = monster;
+
+            var query2 = from i in db.Images
+                         where i.ID == monster.ImageId
+                         select i;
+
+            var image = query2.FirstOrDefault();
+
+            if (image != null)
+            {
+                detailsMonsterViewModel.Image = image;
+            }
+
+            return View(detailsMonsterViewModel);
         }
 
         public ActionResult Create()

@@ -51,7 +51,7 @@
             @Html.DisplayFor(modelItem => item.Price)
         </td>
         <td>
-            @Html.ActionLink("Ustaw Obrazek", "SetToItem", "Image", new { id = item.Id }, null)
+            @Html.ActionLink("Ustaw Obrazek", "Set", "Image", new { category = ImageCategory.Item, id = item.Id }, null)
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
             @Html.ActionLink("Details", "Details", new { id=item.Id }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.Id })

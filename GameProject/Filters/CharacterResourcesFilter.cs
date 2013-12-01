@@ -35,7 +35,9 @@ namespace GameProject.Filters
                 character.RenewalTime = timeNow;
 
                 int moves = (int)(differentSeconds / 30);
-                character.AvailableMoves += moves <= 10 ? moves : 10;
+
+                character.AvailableMoves += moves;
+                character.AvailableMoves = character.AvailableMoves > 10 ? 10 : character.AvailableMoves;
 
                 using (DatabaseContext db = new DatabaseContext())
                 {

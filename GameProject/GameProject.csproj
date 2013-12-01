@@ -165,9 +165,11 @@
     <Compile Include="Enums\FlashMessageType.cs" />
     <Compile Include="Filters\CharacterCreatorFilter.cs" />
     <Compile Include="Filters\AuthorizationFilter.cs" />
+    <Compile Include="Filters\CharacterResourcesFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\CharacterHelpers.cs" />
     <Compile Include="Helpers\EnumHelper.cs" />
     <Compile Include="Helpers\FlashMessageHelper.cs" />
     <Compile Include="Helpers\ItemHelper.cs" />
@@ -188,6 +190,7 @@
     <Compile Include="Services\CharacterService.cs" />
     <Compile Include="Services\ItemService.cs" />
     <Compile Include="Services\PasswordHashService.cs" />
+    <Compile Include="ViewModels\CharacterResourcesViewModel.cs" />
     <Compile Include="ViewModels\CharacterViewModel.cs" />
     <Compile Include="ViewModels\ItemViewModel.cs" />
     <Compile Include="ViewModels\LoginUserViewModel.cs" />

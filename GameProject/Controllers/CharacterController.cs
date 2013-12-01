@@ -19,7 +19,8 @@ namespace GameProject.Controllers
         private UserSessionContext us = new UserSessionContext();
         private CharacterService cs = new CharacterService();
 
-        [CharacterCreatorFilter]
+        [CharacterCreatorFilter(Order = 1)]
+        [CharacterResourcesFilter(Order = 2)]
         public ActionResult Index()
         {
             Character character = this.HttpContext.Items["Character"] as Character;
@@ -76,6 +77,8 @@ namespace GameProject.Controllers
             character.UserId = user.Id;
             character.Experience = 0;
             character.Gold = 0;
+            character.RenewalTime = DateTime.Now;
+            character.AvailableMoves = 0;
 
             try
             {

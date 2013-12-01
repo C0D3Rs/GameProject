@@ -16,6 +16,7 @@ namespace GameProject.Controllers
 {
     [AuthorizationFilter(UserRole.Normal, Order = 1)]
     [CharacterCreatorFilter(Order = 2)]
+    [CharacterResourcesFilter(Order = 3)]
     public class EquipmentController : Controller
     {
         private DatabaseContext db = new DatabaseContext();

@@ -29,6 +29,15 @@
         </div>
     </div>
     <div class="container body-content">
+        @if (CharacterHelpers.GetCharacterResources(this.Context) != null)
+        {
+            <div>
+                Złoto: @CharacterHelpers.GetCharacterResources(this.Context).Gold
+                Dostępne ruchy: @CharacterHelpers.GetCharacterResources(this.Context).AvailableMoves /
+                @CharacterHelpers.GetCharacterResources(this.Context).AvailableMovesReduction
+            </div>
+        }
+
         @RenderBody()
         <hr />
         <footer>

@@ -19,5 +19,9 @@ namespace GameProject.Models.Entities
         public int Experience { get; set; }
 
         public int Gold { get; set; }
+
+        public int AvailableMoves { get; set; }
+
+        public DateTime RenewalTime { get; set; }
     }
 }

@@ -142,6 +142,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
     <Compile Include="Areas\Admin\Controllers\AffixController.cs" />
+    <Compile Include="Areas\Admin\Controllers\LocationController.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Admin\Controllers\ImageController.cs" />
     <Compile Include="Areas\Admin\Controllers\ItemController.cs" />
@@ -174,6 +175,7 @@
     <Compile Include="Models\DatabaseContext.cs" />
     <Compile Include="Models\DatabaseInitializer.cs" />
     <Compile Include="Models\Entities\Character.cs" />
+    <Compile Include="Models\Entities\Location.cs" />
     <Compile Include="Models\Entities\GeneratedItem.cs" />
     <Compile Include="Models\Entities\User.cs" />
     <Compile Include="Models\Entities\Image.cs" />
@@ -239,6 +241,9 @@
     <Content Include="Areas\Admin\Views\Shared\_FlashMessagePartial.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_LayoutForLoggedUser.cshtml" />
     <Content Include="Areas\Admin\Views\Account\Login.cshtml" />
+    <Content Include="Areas\Admin\Views\Location\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Location\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Location\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

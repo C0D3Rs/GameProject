@@ -7,6 +7,7 @@ using GameProject.Models.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -37,9 +38,20 @@ namespace GameProject.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Create(HttpPostedFileBase file,ImageCategory category)
         {
-            //jeśli nie jest pusty i mniejszy niż 200kb
-            if (file != null && file.ContentLength > 0 && file.ContentLength < 204800)
+            Image image = new Image();
+
+            try
             {
+                if (file == null || file.ContentLength <= 0)
+                {
+                    throw new Exception("Plik pusty");
+                }
+
+                if (file.ContentLength > 204800)
+                {
+                    throw new Exception("Uwaga wielkość pliku przekracza 200kb.");
+                }
+
                 // Get file info
                 var fileName = Path.GetFileName(file.FileName); //nazwa pliku
                 var imageName = Path.GetFileNameWithoutExtension(fileName);
@@ -50,37 +62,33 @@ namespace GameProject.Areas.Admin.Controllers
                 if (contentType == "image/jpeg") { imageExtension = "jpg";}
                 else if (contentType == "image/png") { imageExtension = "png";}
 
-                if (imageExtension != "")
+                if (imageExtension == "")
                 {
-                    byte[] imageBytes = new byte[contentLength - 1];
-                    using (var binaryReader = new BinaryReader(file.InputStream))
-                    {
-                        imageBytes = binaryReader.ReadBytes(file.ContentLength);
-                    }
-                    Image img = new Image();
-                    img.FileName = String.Format("{0:yyyyMMddHHmmss}.{1}", DateTime.Now, imageExtension);
-                    img.Data = imageBytes;
-                    img.Type = contentType;
-                    img.Category = category;
-                    db.Images.Add(img);
-                    db.SaveChanges();
+                    throw new Exception("Uwaga niewłaściwy format zdjęcia. Akceptowane formaty: jpg, png.");
+                }
 
-                    // redirect back to the index action to show the form once again
-                    FlashMessageHelper.SetMessage(this, FlashMessageType.Success, "Dodanie zdjęcia przebiegło pomyślnie.");
-                    return RedirectToAction("Index");
-                }
-                else
+                byte[] imageBytes = new byte[contentLength - 1];
+
+                using (var binaryReader = new BinaryReader(file.InputStream))
                 {
-                    FlashMessageHelper.SetMessage(this, FlashMessageType.Danger, "Uwaga niewłaściwy format zdjęcia. Akceptowane formaty: jpg, png."); 
-                    return RedirectToAction("Create");
+                    imageBytes = binaryReader.ReadBytes(file.ContentLength);
                 }
+
+                image.FileName = String.Format("{0:yyyyMMddHHmmss}.{1}", DateTime.Now, imageExtension);
+                image.Data = imageBytes;
+                image.Type = contentType;
+                image.Category = category;
+                db.Images.Add(image);
+                db.SaveChanges();
+
+                FlashMessageHelper.SetMessage(this, FlashMessageType.Success, "Dodanie zdjęcia przebiegło pomyślnie.");
+                return RedirectToAction("Index");
             }
-            else
+            catch (Exception e)
             {
-                // redirect back to the index action to show the form once again
-                FlashMessageHelper.SetMessage(this, FlashMessageType.Danger, "Uwaga nie wybrano pliku lub jego wielkość przekracza 200kb.");
-                return RedirectToAction("Create");
+                FlashMessageHelper.SetMessage(this, FlashMessageType.Danger, "Wystąpił nieoczekiwany błąd związany z zapisem danych. " + e.Message);
             }
+            return View(image);
         }
 
         public ActionResult Details(int? id)
@@ -176,22 +184,31 @@ namespace GameProject.Areas.Admin.Controllers
 
             return View(image);
         }
-        /*
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int? id, HttpPostedFileBase file)
+        public ActionResult Edit(int? id, HttpPostedFileBase file, ImageCategory category)
         {
-
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
+            var query = from i in db.Images
+                        where i.ID == id
+                        select i;
+
+            var image = query.FirstOrDefault();
+
             try
             {
-                if (file != null && file.ContentLength > 0 && file.ContentLength < 204800)
+                if (!Enum.IsDefined(typeof(ImageCategory), category))
                 {
-                    // Get file info
+                    throw new Exception("Niewłaściwa Katygoria");
+                }
+
+                if (file != null)
+                {
                     var fileName = Path.GetFileName(file.FileName); //nazwa pliku
                     var imageName = Path.GetFileNameWithoutExtension(fileName);
                     var imageExtension = "";
@@ -203,33 +220,32 @@ namespace GameProject.Areas.Admin.Controllers
                     {
                         imageBytes = binaryReader.ReadBytes(file.ContentLength);
                     }
-                    img.FileName = String.Format("{0:yyyyMMddHHmmss}.{1}", DateTime.Now, imageExtension);
-                    img.Data = imageBytes;
-                    img.Type = contentType;
-                    img.Category = category;
-                    db.Images.Add(img);
-                    db.SaveChanges();
-                    db.Entry(item).State = EntityState.Modified;
-                    db.SaveChanges();
 
-                    FlashMessageHelper.SetMessage(this, FlashMessageType.Success, "Aktualizacja danych przebiegła pomyślnie.");
-                    return RedirectToAction("Index");
+                    image.FileName = String.Format("{0:yyyyMMddHHmmss}.{1}", DateTime.Now, imageExtension);
+                    image.Data = imageBytes;
+                    image.Type = contentType;
                 }
 
-                FlashMessageHelper.SetMessage(this, FlashMessageType.Info, "Nie można zaktualizować danych. Należy poprawić zaistniałe błędy.");
+                image.Category = category;
+
+                db.Entry(image).State = EntityState.Modified;
+                db.SaveChanges();
+
+                FlashMessageHelper.SetMessage(this, FlashMessageType.Success, "Aktualizacja danych przebiegła pomyślnie.");
+                return RedirectToAction("Index");
+                
             }
             catch (DbUpdateConcurrencyException)
             {
-                FlashMessageHelper.SetMessage(this, FlashMessageType.Warning, "Dane został zaktualizowane przez inną osobę. Należy odświeżyć stronę w celu wczytania nowych danych.");
+                FlashMessageHelper.SetMessage(this, FlashMessageType.Warning, "Dane zostały zaktualizowane przez inną osobę. Należy odświeżyć stronę w celu wczytania nowych danych.");
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                FlashMessageHelper.SetMessage(this, FlashMessageType.Danger, "Wystąpił nieoczekiwany błąd związany z aktualizowaniem danych.");
+                FlashMessageHelper.SetMessage(this, FlashMessageType.Danger, "Wystąpił nieoczekiwany błąd związany z aktualizowaniem danych. " + e.Message);
             }
 
-            return GetEditItemView(item);
+            return View(image);
         }
-         */
 
         private ActionResult Set(ImageCategory category, int id)
         {

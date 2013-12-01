@@ -334,7 +334,7 @@ namespace GameProject.Areas.Admin.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                FlashMessageHelper.SetMessage(this, FlashMessageType.Warning, "Dane został zaktualizowane przez inną osobę. Należy odświeżyć stronę w celu wczytania nowych danych.");
+                FlashMessageHelper.SetMessage(this, FlashMessageType.Warning, "Dane zostały zaktualizowane przez inną osobę. Należy odświeżyć stronę w celu wczytania nowych danych.");
             }
             catch (Exception)
             {

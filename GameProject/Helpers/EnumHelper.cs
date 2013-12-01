@@ -1,7 +1,9 @@
 ﻿using GameProject.Enums;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 
@@ -21,9 +23,25 @@ namespace GameProject.Helpers
             
             IEnumerable<SelectListItem> items = 
                 from v in values
-                select new SelectListItem { Text = v.ToString(), Value = v.ToString() };
+                select new SelectListItem { Text = GetEnumDescription<TEnum>(v), Value = v.ToString() };
 
             return items;
+        }
+
+        public static string GetEnumDescription<TEnum>(TEnum value)
+        {
+            FieldInfo fi = value.GetType().GetField(value.ToString());
+
+            DescriptionAttribute[] attributes = (DescriptionAttribute[])fi.GetCustomAttributes(typeof(DescriptionAttribute), false);
+
+            if ((attributes != null) && (attributes.Length > 0))
+            {
+                return attributes[0].Description;
+            }
+            else
+            {
+                return value.ToString();
+            }
         }
     }
 }

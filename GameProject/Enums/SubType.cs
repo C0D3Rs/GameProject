@@ -1,14 +1,21 @@
-﻿namespace GameProject.Enums
+﻿using System.ComponentModel;
+namespace GameProject.Enums
 {
     public enum WeaponType
     {
+        [Description("Jednoręczna")]
         OneHanded = 1,
+
+        [Description("Dwuręczna")]
         TwoHanded = 2
     }
 
     public enum JewelryType
     {
+        [Description("Amulet")]
         Amulet = 3,
+
+        [Description("Pierścień")]
         Ring = 4
     }
 

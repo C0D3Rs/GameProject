@@ -16,7 +16,6 @@ namespace GameProject.Controllers
     public class CharacterController : Controller
     {
         private DatabaseContext db = new DatabaseContext();
-        private UserSessionContext us = new UserSessionContext();
         private CharacterService cs = new CharacterService();
 
         [CharacterCreatorFilter(Order = 1)]

@@ -16,7 +16,6 @@ namespace GameProject.Areas.Admin.Controllers
     public class AccountController : Controller
     {
         private DatabaseContext db = new DatabaseContext();
-        private UserSessionContext us = new UserSessionContext();
 
         public ActionResult Login()
         {
@@ -42,7 +41,7 @@ namespace GameProject.Areas.Admin.Controllers
                 return View(model);
             }
 
-            us.SetHttpSessionStateBase(this.HttpContext.Session);
+            UserSessionContext us = new UserSessionContext(HttpContext);
             us.SetUserId(user.Id);
 
             return RedirectToAction("Index", "Dashboard");
@@ -57,19 +56,10 @@ namespace GameProject.Areas.Admin.Controllers
         [AuthorizationFilter(UserRole.Admin)]
         public ActionResult Logout()
         {
-            us.SetHttpSessionStateBase(this.HttpContext.Session);
+            UserSessionContext us = new UserSessionContext(HttpContext);
             us.RemoveUserId();
 
             return RedirectToAction("Login", "Account");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }

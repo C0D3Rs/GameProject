@@ -20,7 +20,6 @@ namespace GameProject.Controllers
     public class EquipmentController : Controller
     {
         private DatabaseContext db = new DatabaseContext();
-        private UserSessionContext us = new UserSessionContext();
         private ItemService itemService = new ItemService();
 
         public ActionResult Index()

@@ -8,7 +8,7 @@ using System.Web;
 
 namespace GameProject.Services
 {
-    public class ItemService
+    public class ItemService : IDisposable
     {
         DatabaseContext db = new DatabaseContext();
 
@@ -113,6 +113,20 @@ namespace GameProject.Services
             }
 
             return generatedItem;
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

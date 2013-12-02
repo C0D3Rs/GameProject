@@ -11,10 +11,9 @@ using System.Web.Routing;
 
 namespace GameProject.Filters
 {
-    public class CharacterCreatorFilter : ActionFilterAttribute, IActionFilter
+    public class CharacterCreatorFilter : ActionFilterAttribute, IActionFilter, IDisposable
     {
         private DatabaseContext db = new DatabaseContext();
-        private UserSessionContext us = new UserSessionContext();
 
         void IActionFilter.OnActionExecuting(ActionExecutingContext filterContext)
         {
@@ -46,6 +45,20 @@ namespace GameProject.Filters
             }
 
             this.OnActionExecuting(filterContext);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

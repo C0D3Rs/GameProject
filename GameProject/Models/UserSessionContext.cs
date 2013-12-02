@@ -8,36 +8,32 @@ namespace GameProject.Models
 {
     public class UserSessionContext
     {
-        private HttpSessionStateBase session;
+        private HttpContextBase context;
+        private const string UserSessionKey = "UserId";
 
-        private const string SessionUserIdKey = "SessionUserIdKey";
-        private int userId = 0;
-
-        public void SetHttpSessionStateBase(HttpSessionStateBase session)
+        public UserSessionContext(HttpContextBase context)
         {
-            this.session = session;
+            this.context = context;
         }
 
         public int GetUserId()
         {
-            if (session != null && session[SessionUserIdKey] != null)
+            if (context.Session[UserSessionKey] == null)
             {
-                userId = (int)session[SessionUserIdKey];
+                return -1;
             }
 
-            return userId;
+            return (int)context.Session[UserSessionKey];
         }
 
         public void SetUserId(int userId)
         {
-            this.userId = userId;
-            session[SessionUserIdKey] = userId;
+            context.Session[UserSessionKey] = userId;
         }
 
         public void RemoveUserId()
         {
-            userId = 0;
-            session[SessionUserIdKey] = 0;
+            context.Session[UserSessionKey] = null;
         }
     }
 }

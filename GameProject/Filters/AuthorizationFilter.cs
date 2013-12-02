@@ -10,10 +10,9 @@ using System.Web.Routing;
 
 namespace GameProject.Filters
 {
-    public class AuthorizationFilter : ActionFilterAttribute, IActionFilter
+    public class AuthorizationFilter : ActionFilterAttribute, IActionFilter, IDisposable
     {
         private DatabaseContext db = new DatabaseContext();
-        private UserSessionContext us = new UserSessionContext();
         private UserRole userRole;
 
         public AuthorizationFilter(UserRole userRole)
@@ -23,9 +22,9 @@ namespace GameProject.Filters
 
         void IActionFilter.OnActionExecuting(ActionExecutingContext filterContext)
         {
-            us.SetHttpSessionStateBase(filterContext.HttpContext.Session);
+            UserSessionContext us = new UserSessionContext(filterContext.HttpContext);
 
-            var userId = us.GetUserId();
+            int userId = us.GetUserId();
 
             var query = from u in db.Users
                         where u.Id == userId && u.Role == userRole
@@ -47,6 +46,20 @@ namespace GameProject.Filters
             }
 
             this.OnActionExecuting(filterContext);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

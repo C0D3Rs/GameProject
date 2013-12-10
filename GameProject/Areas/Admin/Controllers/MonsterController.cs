@@ -13,6 +13,7 @@ using GameProject.Enums;
 using System.Data.Entity.Infrastructure;
 using GameProject.Filters;
 using GameProject.Areas.Admin.ViewModels;
+using PagedList;
 
 namespace GameProject.Areas.Admin.Controllers
 {
@@ -21,13 +22,14 @@ namespace GameProject.Areas.Admin.Controllers
     {
         private DatabaseContext db = new DatabaseContext();
 
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
             var query = from m in db.Monsters
                         orderby m.Id descending
                         select m;
 
-            return View(query.ToList());
+            int pageNumber = (page ?? 1);
+            return View(query.ToPagedList(pageNumber, 10));
         }
 
         public ActionResult Details(int? id)

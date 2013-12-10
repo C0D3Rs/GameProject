@@ -33,6 +33,12 @@ namespace GameProject.Models.Entities
         [Required]
         public int Defense { get; set; }
 
+        [Required]
+        public decimal AttackSpeed { get; set; }
+
+        [Required]
+        public int ChanceToHit { get; set; }
+
         [Timestamp]
         public byte[] CurrentVersion { get; set; }
     }

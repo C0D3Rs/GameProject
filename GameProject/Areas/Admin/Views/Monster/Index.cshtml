@@ -1,4 +1,4 @@
-﻿@model IEnumerable<GameProject.Models.Entities.Monster>
+﻿@model PagedList.IPagedList<Monster>
 
 @{
     ViewBag.Title = "Index";
@@ -11,24 +11,11 @@
 </p>
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Level)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Life)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MinDamage)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MaxDamage)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Defense)
-        </th>
+        <th>Nazwa</th>
+        <th>Poziom</th>
+        <th>Życie</th>
+        <th>Obrażenia</th>
+        <th>Obrona</th>
         <th></th>
     </tr>
 
@@ -44,9 +31,7 @@
             @Html.DisplayFor(modelItem => item.Life)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.MinDamage)
-        </td>
-        <td>
+            @Html.DisplayFor(modelItem => item.MinDamage) -
             @Html.DisplayFor(modelItem => item.MaxDamage)
         </td>
         <td>
@@ -60,5 +45,8 @@
         </td>
     </tr>
 }
-
 </table>
+
+Strona @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) z @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

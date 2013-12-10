@@ -1,4 +1,4 @@
-﻿@model GameProject.Models.Entities.Monster
+﻿@model Monster
 
 @{
     ViewBag.Title = "Create";
@@ -11,11 +11,8 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Monster</h4>
-        <hr />
-
         <div class="form-group">
-            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Nazwa</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Name)
                 @Html.ValidationMessageFor(model => model.Name)
@@ -23,7 +20,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Opis</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Description)
                 @Html.ValidationMessageFor(model => model.Description)
@@ -31,7 +28,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Level, new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Poziom</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Level)
                 @Html.ValidationMessageFor(model => model.Level)
@@ -39,7 +36,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Life, new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Życie</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Life)
                 @Html.ValidationMessageFor(model => model.Life)
@@ -47,7 +44,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.MinDamage, new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Minimalne obrażenia</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.MinDamage)
                 @Html.ValidationMessageFor(model => model.MinDamage)
@@ -55,7 +52,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.MaxDamage, new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Maksymalne obrażenia</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.MaxDamage)
                 @Html.ValidationMessageFor(model => model.MaxDamage)
@@ -63,10 +60,26 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Defense, new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Obrona</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Defense)
                 @Html.ValidationMessageFor(model => model.Defense)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Szybkość ataku</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.AttackSpeed)
+                @Html.ValidationMessageFor(model => model.AttackSpeed)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Szansa na trafienie</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ChanceToHit)
+                @Html.ValidationMessageFor(model => model.ChanceToHit)
             </div>
         </div>
 
@@ -77,7 +90,3 @@
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>

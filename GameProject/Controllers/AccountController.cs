@@ -38,6 +38,7 @@ namespace GameProject.Controllers
 
             if (user == null || !PasswordHashService.ValidatePassword(model.Password, user.Password))
             {
+                FlashMessageHelper.SetMessage(this, FlashMessageType.Warning, "Autoryzacja użytkownika nie przebiegła pomyślnie.");
                 return View(model);
             }
 
@@ -55,20 +56,29 @@ namespace GameProject.Controllers
         [HttpPost]
         public ActionResult Register(RegisterUserViewModel model)
         {
+            var query = from u in db.Users
+                        where u.Name == model.Username
+                        select u;
+
+            if (query.Any())
+            {
+                ModelState.AddModelError("Username", "Podany użytkownik już istnieje.");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            User user = new User()
+            {
+                Role = UserRole.Normal,
+                Name = model.Username,
+                Password = PasswordHashService.CreateHash(model.Password)
+            };
+
             try
             {
-                if (!ModelState.IsValid)
-                {
-                    return View(model);
-                }
-
-                User user = new User()
-                {
-                    Role = UserRole.Normal,
-                    Name = model.Username,
-                    Password = PasswordHashService.CreateHash(model.Password)
-                };
-
                 db.Users.Add(user);
                 db.SaveChanges();
             }

@@ -1,0 +1,24 @@
+﻿@if (FlashMessageHelper.HasMessage(TempData, FlashMessageType.Success))
+{
+    <div class="alert alert-success">
+        <p>@FlashMessageHelper.GetMessage(TempData, FlashMessageType.Success)</p>
+    </div>
+}
+@if (FlashMessageHelper.HasMessage(TempData, FlashMessageType.Info))
+{
+    <div class="alert alert-info">
+        <p>@FlashMessageHelper.GetMessage(TempData, FlashMessageType.Info)</p>
+    </div>
+}
+@if (FlashMessageHelper.HasMessage(TempData, FlashMessageType.Warning))
+{
+    <div class="alert alert-warning">
+        <p>@FlashMessageHelper.GetMessage(TempData, FlashMessageType.Warning)</p>
+    </div>
+}
+@if (FlashMessageHelper.HasMessage(TempData, FlashMessageType.Danger))
+{
+    <div class="alert alert-danger">
+        <p>@FlashMessageHelper.GetMessage(TempData, FlashMessageType.Danger)</p>
+    </div>
+}

@@ -15,7 +15,7 @@
         <hr />
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Username, new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Użytkownik</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Username)
                 @Html.ValidationMessageFor(model => model.Username)
@@ -23,7 +23,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Password, new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Hasło</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Password)
                 @Html.ValidationMessageFor(model => model.Password)

@@ -38,6 +38,7 @@ namespace GameProject.Areas.Admin.Controllers
 
             if (user == null || !PasswordHashService.ValidatePassword(model.Password, user.Password))
             {
+                FlashMessageHelper.SetMessage(this, FlashMessageType.Warning, "Autoryzacja danych nie przebiegła pomyślnie.");
                 return View(model);
             }
 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using GameProject.Models.Entities;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
 
 namespace GameProject.ViewModels
 {

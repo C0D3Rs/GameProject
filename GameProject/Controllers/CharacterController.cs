@@ -1,5 +1,6 @@
 ﻿using GameProject.Enums;
 using GameProject.Filters;
+using GameProject.Helpers;
 using GameProject.Models;
 using GameProject.Models.Entities;
 using GameProject.Services;
@@ -73,6 +74,11 @@ namespace GameProject.Controllers
                 return RedirectToAction("Index");
             }
 
+            if (!ModelState.IsValid)
+            {
+                return View(character);
+            }
+
             character.UserId = user.Id;
             character.Experience = 0;
             character.Gold = 0;
@@ -81,17 +87,14 @@ namespace GameProject.Controllers
 
             try
             {
-                if(ModelState.IsValid)
-                {
-                    db.Characters.Add(character);
-                    db.SaveChanges();
+                db.Characters.Add(character);
+                db.SaveChanges();
 
-                    return RedirectToAction("Index");
-                }
+                return RedirectToAction("Index");
             }
             catch(Exception)
             {
-
+                FlashMessageHelper.SetMessage(this, FlashMessageType.Warning, "Wystąpił nieoczekiwany błąd.");
             }
 
             return View(character);

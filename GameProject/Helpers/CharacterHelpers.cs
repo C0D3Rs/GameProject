@@ -19,5 +19,9 @@ namespace GameProject.Helpers
 
             return context.Items["CharacterResources"] as CharacterResourcesViewModel;
         }
+        public static string GetHtmlBattleResult(string battleResult)
+        {
+            return battleResult.Replace("<name>", "<b>").Replace("</name>", "</b>").Replace("\n", "<br />");
+        }
     }
 }

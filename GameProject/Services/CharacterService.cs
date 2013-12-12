@@ -17,7 +17,7 @@ namespace GameProject.Services
 
             characterViewModel.Class = character.Class;
             characterViewModel.Name = character.Name;
-            
+
             characterViewModel.Experience = character.Experience;
             characterViewModel.ExperienceToLevel = (characterViewModel.Level + 1) * 100;
             characterViewModel.Level = characterViewModel.Experience / 100 + 1;
@@ -63,8 +63,106 @@ namespace GameProject.Services
             {
                 characterViewModel.ChanceToHit = 75;
             }
-            
+
             return characterViewModel;
+        }
+
+        private int HitBy(int life, int armor, int dmg)
+        {
+            if (dmg <= 1)
+                dmg++;
+            return dmg - (armor * 10 / 100);
+        }
+
+        private int GetNumberOfHits(int round, decimal attackSpeed)
+        {   // R * AS - ( R - 1 ) * AS   R - round, AS - attackspeed
+            int tempAttackSpeed = (int)Decimal.Ceiling(attackSpeed);
+            return round * tempAttackSpeed - (round - 1) * tempAttackSpeed;
+        }
+
+        public string GetBattleReport(CharacterViewModel characterViewModel, Monster monster, ref bool characterWinner)
+        {
+            int round = 0;
+            string raport = "";
+            int finalDMG = 0;
+
+            if (characterViewModel.Level < monster.Level)
+            {
+                characterViewModel.ChanceToHit = characterViewModel.ChanceToHit - 5;
+            }
+
+            if (monster.AttackSpeed < characterViewModel.AttackSpeed)
+            { // atak characteru 
+                raport += String.Format("\n <name>{0}</name> rozpoczął walkę.", characterViewModel.Name);
+            }
+            else
+            { // atak monstera
+                raport += String.Format("\nZaatakował Cię {0}", monster.Name);
+            }
+
+            Random dice = new Random();
+            int intervalOfChanceToHit;
+
+            do
+            {
+                round++;
+                for (int i = 0; i < GetNumberOfHits(round, characterViewModel.AttackSpeed); i++)
+                {
+                    intervalOfChanceToHit = dice.Next(1, 101);
+                    if (characterViewModel.ChanceToHit >= intervalOfChanceToHit)
+                    {
+                        finalDMG = HitBy(monster.Life, monster.Defense, dice.Next(characterViewModel.MinDamage, characterViewModel.MaxDamage + 1));
+                        monster.Life = monster.Life - finalDMG;
+
+                        if (monster.Life <= 0)
+                        {
+                            break;
+                        }
+
+                        raport += String.Format("\n{2} zaatakował {0} dmg, życie przeciwnika wynosi: {1}", finalDMG, monster.Life, characterViewModel.Name);
+                    }
+                    else
+                    {
+                        raport += String.Format("\nNie trafiłeś przeciwnika.");
+                    }
+                }
+
+                for (int i = 0; i < GetNumberOfHits(round, monster.AttackSpeed); i++)
+                {
+                    intervalOfChanceToHit = dice.Next(1, 101);
+                    if (monster.ChanceToHit >= intervalOfChanceToHit)
+                    {
+                        finalDMG = HitBy(characterViewModel.Life, characterViewModel.Armor, dice.Next(monster.MinDamage, monster.MaxDamage + 1));
+                        characterViewModel.Life = characterViewModel.Life - finalDMG;
+
+                        if (characterViewModel.Life <= 0)
+                        {
+                            break;
+                        }
+
+                        raport += String.Format("\n{2} zaatakował {0} dmg, życie Twojej postaci wynosi: {1}", finalDMG, characterViewModel.Life, monster.Name);
+                    }
+                    else
+                    {
+                        raport += String.Format("\nPrzeciwnik spudłował.");
+                    }
+                }
+            }
+            while (monster.Life > 0 && characterViewModel.Life > 0);
+
+            if (monster.Life == 0 || monster.Life < 0)
+            {
+                raport += String.Format("\nWygrałeś bitwę.");
+                characterWinner = true;
+            }
+
+            if (characterViewModel.Life == 0 || characterViewModel.Life < 0)
+            {
+                raport += String.Format("\nPrzeciwnik wygrał walkę.");
+                characterWinner = false;
+            }
+
+            return raport;
         }
     }
 }

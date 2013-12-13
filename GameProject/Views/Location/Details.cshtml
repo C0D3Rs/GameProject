@@ -1,0 +1,29 @@
+﻿@model DetailsLocationViewModel
+
+@{
+    ViewBag.Title = "Details Location";
+}
+
+<h2>Details Location</h2>
+<div class="container" style="display:block;">
+
+@if(Model.Image != null)
+{
+    <img src="@Url.Action("Show","Image", new { imageName = Model.Image.FileName })" class="img-rounded col-md-4" width="150px" />
+}
+
+<dl class="dl-horizontal col-md-8">
+    <dt>
+        <i class="glyphicon glyphicon-bookmark"></i> @Html.DisplayNameFor(model => model.Location.Name)
+    </dt>      
+    <dd>
+        @Model.Location.Name
+    </dd>
+    <dt>
+       <i class="glyphicon glyphicon-list-alt"></i> @Html.DisplayNameFor(model => model.Location.Description)
+    </dt>
+    <dd>
+        @Model.Location.Description
+    </dd>
+</dl>
+</div>

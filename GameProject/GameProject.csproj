@@ -159,6 +159,7 @@
     <Compile Include="Controllers\CharacterController.cs" />
     <Compile Include="Controllers\EquipmentController.cs" />
     <Compile Include="Controllers\ImageController.cs" />
+    <Compile Include="Controllers\LocationController.cs" />
     <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\MonsterLoreController.cs" />
     <Compile Include="Enums\CharacterClass.cs" />
@@ -196,6 +197,7 @@
     <Compile Include="Services\PasswordHashService.cs" />
     <Compile Include="ViewModels\CharacterResourcesViewModel.cs" />
     <Compile Include="ViewModels\CharacterViewModel.cs" />
+    <Compile Include="ViewModels\DetailsLocationViewModel.cs" />
     <Compile Include="ViewModels\ItemViewModel.cs" />
     <Compile Include="ViewModels\LoginUserViewModel.cs" />
     <Compile Include="ViewModels\RegisterUserViewModel.cs" />
@@ -280,6 +282,8 @@
     <Content Include="Views\Character\Create.cshtml" />
     <Content Include="Views\Shared\_FlashMessagePartial.cshtml" />
     <Content Include="Views\Message\Index.cshtml" />
+    <Content Include="Views\Location\Details.cshtml" />
+    <Content Include="Views\Location\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

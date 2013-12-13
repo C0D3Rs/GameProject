@@ -26,6 +26,12 @@
             <i class="glyphicon glyphicon-edit"></i> Edytuj
         </a>
 
+        @if(ViewData["isAnyImages"] != null) {
+            @Html.ActionLink("Ustaw Obrazek", "Set", "Image", new { category = ImageCategory.Location, id = location.ID }, null)
+        }
+
+        @Html.ActionLink("Details", "Details", new { id=location.ID })
+
         </td>
     </tr>
 }

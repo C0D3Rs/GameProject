@@ -147,6 +147,7 @@
     <Compile Include="Areas\Admin\Controllers\ImageController.cs" />
     <Compile Include="Areas\Admin\Controllers\ItemController.cs" />
     <Compile Include="Areas\Admin\Controllers\MonsterController.cs" />
+    <Compile Include="Areas\Admin\ViewModels\DetailsLocationViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\DetailsMonsterViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\JewelryItemViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\ArmorItemViewModel.cs" />
@@ -248,6 +249,7 @@
     <Content Include="Areas\Admin\Views\Location\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Location\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Location\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Location\Details.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

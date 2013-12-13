@@ -376,8 +376,48 @@ namespace GameProject.Areas.Admin.Controllers
             }
             else if (category == ImageCategory.Location)
             {
-                // do zrobienia
-                return RedirectToAction("Index", "Location");
+                var query = from i in db.Locations
+                            where i.ID == id
+                            select i;
+
+                var location = query.FirstOrDefault();
+
+                if (location == null)
+                {
+                    return HttpNotFound();
+                }
+
+                if (imageId == null)
+                {
+                    return Set(ImageCategory.Location, location.ID);
+                }
+
+                var query2 = from i in db.Images
+                             where i.ID == imageId
+                             select i;
+
+                var image = query2.FirstOrDefault();
+
+                if (image == null)
+                {
+                    return HttpNotFound();
+                }
+
+                try
+                {
+                    location.ImageId = (int)imageId;
+                    db.Entry(location).State = EntityState.Modified;
+                    db.SaveChanges();
+
+                    FlashMessageHelper.SetMessage(this, FlashMessageType.Success, "Obrazek został pomyślnie przypisany do lokacji.");
+
+                    return RedirectToAction("Details", "Location", new { id = location.ID });
+                }
+                catch (Exception)
+                {
+                    FlashMessageHelper.SetMessage(this, FlashMessageType.Danger, "Wystąpił nieoczekiwany błąd z przypisaniem obrazka do lokacji.");
+                }
+                return Set(ImageCategory.Location, location.ID);
             }
 
             return HttpNotFound();

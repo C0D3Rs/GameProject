@@ -7,6 +7,7 @@ using GameProject.Models.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -26,6 +27,13 @@ namespace GameProject.Areas.Admin.Controllers
             var query = from a in db.Locations
                         orderby a.Name
                         select a;
+            var query2 = from i in db.Images
+                        where i.Category == ImageCategory.Location
+                        select i;
+            if (query2.Any())
+            {
+                ViewData["isAnyImages"] = true;
+            }
             return View(query.ToList());
         }
 
@@ -73,7 +81,25 @@ namespace GameProject.Areas.Admin.Controllers
                 return HttpNotFound();
             }
 
-            return View();
+            DetailsLocationViewModel model = new DetailsLocationViewModel();
+            model.Location = location;
+
+            var query2 = from i in db.Images
+                        where i.ID == location.ImageId
+                        select i;
+
+            var image = query2.FirstOrDefault();
+
+            if (image != null)
+            {
+                model.Image = image;
+            }
+            else
+            {
+                model.Image = null;
+            }
+
+            return View(model);
         }
 
         public ActionResult Delete(int? id)
@@ -129,12 +155,17 @@ namespace GameProject.Areas.Admin.Controllers
 
             return View(location);
         }
-        /*
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Location location)
         {
-            if (location == null)
+
+            var query = from i in db.Locations
+                        where i.ID == location.ID
+                        select i;
+
+            if (!query.Any())
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -161,8 +192,7 @@ namespace GameProject.Areas.Admin.Controllers
                 FlashMessageHelper.SetMessage(this, FlashMessageType.Danger, "Wystąpił nieoczekiwany błąd związany z aktualizowaniem danych.");
             }
 
-            return GetEditItemView(item);
+            return View(location);
         }
-        */
     }
 }

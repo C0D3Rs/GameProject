@@ -4,24 +4,19 @@
 }
 
 <h2>Locations</h2>
-<div class="container">
+<div class="container" id="lokacje">
     <div class="row">
         @foreach (var model in Model) {
-        <div class="col-xs-12 col-md-3">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h3 class="panel-title">@Html.DisplayFor(modelLocation => model.Location.Name)</h3>
-                </div>
-                <div class="panel-body">
-                    <div class="the-price">
-                        <img src="@Url.Action("Show","Image", new { imageName = model.Image.FileName })" class="img-rounded col-md-4" width="150px" />
+        <a href="@Url.Action("Details", "Location", new { id=model.Location.ID })">
+            <div class="col-xs-12 col-md-3">
+                <div class="panel panel-primary">
+                 <img src="@Url.Action("Show","Image", new { imageName = model.Image.FileName })" />
+                    <div class="panel-footer">
+                       @Html.DisplayFor(modelLocation => model.Location.Name)
                     </div>
                 </div>
-                <div class="panel-footer">
-                    @Html.ActionLink("Details", "Details", new { id=model.Location.ID })
-                </div>
             </div>
-        </div>
+        </a>
         }
     </div>
 </div>

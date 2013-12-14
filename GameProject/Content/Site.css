@@ -40,3 +40,22 @@ input[type="checkbox"].input-validation-error {
 .validation-summary-valid {
     display: none;
 }
+
+#lokacje > .row > a > .col-xs-12 > .panel {
+    opacity: 0.8;
+    border-color:white;
+}
+
+#lokacje > .row > a > .col-xs-12 > .panel:hover {
+    opacity: 1;
+    border-color:darkorange!important;
+}
+
+#lokacje > .row > a > .col-xs-12 > .panel > img {
+    width:100%;
+    border-radius: 4px;
+}
+#lokacje > .row > a > .col-xs-12 > .panel > .panel-footer {
+    opacity: 0.8;
+    margin-top: -41px;
+}

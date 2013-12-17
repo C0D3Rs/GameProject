@@ -81,14 +81,14 @@ namespace GameProject.Helpers
              .Replace("<summationname>", "").Replace("</summationname>", "")
 
              //Podsumowanie - nazwa characteru
-             .Replace("<summationcharactername>", "").Replace("</summationcharactername>", "")
+             .Replace("<summationcharactername>", "").Replace("</summationcharactername>", " ")
                 //Podsumowanie - spadające życie charactera. Wartość cały czas się zmienia.
              .Replace("<summationcharacterlifefalldown>", "").Replace("</summationcharacterlifefalldown>", "")
                 //Podsumowanie - życie charactera po slashu "/". Jest ono stałe.
              .Replace("<summationcharacterlifeconstantly>", "").Replace("</summationcharacterlifeconstantly>", "<br />")
 
              //Podsumowanie - nazwa monstera
-            .Replace("<summationmonstername>", "").Replace("</summationmonstername>", "")
+            .Replace("<summationmonstername>", "").Replace("</summationmonstername>", " ")
                 //Podsumowanie - spadające życie monstera. Wartość się zmienia.
              .Replace("<summationmonsterlifefalldown>", "").Replace("</summationmonsterlifefalldown>", "")
                 //Podsumowanie - stałe życie monstera które nie ulega zmianie. Występuje ono po slashu "/"

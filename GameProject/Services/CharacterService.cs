@@ -163,8 +163,8 @@ namespace GameProject.Services
                 }
                 if (firstHitByMonster == true)
                 {   // Podsumowanie
-                    raport += String.Format("<summation><summationcharactername>{0}</summationcharactername> <summationcharacterlifefalldown>{1}</summationcharacterlifefalldown>/<summationcharacterlifeconstantly>{2}</summationcharacterlifeconstantly>", characterViewModel.Name, characterViewModel.Life, fullLifeOfCharacter);
-                    raport += String.Format("<summationmonstername>{0}</summationmonstername> <summationmonsterlifefalldown>{1}</summationmonsterlifefalldown>/<summationmonsterlifeconstantly>{2}</summationmonsterlifeconstantly></summation>", monster.Name, monster.Life, fullLifeOfMonster);
+                    raport += String.Format("<summation><summationcharactername>{0}</summationcharactername><summationcharacterlifefalldown>{1}</summationcharacterlifefalldown>/<summationcharacterlifeconstantly>{2}</summationcharacterlifeconstantly>", characterViewModel.Name, characterViewModel.Life, fullLifeOfCharacter);
+                    raport += String.Format("<summationmonstername>{0}</summationmonstername><summationmonsterlifefalldown>{1}</summationmonsterlifefalldown>/<summationmonsterlifeconstantly>{2}</summationmonsterlifeconstantly></summation>", monster.Name, monster.Life, fullLifeOfMonster);
 
                     round++;
                     raport += String.Format("<round><roundvalue>{0}</roundvalue></round>", round);
@@ -204,8 +204,8 @@ namespace GameProject.Services
                 }
                 else
                 {   // Podsumowanie
-                    raport += String.Format("<summation><summationcharactername>{0}</summationcharactername> <summationcharacterlifefalldown>{1}</summationcharacterlifefalldown>/<summationcharacterlifeconstantly>{2}</summationcharacterlifeconstantly>", characterViewModel.Name, characterViewModel.Life, fullLifeOfCharacter);
-                    raport += String.Format("<summationmonstername>{0}</summationmonstername> <summationmonsterlifefalldown>{1}</summationmonsterlifefalldown>/<summationmonsterlifeconstantly>{2}</summationmonsterlifeconstantly></summation>", monster.Name, monster.Life, fullLifeOfMonster);
+                    raport += String.Format("<summation><summationcharactername>{0}</summationcharactername><summationcharacterlifefalldown>{1}</summationcharacterlifefalldown>/<summationcharacterlifeconstantly>{2}</summationcharacterlifeconstantly>", characterViewModel.Name, characterViewModel.Life, fullLifeOfCharacter);
+                    raport += String.Format("<summationmonstername>{0}</summationmonstername><summationmonsterlifefalldown>{1}</summationmonsterlifefalldown>/<summationmonsterlifeconstantly>{2}</summationmonsterlifeconstantly></summation>", monster.Name, monster.Life, fullLifeOfMonster);
                 }
             }
             while (monster.Life > 0 && characterViewModel.Life > 0);
@@ -214,8 +214,8 @@ namespace GameProject.Services
             if (monster.Life == 0 || monster.Life < 0)
             {
                 monster.Life = 0;
-                raport += String.Format("<summation><summationcharactername>{0}</summationcharactername> <summationcharacterlifefalldown>{1}</summationcharacterlifefalldown>/<summationcharacterlifeconstantly>{2}</summationcharacterlifeconstantly>", characterViewModel.Name, characterViewModel.Life, fullLifeOfCharacter);
-                raport += String.Format("<summationmonstername>{0}</summationmonstername> <summationmonsterlifefalldown>{1}</summationmonsterlifefalldown>/<summationmonsterlifeconstantly>{2}</summationmonsterlifeconstantly></summation>", monster.Name, monster.Life, fullLifeOfMonster);
+                raport += String.Format("<summation><summationcharactername>{0}</summationcharactername><summationcharacterlifefalldown>{1}</summationcharacterlifefalldown>/<summationcharacterlifeconstantly>{2}</summationcharacterlifeconstantly>", characterViewModel.Name, characterViewModel.Life, fullLifeOfCharacter);
+                raport += String.Format("<summationmonstername>{0}</summationmonstername><summationmonsterlifefalldown>{1}</summationmonsterlifefalldown>/<summationmonsterlifeconstantly>{2}</summationmonsterlifeconstantly></summation>", monster.Name, monster.Life, fullLifeOfMonster);
                 raport += String.Format("<characterwinthebattle></characterwinthebattle>");
                 characterWinner = true;
             }
@@ -224,7 +224,7 @@ namespace GameProject.Services
             if (characterViewModel.Life == 0 || characterViewModel.Life < 0)
             {
                 characterViewModel.Life = 0;
-                raport += String.Format("<summation><summationcharactername>{0}</summationcharactername> <summationcharacterlifefalldown>{1}</summationcharacterlifefalldown>/<summationcharacterlifeconstantly>{2}</summationcharacterlifeconstantly>", characterViewModel.Name, characterViewModel.Life, fullLifeOfCharacter);
+                raport += String.Format("<summation><summationcharactername>{0}</summationcharactername><summationcharacterlifefalldown>{1}</summationcharacterlifefalldown>/<summationcharacterlifeconstantly>{2}</summationcharacterlifeconstantly>", characterViewModel.Name, characterViewModel.Life, fullLifeOfCharacter);
                 raport += String.Format("<summationmonstername>{0}</summationmonstername><summationmonsterlifefalldown>{1}</summationmonsterlifefalldown>/<summationmonsterlifeconstantly>{2}</summationmonsterlifeconstantly></summation>", monster.Name, monster.Life, fullLifeOfMonster);
                 raport += String.Format("<monsterwinthebattle></monsterwinthebattle>");
                 characterWinner = false;

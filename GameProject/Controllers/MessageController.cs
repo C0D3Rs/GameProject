@@ -36,7 +36,7 @@ namespace GameProject.Controllers
             characterViewModel.MaxDamage = 5;
             characterViewModel.Armor = 10;
             characterViewModel.AttackSpeed = 1.5M;
-            characterViewModel.ChanceToHit = 75;
+            characterViewModel.ChanceToHit = 85;
 
             bool Winner = true;
             string GetMoreDetails = characterService.GetBattleReport(characterViewModel, monster, ref Winner);

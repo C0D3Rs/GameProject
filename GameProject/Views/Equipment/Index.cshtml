@@ -6,141 +6,72 @@
 
 <h4>Założone Przedmioty</h4>
 
-<table class="table">
-    <tr>
-        <th>Typ</th>
-        <th>Podtyp</th>
-        <th>Nazwa</th>
-        <th>Wytrzymałość</th>
-        <th>Cena</th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model.EquippedItems)
+@foreach (var item in Model.EquippedItems)
+{
+    if (item.Item.Type == ItemType.Weapon)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Item.Type)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Item.SubType)
-            </td>
-            <td>
-@if (item.Prefix != null)
-{
-    @item.Prefix.Name
-}
-
-@item.Item.Name
-
-@if (item.Suffix != null)
-{
-    @item.Suffix.Name
-}
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Item.Durability)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Item.Price)
-            </td>
-            <td>
-                @Html.ActionLink("Zdejmij", "ChangeStatusToChest", new { id = item.GeneratedItem.Id })
-            </td>
-        </tr>
+        @Html.Partial("_Weapon", item)
     }
-</table>
+    else if (item.Item.Type == ItemType.Shield)
+    {
+        @Html.Partial("_Shield", item)
+    }
+    else if (item.Item.Type == ItemType.Armor)
+    {
+        @Html.Partial("_Armor", item)
+    }
+    else if (item.Item.Type == ItemType.Jewelry)
+    {
+        @Html.Partial("_Jewelry", item)
+    }
+    
+    @Html.ActionLink("Zdejmij", "ChangeStatusToChest", new { id = item.GeneratedItem.Id })
+}
 
 <h4>Plecak</h4>
 
-<table class="table">
-    <tr>
-        <th>Typ</th>
-        <th>Podtyp</th>
-        <th>Nazwa</th>
-        <th>Wytrzymałość</th>
-        <th>Cena</th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model.BackpackItems)
+@foreach (var item in Model.BackpackItems)
+{
+    if (item.Item.Type == ItemType.Weapon)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Item.Type)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Item.SubType)
-            </td>
-            <td>
-@if (item.Prefix != null)
-{
-    @item.Prefix.Name
-}
-
-@item.Item.Name
-
-@if (item.Suffix != null)
-{
-    @item.Suffix.Name
-}
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Item.Durability)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Item.Price)
-            </td>
-            <td>
-                @Html.ActionLink("Przenieś do skrzyni", "ChangeStatusToChest", new { id = item.GeneratedItem.Id })
-            </td>
-        </tr>
+        @Html.Partial("_Weapon", item)
     }
-</table>
+    else if (item.Item.Type == ItemType.Shield)
+    {
+        @Html.Partial("_Shield", item)
+    }
+    else if (item.Item.Type == ItemType.Armor)
+    {
+        @Html.Partial("_Armor", item)
+    }
+    else if (item.Item.Type == ItemType.Jewelry)
+    {
+        @Html.Partial("_Jewelry", item)
+    }
+    
+    @Html.ActionLink("Przenieś do skrzyni", "ChangeStatusToChest", new { id = item.GeneratedItem.Id })
+}
 
 <h4>Skrzynka</h4>
 
-<table class="table">
-    <tr>
-        <th>Typ</th>
-        <th>Podtyp</th>
-        <th>Nazwa</th>
-        <th>Wytrzymałość</th>
-        <th>Cena</th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model.ChestItems)
+@foreach (var item in Model.ChestItems)
+{
+    if (item.Item.Type == ItemType.Weapon)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Item.Type)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Item.SubType)
-            </td>
-            <td>
-@if (item.Prefix != null)
-{
-    @item.Prefix.Name
-}
-
-@item.Item.Name
-
-@if (item.Suffix != null)
-{
-    @item.Suffix.Name
-}
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Item.Durability)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Item.Price)
-            </td>
-            <td>
-                @Html.ActionLink("Załóż", "ChangeStatusToEquipped", new { id = item.GeneratedItem.Id })
-            </td>
-        </tr>
+        @Html.Partial("_Weapon", item)
     }
-</table>
+    else if (item.Item.Type == ItemType.Shield)
+    {
+        @Html.Partial("_Shield", item)
+    }
+    else if (item.Item.Type == ItemType.Armor)
+    {
+        @Html.Partial("_Armor", item)
+    }
+    else if (item.Item.Type == ItemType.Jewelry)
+    {
+        @Html.Partial("_Jewelry", item)
+    }
+    
+    @Html.ActionLink("Załóż", "ChangeStatusToEquipped", new { id = item.GeneratedItem.Id })
+}

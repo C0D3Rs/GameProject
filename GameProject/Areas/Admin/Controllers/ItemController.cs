@@ -109,6 +109,8 @@ namespace GameProject.Areas.Admin.Controllers
                 PrimaryMaxValue = weaponItemViewModel.MaxDamage,
                 QualityLevel = weaponItemViewModel.QualityLevel,
                 RequireStrength = weaponItemViewModel.RequireStrength,
+                AttackSpeed = weaponItemViewModel.AttackSpeed,
+                ChanceToHit = weaponItemViewModel.ChanceToHit
             };
 
             try

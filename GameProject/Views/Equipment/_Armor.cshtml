@@ -1,0 +1,81 @@
+﻿@model ItemViewModel
+
+<div>
+    @if (Model.Image != null)
+    {
+        <img src="@Url.Action("Show","Image", new { imageName = Model.Image.FileName })" />
+    }
+    <dl>
+        <dt>Nazwa</dt>
+        <dd>
+            @if (Model.Prefix != null)
+            {
+                @Model.Prefix.Name
+            }
+
+            @Model.Item.Name
+
+            @if (Model.Suffix != null)
+            {
+                @Model.Suffix.Name
+            }
+        </dd>
+
+        <dt>Pancerz</dt>
+        <dd>
+            @Model.GeneratedItem.PrimaryMinValue
+        </dd>
+
+        @if (Model.GeneratedItem.Strength != 0)
+        {
+            <dt>Siła</dt>
+            <dd>
+                @Model.GeneratedItem.Strength
+            </dd>
+        }
+
+        @if (Model.GeneratedItem.Dexterity != 0)
+        {
+            <dt>Zręczność</dt>
+            <dd>
+                @Model.GeneratedItem.Dexterity
+            </dd>
+        }
+
+        @if (Model.GeneratedItem.Intelligence != 0)
+        {
+            <dt>Inteligencja</dt>
+            <dd>
+                @Model.GeneratedItem.Intelligence
+            </dd>
+        }
+
+        @if (Model.GeneratedItem.Vitality != 0)
+        {
+            <dt>Witalność</dt>
+            <dd>
+                @Model.GeneratedItem.Vitality
+            </dd>
+        }
+
+        <dt>Wymagana siła</dt>
+        <dd>
+            @Model.Item.RequireStrength
+        </dd>
+
+        <dt>Poziom jakości</dt>
+        <dd>
+            @Model.Item.QualityLevel
+        </dd>
+
+        <dt>Wytrzymałość</dt>
+        <dd>
+            @Model.Item.Durability
+        </dd>
+
+        <dt>Wartość</dt>
+        <dd>
+            @Model.Item.Price
+        </dd>
+    </dl>
+</div>

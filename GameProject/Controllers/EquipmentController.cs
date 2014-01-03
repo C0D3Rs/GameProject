@@ -17,6 +17,7 @@ namespace GameProject.Controllers
     [AuthorizationFilter(UserRole.Normal, Order = 1)]
     [CharacterCreatorFilter(Order = 2)]
     [CharacterResourcesFilter(Order = 3)]
+    [EventFilter(Order = 4)]
     public class EquipmentController : Controller
     {
         private DatabaseContext db = new DatabaseContext();
@@ -33,19 +34,18 @@ namespace GameProject.Controllers
 
             var query2 = from r1 in db.GeneratedItems
                          from r2 in db.Items
-                         from r3 in db.Images
+                         join r3 in db.Images on r2.ImageId equals r3.ID into R3
+                         from r8 in R3.DefaultIfEmpty()
                          join r4 in db.Affixes on r1.PrefixId equals r4.Id into R4
                          from r5 in R4.DefaultIfEmpty()
                          join r6 in db.Affixes on r1.SuffixId equals r6.Id into R6
                          from r7 in R6.DefaultIfEmpty()
-                         where r1.CharacterId == character.Id && 
-                            r1.ItemId == r2.Id &&
-                            r2.ImageId == r3.ID
+                         where r1.CharacterId == character.Id && r1.ItemId == r2.Id
                          select new ItemViewModel
                          {
                              GeneratedItem = r1,
                              Item = r2,
-                             Image = r3,
+                             Image = r8 != null ? r8 : null,
                              Prefix = r5 != null ? r5 : null,
                              Suffix = r7 != null ? r7 : null
                          };
@@ -197,61 +197,6 @@ namespace GameProject.Controllers
             {
                 item.Status = ItemStatus.Chest;
                 db.Entry(item).State = EntityState.Modified;
-                db.SaveChanges();
-            }
-            catch (Exception)
-            {
-                // komunikat jakiś
-            }
-
-            return RedirectToAction("Index");
-        }
-
-        public ActionResult GenerateItem(int qualityLevel = 0)
-        {
-            if (qualityLevel <= 0)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            Character character = this.HttpContext.Items["Character"] as Character;
-
-            if (character == null)
-            {
-                return HttpNotFound();
-            }
-
-            var query = from i in db.GeneratedItems
-                        where i.CharacterId == character.Id && i.Status == ItemStatus.Bagpack
-                        select i;
-
-            if (query.Count() != 0)
-            {
-                return RedirectToAction("Index");
-            }
-
-            var item = itemService.GetRandomItem(qualityLevel);
-
-            if (item == null)
-            {
-                return RedirectToAction("Index");
-            }
-
-            var prefix = itemService.GetRandomAffix(AffixType.Prefix, item.Type, qualityLevel);
-            var suffix = itemService.GetRandomAffix(AffixType.Suffix, item.Type, qualityLevel);
-
-            var generatedItem = itemService.GetGeneratedItem(item, prefix, suffix);
-
-            if (generatedItem == null)
-            {
-                return RedirectToAction("Index");
-            }
-
-            try
-            {
-                generatedItem.Status = ItemStatus.Bagpack;
-                generatedItem.CharacterId = character.Id;
-                db.GeneratedItems.Add(generatedItem);
                 db.SaveChanges();
             }
             catch (Exception)

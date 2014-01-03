@@ -58,20 +58,36 @@
             @Html.DisplayFor(model => model.ForJewelry)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.MinStrength)
-        </dt>
+        <dt>Siła</dt>
 
         <dd>
             @Html.DisplayFor(model => model.MinStrength)
+            -
+            @Html.DisplayFor(model => model.MaxStrength)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.MaxStrength)
-        </dt>
+        <dt>Zręczność</dt>
 
         <dd>
-            @Html.DisplayFor(model => model.MaxStrength)
+            @Html.DisplayFor(model => model.MinDexterity)
+            -
+            @Html.DisplayFor(model => model.MaxDexterity)
+        </dd>
+
+        <dt>Inteligencja</dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MinIntelligence)
+            -
+            @Html.DisplayFor(model => model.MaxIntelligence)
+        </dd>
+
+        <dt>Witalność</dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MinVitality)
+            -
+            @Html.DisplayFor(model => model.MaxVitality)
         </dd>
 
         <dt>

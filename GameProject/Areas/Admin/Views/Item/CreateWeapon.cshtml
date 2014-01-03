@@ -46,6 +46,22 @@
         </div>
 
         <div class="form-group">
+            @Html.LabelFor(model => model.ChanceToHit, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ChanceToHit)
+                @Html.ValidationMessageFor(model => model.ChanceToHit)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AttackSpeed, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.AttackSpeed)
+                @Html.ValidationMessageFor(model => model.AttackSpeed)
+            </div>
+        </div>
+
+        <div class="form-group">
             @Html.LabelFor(model => model.RequireStrength, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.RequireStrength)

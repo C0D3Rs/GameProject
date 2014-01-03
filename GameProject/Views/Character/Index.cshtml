@@ -8,96 +8,62 @@
 
 <div>
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Class)
-        </dt>
-
+        <dt>Klasa</dt>
         <dd>
-            @Html.DisplayFor(model => model.Class)
+            @EnumHelper.GetEnumDescription(Model.Class)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Level)
-        </dt>
-
+        <dt>Poziom</dt>
         <dd>
             @Html.DisplayFor(model => model.Level)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
+        <dt>Nazwa</dt>
         <dd>
             @Html.DisplayFor(model => model.Name)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Experience)
-        </dt>
-
+        <dt>Doświadczenie</dt>
         <dd>
             @Html.DisplayFor(model => model.Experience) / @Html.DisplayFor(model => model.ExperienceToLevel)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Strength)
-        </dt>
-
+        <dt>Siła</dt>
         <dd>
             @Html.DisplayFor(model => model.Strength)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Dexterity)
-        </dt>
-
+        <dt>Zręczność</dt>
         <dd>
             @Html.DisplayFor(model => model.Dexterity)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Intelligence)
-        </dt>
-
+        <dt>Inteligencja</dt>
         <dd>
             @Html.DisplayFor(model => model.Intelligence)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Vitality)
-        </dt>
-
+        <dt>Witalność</dt>
         <dd>
             @Html.DisplayFor(model => model.Vitality)
         </dd>
 
         <dt>Obrażenia</dt>
-
         <dd>
             @Html.DisplayFor(model => model.MinDamage) - @Html.DisplayFor(model => model.MaxDamage)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Armor)
-        </dt>
-
+        <dt>Pancerz</dt>
         <dd>
             @Html.DisplayFor(model => model.Armor)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ChanceToHit)
-        </dt>
-
+        <dt>Szansa na trafienie</dt>
         <dd>
             @Html.DisplayFor(model => model.ChanceToHit)%
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.AttackSpeed)
-        </dt>
-
+        <dt>Szybkość ataku</dt>
         <dd>
             @Html.DisplayFor(model => model.AttackSpeed)
         </dd>

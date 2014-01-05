@@ -40,6 +40,14 @@ namespace GameProject.Areas.Admin.ViewModels
         [Display(Name = "Maksymalne obrażenia")]
         public int MaxDamage { get; set; }
 
+        [Required(ErrorMessage = "Pole Szansa na trafienie jest wymagane.")]
+        [Display(Name = "Szansa na trafienie")]
+        public int ChanceToHit { get; set; }
+
+        [Required(ErrorMessage = "Pole Szybkość atakku jest wymagane.")]
+        [Display(Name = "Szybkość ataku")]
+        public decimal AttackSpeed { get; set; }
+
         [Required(ErrorMessage = "Pole Wymagana siła obrażenia jest wymagane.")]
         [Display(Name = "Wymagana siła")]
         public int RequireStrength { get; set; }

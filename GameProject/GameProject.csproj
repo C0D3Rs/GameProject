@@ -172,6 +172,7 @@
     <Compile Include="Enums\FlashMessageType.cs" />
     <Compile Include="Filters\CharacterCreatorFilter.cs" />
     <Compile Include="Filters\AuthorizationFilter.cs" />
+    <Compile Include="Filters\EventFilter.cs" />
     <Compile Include="Filters\CharacterResourcesFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -292,6 +293,10 @@
     <Content Include="Views\Message\Index.cshtml" />
     <Content Include="Views\Location\Details.cshtml" />
     <Content Include="Views\Location\Index.cshtml" />
+    <Content Include="Views\Equipment\_Jewelry.cshtml" />
+    <Content Include="Views\Equipment\_Weapon.cshtml" />
+    <Content Include="Views\Equipment\_Shield.cshtml" />
+    <Content Include="Views\Equipment\_Armor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

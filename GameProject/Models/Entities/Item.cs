@@ -42,6 +42,9 @@ namespace GameProject.Models.Entities
         [Required]
         public int RequireStrength { get; set; }
 
+        public decimal AttackSpeed { get; set; }
+        public int ChanceToHit { get; set; }
+
         [Timestamp]
         public byte[] CurrentVersion { get; set; }
     }

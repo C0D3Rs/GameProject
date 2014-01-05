@@ -64,6 +64,11 @@ namespace GameProject.Controllers
         [HttpPost]
         public ActionResult Create(Character character)
         {
+            if (!Enum.IsDefined(typeof(CharacterClass), character.Class))
+            {
+                return HttpNotFound();
+            }
+
             User user = this.HttpContext.Items["User"] as User;
             var query = from c in db.Characters
                         where c.UserId == user.Id
@@ -72,6 +77,15 @@ namespace GameProject.Controllers
             if (query.Any())
             {
                 return RedirectToAction("Index");
+            }
+
+            var query2 = from c in db.Characters
+                         where c.Name == character.Name
+                         select c;
+
+            if (query2.Any())
+            {
+                ModelState.AddModelError("Name", "Nazwa postaci jest już zajęta.");
             }
 
             if (!ModelState.IsValid)

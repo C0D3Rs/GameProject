@@ -82,6 +82,54 @@
         </div>
 
         <div class="form-group">
+            @Html.LabelFor(model => model.MinDexterity, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MinDexterity)
+                @Html.ValidationMessageFor(model => model.MinDexterity)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MaxDexterity, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MaxDexterity)
+                @Html.ValidationMessageFor(model => model.MaxDexterity)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MinIntelligence, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MinIntelligence)
+                @Html.ValidationMessageFor(model => model.MinIntelligence)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MaxIntelligence, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MaxIntelligence)
+                @Html.ValidationMessageFor(model => model.MaxIntelligence)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MinVitality, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MinVitality)
+                @Html.ValidationMessageFor(model => model.MinVitality)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MaxVitality, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MaxVitality)
+                @Html.ValidationMessageFor(model => model.MaxVitality)
+            </div>
+        </div>
+
+        <div class="form-group">
             @Html.LabelFor(model => model.QualityLevel, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.QualityLevel)

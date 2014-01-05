@@ -153,6 +153,7 @@
     <Compile Include="Areas\Admin\ViewModels\DetailsMonsterViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\JewelryItemViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\ArmorItemViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\LoginUserViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\ShieldItemViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\WeaponItemViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\DetailsItemViewModel.cs" />

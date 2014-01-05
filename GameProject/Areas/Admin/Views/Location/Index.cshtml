@@ -27,10 +27,14 @@
         </a>
 
         @if(ViewData["isAnyImages"] != null) {
-            @Html.ActionLink("Ustaw Obrazek", "Set", "Image", new { category = ImageCategory.Location, id = location.ID }, null)
+            <a type="button" class="btn btn-info" href="@Url.Action("Set", "Image", new { category = ImageCategory.Location, id = location.ID })">
+                <i class="glyphicon glyphicon-picture"></i> Ustaw obrazek
+            </a>
         }
 
-        @Html.ActionLink("Details", "Details", new { id=location.ID })
+        <a type="button" class="btn btn-primary" href="@Url.Action("Details/"+location.ID, "Location")">
+            <i class="glyphicon glyphicon-eye-open"></i> Zobacz
+        </a>
 
         </td>
     </tr>

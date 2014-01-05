@@ -99,6 +99,12 @@ namespace GameProject.Areas.Admin.Controllers
                 model.Image = null;
             }
 
+            var query3 = from i in db.Events
+                         where i.LocationId == location.ID
+                         select i;
+
+            model.Events = query3.ToList();
+
             return View(model);
         }
 

@@ -1,0 +1,30 @@
+﻿@model IEnumerable<GameProject.Models.Entities.Event>
+@{
+    ViewBag.Title = "Index Event";
+}
+
+<h2>Events</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Type)
+        </th>
+    </tr>
+
+@foreach (var one_event in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelLocation => one_event.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelLocation => one_event.Type)
+        </td>
+    </tr>
+}
+
+</table>
+

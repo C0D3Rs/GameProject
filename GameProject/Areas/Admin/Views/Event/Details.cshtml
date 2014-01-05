@@ -40,22 +40,20 @@
         </dd>
     </div>
 
-    @Html.ActionLink("Create Event","Create", new{controller="Event", locationID=@Model.Location.ID})
-
+    @foreach (var event in @Model.Events) {
     <table class="table">
       <thead>
         <tr>
-          <td>Eventy Lokacji</td>
+          <td>@Html.DisplayFor(modelEvent => event.Name)</td>
         </tr>
       </thead>
+
       <tbody>
-      @foreach(var one_event in Model.Events) 
-      {
         <tr>
-          <td>@Html.DisplayFor(model => one_event.Name)</td>
+          <td>@Html.DisplayFor(model => event.Name)</td>
         </tr>
-      }
       </tbody>
     </table>
+    }
 </dl>
 </div>

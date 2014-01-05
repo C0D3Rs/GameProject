@@ -142,11 +142,13 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
     <Compile Include="Areas\Admin\Controllers\AffixController.cs" />
+    <Compile Include="Areas\Admin\Controllers\EventController.cs" />
     <Compile Include="Areas\Admin\Controllers\LocationController.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Admin\Controllers\ImageController.cs" />
     <Compile Include="Areas\Admin\Controllers\ItemController.cs" />
     <Compile Include="Areas\Admin\Controllers\MonsterController.cs" />
+    <Compile Include="Areas\Admin\ViewModels\CreateEventViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\DetailsLocationViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\DetailsMonsterViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\JewelryItemViewModel.cs" />
@@ -163,6 +165,7 @@
     <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\MonsterLoreController.cs" />
     <Compile Include="Enums\CharacterClass.cs" />
+    <Compile Include="Enums\EventType.cs" />
     <Compile Include="Enums\ItemStatus.cs" />
     <Compile Include="Enums\ImageCategory.cs" />
     <Compile Include="Enums\SubType.cs" />
@@ -180,6 +183,7 @@
     <Compile Include="Models\DatabaseContext.cs" />
     <Compile Include="Models\DatabaseInitializer.cs" />
     <Compile Include="Models\Entities\Character.cs" />
+    <Compile Include="Models\Entities\Event.cs" />
     <Compile Include="Models\Entities\Location.cs" />
     <Compile Include="Models\Entities\GeneratedItem.cs" />
     <Compile Include="Models\Entities\User.cs" />
@@ -252,6 +256,10 @@
     <Content Include="Areas\Admin\Views\Location\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Location\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Location\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Event\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Event\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Event\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Event\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

@@ -1,6 +1,6 @@
 ﻿using GameProject.Models;
 using GameProject.Models.Entities;
-using GameProject.ViewModels;
+using GameProject.Areas.Admin.ViewModels;
 using GameProject.Enums;
 using System;
 using System.Collections.Generic;

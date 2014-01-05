@@ -11,6 +11,7 @@ namespace GameProject.ViewModels
     public class LoginUserViewModel
     {
         [Required]
+        [DataType(DataType.EmailAddress, ErrorMessage = "Wpisz poprawny adres e-mail.")]
         public string Username { get; set; }
 
         [DataType(DataType.Password)]

@@ -155,7 +155,7 @@
     <Compile Include="Areas\Admin\ViewModels\WeaponItemViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\DetailsItemViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\SetImageViewModel.cs" />
-    <Compile Include="App_Start\AccountController.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CharacterController.cs" />
     <Compile Include="Controllers\EquipmentController.cs" />
     <Compile Include="Controllers\ImageController.cs" />

@@ -48,7 +48,7 @@
 
             <div class="col-md-4">
                 @Html.TextBoxFor(model => model.Event.MonsterId,  new { Id = "MonsterId", Name="MonsterId", @readonly="readonly" } )
-                @Html.ValidationMessageFor(model => model.Event.MonsterId)
+                @Html.ValidationMessageFor(model => model.Event.MonsterId )
             </div>
         </div>
 
@@ -151,7 +151,8 @@
         </div>
     </div>
 }
-
+@if(Model.Monsters != null)
+{
 <div class="col-md-6">
    <table class="table" style="display:none;">
       <thead>
@@ -174,6 +175,7 @@
       </tbody>
     </table>
 </div>
+}
 </div>
 
 <div class="col-md-12">

@@ -4,20 +4,16 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit Jewelry</h2>
+<h2>Edytuj Biżuterię</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.CurrentVersion)
+    @Html.HiddenFor(model => model.Type)
     
     <div class="form-horizontal">
-        <h4>Item</h4>
-        <hr />
-        @Html.ValidationSummary(true)
-        @Html.HiddenFor(model => model.Id)
-        @Html.HiddenFor(model => model.CurrentVersion)
-        @Html.HiddenFor(model => model.Type)
-
         <div class="form-group">
             @Html.LabelFor(model => model.SubType, new { @class = "control-label col-md-2" })
             <div class="col-md-10">

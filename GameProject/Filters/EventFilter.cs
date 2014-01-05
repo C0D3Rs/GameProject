@@ -13,10 +13,10 @@ using System.Web.Routing;
 
 namespace GameProject.Filters
 {
-    public class EventFilter : ActionFilterAttribute, IActionFilter
+    public class EventFilter : ActionFilterAttribute, IActionFilter, IDisposable
     {
         private DatabaseContext db = new DatabaseContext();
-        private ItemService itemService = new ItemService();
+        
 
         void IActionFilter.OnActionExecuting(ActionExecutingContext filterContext)
         {
@@ -40,6 +40,8 @@ namespace GameProject.Filters
             {
                 return;
             }
+
+            ItemService itemService = new ItemService();
 
             var item = itemService.GetRandomItem(qualityLevel);
 
@@ -69,6 +71,20 @@ namespace GameProject.Filters
             {
                 // komunikat jakiś
             }
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

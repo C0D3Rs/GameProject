@@ -178,39 +178,5 @@ namespace GameProject.Areas.Admin.Controllers
 
             return RedirectToAction("Index");
         }
-
-        [HttpPost, ActionName("Delete")]
-        
-        public ActionResult DeleteConfirmed(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            var query = from m in db.Monsters
-                        where m.Id == id
-                        select m;
-
-            var monster = query.FirstOrDefault();
-
-            if (monster == null)
-            {
-                return HttpNotFound();
-            }
-
-
-
-            return View(monster);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
     }
 }

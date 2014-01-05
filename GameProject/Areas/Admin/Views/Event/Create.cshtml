@@ -48,7 +48,7 @@
 
             <div class="col-md-4">
                 @Html.TextBoxFor(model => model.Event.MonsterId,  new { Id = "MonsterId", Name="MonsterId", @readonly="readonly" } )
-                @Html.ValidationMessageFor(model => model.Event.MonsterId )
+                @Html.ValidationMessage("MonsterId")
             </div>
         </div>
 
@@ -57,7 +57,7 @@
 
             <div class="col-md-4">
                 @Html.TextBoxFor(model => model.Event.LocationId,  new { Id = "LocationId", Name="LocationId", @readonly="readonly" })
-                @Html.ValidationMessageFor(model => model.Event.LocationId)
+                @Html.ValidationMessage("LocationId")
             </div>
         </div>
 
@@ -74,7 +74,7 @@
             <label class = "control-label col-md-4"> Name</label>
             <div class="col-md-4">
                 @Html.TextBoxFor(model => model.Event.Name,  new { Id = "Name", Name="Name" })
-                @Html.ValidationMessageFor(model => model.Event.Name)
+                @Html.ValidationMessage("Name")
             </div>
         </div>
 
@@ -82,7 +82,7 @@
             @Html.LabelFor(model => model.Event.MainDescription, new { @class = "control-label col-md-4" })
             <div class="col-md-4">
                 @Html.TextAreaFor(model => model.Event.MainDescription, new { Id = "MainDescription", Name="MainDescription" })
-                @Html.ValidationMessageFor(model => model.Event.MainDescription)
+                @Html.ValidationMessage("MainDescription")
             </div>
         </div>
 
@@ -90,7 +90,7 @@
             @Html.LabelFor(model => model.Event.SuccessDescription, new { @class = "control-label col-md-4" })
             <div class="col-md-4">
                 @Html.TextAreaFor(model => model.Event.SuccessDescription, new { Id = "SuccessDescription", Name="SuccessDescription" })
-                @Html.ValidationMessageFor(model => model.Event.SuccessDescription)
+                @Html.ValidationMessage("SuccessDescription")
             </div>
         </div>
 
@@ -98,7 +98,7 @@
             @Html.LabelFor(model => model.Event.LostDescription, new { @class = "control-label col-md-4" })
             <div class="col-md-4">
                 @Html.TextAreaFor(model => model.Event.LostDescription, new { Id = "LostDescription", Name="LostDescription" })
-                @Html.ValidationMessageFor(model => model.Event.LostDescription)
+                @Html.ValidationMessage("LostDescription")
             </div>
         </div>
 
@@ -107,7 +107,7 @@
             @Html.LabelFor(model => model.Event.Reward, new { @class = "control-label col-md-4" })
             <div class="col-md-4">
                 @Html.TextBoxFor(model => model.Event.Reward, new { Id = "Reward", Name="Reward" })
-                @Html.ValidationMessageFor(model => model.Event.Reward)
+                @Html.ValidationMessage("Reward")
             </div>
         </div>
 
@@ -115,7 +115,7 @@
             @Html.LabelFor(model => model.Event.RequireStrength, new { @class = "control-label col-md-4" })
             <div class="col-md-4">
                 @Html.TextBoxFor(model => model.Event.RequireStrength, new { Id = "RequireStrength", Name="RequireStrength"  })
-                @Html.ValidationMessageFor(model => model.Event.RequireStrength)
+                @Html.ValidationMessage("RequireStrength")
             </div>
         </div>
 
@@ -123,7 +123,7 @@
             @Html.LabelFor(model => model.Event.RequireDexterity , new { @class = "control-label col-md-4" })
             <div class="col-md-4">
                 @Html.TextBoxFor(model => model.Event.RequireDexterity, new { Id = "RequireDexterity", Name="RequireDexterity" })
-                @Html.ValidationMessageFor(model => model.Event.RequireDexterity)
+                @Html.ValidationMessage("RequireDexterity")
             </div>
         </div>
 
@@ -131,7 +131,7 @@
             @Html.LabelFor(model => model.Event.RequireVitality , new { @class = "control-label col-md-4" })
             <div class="col-md-4">
                 @Html.TextBoxFor(model => model.Event.RequireVitality, new { Id = "RequireVitality", Name="RequireVitality" })
-                @Html.ValidationMessageFor(model => model.Event.RequireVitality)
+                @Html.ValidationMessage("RequireVitality")
             </div>
         </div>
 
@@ -139,7 +139,7 @@
             @Html.LabelFor(model => model.Event.RequireInteligence , new { @class = "control-label col-md-4" })
             <div class="col-md-4">
                 @Html.TextBoxFor(model => model.Event.RequireInteligence, new { Id = "RequireInteligence", Name="RequireInteligence" })
-                @Html.ValidationMessageFor(model => model.Event.RequireInteligence)
+                @Html.ValidationMessage("RequireInteligence")
             </div>
         </div>
         </div>

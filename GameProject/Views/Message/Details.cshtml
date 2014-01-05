@@ -1,0 +1,57 @@
+﻿@model GameProject.Models.Entities.Message
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Message</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FromUser)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FromUser)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContentOfMessage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContentOfMessage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ToUserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ToUserId)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

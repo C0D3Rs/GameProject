@@ -3,25 +3,68 @@
 @{
     ViewBag.Title = "Create Image";
 }
+<script type="text/javascript" language="Javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+<script>
+$(document).ready(function () {
+    function readURL(input) {
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#prevImage').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#file").change(function () {
+        readURL(this);
+    });
+});
+</script>
 
 <h2>Create Image</h2>
-
+<div style="display: block;overflow:auto;">
 @using (Html.BeginForm("Create", "Image", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-   <div class="form-horizontal">
+   <div class="form-horizontal col-md-6">
         <h4>Image</h4>
         <hr />
 
         <div class="form-group">
             <div class="col-md-10">
-                @Html.DropDownList("category", EnumHelper.GetSelectList<ImageCategory>())
-                <br /><br />
-                <input type="file" name="file" />
-                <input type="submit" value="OK" />
+                <label class = "control-label col-md-4"> Kategoria</label>
+
+                <div class="col-md-4">
+                    @Html.DropDownList("category", EnumHelper.GetSelectList<ImageCategory>())
+                </div>
+
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <label class = "control-label col-md-4"> Plik</label>
+
+                <div class="col-md-4">
+                    <input type="file" name="file" id="file" />
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-4 col-md-6">
+                <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
+<div class="col-md-6">
+    <img id="prevImage" src="#" alt="your image" class="img-polaroid" />
+</div>
+</div>
 
 <div>
     @Html.ActionLink("Back to List", "Index")

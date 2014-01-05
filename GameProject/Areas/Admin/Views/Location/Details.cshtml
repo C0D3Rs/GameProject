@@ -37,10 +37,12 @@
         <a type="button" class="btn btn-danger" href="@Url.Action("Delete/"+@Model.Location.ID, "Location")">
             <i class="glyphicon glyphicon-trash"></i> Usuń
         </a>
+
+        <a type="button" class="btn btn-success" href="@Url.Action("Create", "Event", new { locationID=@Model.Location.ID })">
+            <i class="glyphicon glyphicon-plus"></i> Dodaj Event
+        </a>
         </dd>
     </div>
-
-    @Html.ActionLink("Create Event","Create", new{controller="Event", locationID=@Model.Location.ID})
 
     <table class="table">
       <thead>

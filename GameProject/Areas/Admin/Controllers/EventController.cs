@@ -32,6 +32,7 @@ namespace GameProject.Areas.Admin.Controllers
             return View(query.ToPagedList(pageNumber, 10));
         }
 
+        /*
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -54,11 +55,28 @@ namespace GameProject.Areas.Admin.Controllers
                          where i.ID == locationEvent.LocationId
                          select i;
 
+            var query3 = from a in db.Monsters
+                         from b in db.Images
+                         where a.ImageId == b.ID
+                         select new DetailsMonsterViewModel
+                         {
+                             Monster = a,
+                             Image = b
+                         };
+
+            var monsters = query3.ToList();
+
             var eventLocation = query2.FirstOrDefault();
 
-            return View();
-        }
+            CreateEventViewModel model = new CreateEventViewModel();
 
+            model.Location = eventLocation;
+            model.Event = locationEvent;
+            model.Monsters = monsters;
+
+            return View(model); 
+        }
+        */
         public ActionResult Create(int? locationID)
         {
             if (locationID == null)

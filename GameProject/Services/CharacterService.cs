@@ -56,8 +56,8 @@ namespace GameProject.Services
             characterViewModel.Armor = armorsAndShields.Sum(aas => aas.GeneratedItem.PrimaryMinValue);
 
             characterViewModel.Life = characterViewModel.Vitality * 10 * characterViewModel.Level;
-            characterViewModel.ChanceToHit = weapon.Item.ChanceToHit * characterViewModel.Dexterity / characterViewModel.Level;
-            characterViewModel.AttackSpeed = characterViewModel.Dexterity / 100 + weapon.Item.AttackSpeed;
+            characterViewModel.ChanceToHit = (weapon != null ? weapon.Item.ChanceToHit : 1) * characterViewModel.Dexterity / characterViewModel.Level;
+            characterViewModel.AttackSpeed = characterViewModel.Dexterity / 100 + (weapon != null ? weapon.Item.AttackSpeed : 1);
 
             if (characterViewModel.ChanceToHit > 75)
             {

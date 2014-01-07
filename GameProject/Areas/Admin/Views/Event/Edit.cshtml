@@ -33,6 +33,8 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Event.Id, new { Id = "ID", Name="ID"} )
+    @Html.HiddenFor(model => model.Event.CurrentVersion,  new { Id = "CurrentVersion", Name="CurrentVersion"} ) 
 
    <div class="form-horizontal col-md-6">
         <h4>Event</h4>

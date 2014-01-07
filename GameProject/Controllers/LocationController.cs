@@ -84,6 +84,12 @@ namespace GameProject.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
+            if (character.AvailableMoves == 0)
+            {
+                FlashMessageHelper.SetMessage(this, FlashMessageType.Danger, "Nie masz wystarczającej ilości ruchów. Spróbuj za chwilę...");
+                return RedirectToAction("Index");
+            }
+
             var query = from e in db.Events
                         from l in db.Locations
                         from i in db.Images

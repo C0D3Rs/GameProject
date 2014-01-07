@@ -97,7 +97,8 @@ namespace GameProject.Controllers
             }
             else
             {
-                return Content("Nie znaleziono użytkownika.");
+                FlashMessageHelper.SetMessage(this, FlashMessageType.Warning, "Nazwa użytkownika jest nie poprawna lub nie istnieje w bazie danych.");
+                return View("Create");
             }
 
             if (ModelState.IsValid)

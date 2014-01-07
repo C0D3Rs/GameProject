@@ -15,7 +15,7 @@ namespace GameProject.Models.Entities
         [AllowHtml]
         public string Title { get; set; }
         public string FromUser { get; set; }
-        [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
+        [DisplayFormat(DataFormatString = "{0:dd MMM yyyy HH:mm:ss}")]
         public DateTime Date { get; set; }
         [DataType(DataType.MultilineText)]
         [Required]

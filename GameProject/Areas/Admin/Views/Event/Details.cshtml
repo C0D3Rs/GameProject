@@ -1,59 +1,125 @@
-﻿@model DetailsLocationViewModel
+﻿@model DetailsEventViewModel
 
 @{
-    ViewBag.Title = "Details Location";
+    ViewBag.Title = "Details Event";
 }
 
-<h2>Details Location</h2>
+<h2>
+Details Event
+<a type="button" class="btn btn-warning" href="@Url.Action("Edit/"+@Model.Event.Id, "Event")">
+    <i class="glyphicon glyphicon-edit"></i> Edytuj
+</a>
+
+<a type="button" class="btn btn-danger" href="@Url.Action("Delete/"+@Model.Event.Id, "Event")">
+    <i class="glyphicon glyphicon-trash"></i> Usuń
+</a>
+</h2>
 <div class="container" style="display:block;">
 
-@if(Model.Image != null)
-{
-    <img src="@Url.Action("Show","Image", new { imageName = Model.Image.FileName })" class="img-rounded col-md-4" width="150px" />
-}
 
 <dl class="dl-horizontal col-md-8">
-    <dt>
-        <i class="glyphicon glyphicon-bookmark"></i> @Html.DisplayNameFor(model => model.Location.Name)
+    <dt class="col-md-4">
+        <i class="glyphicon glyphicon-bookmark"></i> Nazwa
     </dt>      
     <dd>
-        @Model.Location.Name
+        @Model.Event.Name
     </dd>
-    <dt>
-       <i class="glyphicon glyphicon-list-alt"></i> @Html.DisplayNameFor(model => model.Location.Description)
+    <dt class="col-md-4">
+       <i class="glyphicon glyphicon-list-alt"></i> Główny Opis
     </dt>
     <dd>
-        @Model.Location.Description
+        @Model.Event.MainDescription
     </dd>
-    <br />
-    <div class="btn-group">
-        <dt>
-       
-        <a type="button" class="btn btn-warning" href="@Url.Action("Edit/"+@Model.Location.ID, "Location")">
-            <i class="glyphicon glyphicon-edit"></i> Edytuj
-        </a>
-        </dt>
-        <dd>
-        <a type="button" class="btn btn-danger" href="@Url.Action("Delete/"+@Model.Location.ID, "Location")">
-            <i class="glyphicon glyphicon-trash"></i> Usuń
-        </a>
-        </dd>
-    </div>
-
-    @foreach (var event in @Model.Events) {
-    <table class="table">
-      <thead>
-        <tr>
-          <td>@Html.DisplayFor(modelEvent => event.Name)</td>
-        </tr>
-      </thead>
-
-      <tbody>
-        <tr>
-          <td>@Html.DisplayFor(model => event.Name)</td>
-        </tr>
-      </tbody>
-    </table>
-    }
+    <dt class="col-md-4">
+       <i class="glyphicon glyphicon-list-alt"></i> Opis Wygranej
+    </dt>
+    <dd>
+        @Model.Event.SuccessDescription
+    </dd>
+    <dt class="col-md-4">
+       <i class="glyphicon glyphicon-list-alt"></i> Opis Przegranej
+    </dt>
+    <dd>
+        @Model.Event.LostDescription
+    </dd>
+    <dt class="col-md-4">
+       <i class="glyphicon glyphicon-list-alt"></i> Wysokość Wygranej
+    </dt>
+    <dd>
+        @Model.Event.Reward
+    </dd>
+    <dt class="col-md-4">
+       <i class="glyphicon glyphicon-list-alt"></i> Wymagana Siła
+    </dt>
+    <dd>
+        @Model.Event.RequireStrength
+    </dd>
+    <dt class="col-md-4">
+       <i class="glyphicon glyphicon-list-alt"></i> Wymagana Zręczność
+    </dt>
+    <dd>
+        @Model.Event.RequireDexterity
+    </dd>
+    <dt>
+       <i class="glyphicon glyphicon-list-alt"></i> Wymagana Witalność
+    </dt>
+    <dd>
+        @Model.Event.RequireVitality
+    </dd>
+    <dt>
+       <i class="glyphicon glyphicon-list-alt"></i> Wymagana Inteligencja
+    </dt>
+    <dd>
+        @Model.Event.RequireInteligence
+    </dd>
 </dl>
+
+<div class="col-md-4">
+  <h4>Lokacja</h4> 
+  <div style="display:block;overflow:auto;">
+    @if(Model.Location != null)
+    {
+      if(Model.LocationImage != null)
+      {
+      <div class="col-md-6">
+        <img src="@Url.Action("Show","Image", new { imageName = @Model.LocationImage.FileName })" class="img-rounded" width="150px" />
+      </div>
+      }
+      <div class="col-md-6">
+        @Model.Location.Name
+      </div>
+    }
+    <button class="btn btn-large btn-block btn-info" type="button" onclick="location.href='@Url.Action("Details", "Location", new { id=@Model.Location.ID })'">
+        <i class="glyphicon glyphicon-eye-open"></i> Zobacz
+    </button>
+  </div>
+
+  <div style="display:block;overflow:auto;">
+    @if(Model.Event.Type == EventType.Monster)
+    {
+      <h4>Potwór</h4>
+      if(Model.MonsterImage != null)
+      {
+        <div class="col-md-6">
+          <img src="@Url.Action("Show","Image", new { imageName = @Model.MonsterImage.FileName })" class="img-rounded" width="150px" />
+        </div>
+      }
+      <div class="col-md-6">
+        @Model.Monster.Name
+        <br />
+        <b>Level:</b> @Model.Monster.Level
+        <br />
+        <b>Życie:</b> @Model.Monster.Life
+        <br />
+        <b>Obrażenia:</b> @Model.Monster.MinDamage <label>-</label> @Model.Monster.MaxDamage
+        <br />
+        <b>Obrona: </b> @Model.Monster.Defense
+      </div>
+        <button class="btn btn-large btn-block btn-info" type="button" onclick="location.href='@Url.Action("Details", "Monster", new { id=@Model.Monster.Id })'">
+          <i class="glyphicon glyphicon-eye-open"></i> Zobacz
+        </button>
+
+     }
+  </div>
+</div>
 </div>

@@ -73,5 +73,60 @@ namespace GameProject.Controllers
 
             return View(model);
         }
+
+        public ActionResult Travel(int? locationID)
+        {
+            Character character = this.HttpContext.Items["Character"] as Character;
+
+            if (locationID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var query = from e in db.Events
+                        from l in db.Locations
+                        from i in db.Images
+                        where e.Id == locationID && l.ID == locationID && i.ID == l.ImageId
+                        select e;
+
+            int eventCouter = query.Count();
+
+            if (eventCouter == 0)
+            {
+                return HttpNotFound();
+            }
+
+            Random dice = new Random();
+
+            int random = dice.Next(0,eventCouter);
+
+            var query2 = from i in db.Events
+                        where i.Id == locationID
+                        select i;
+            var winEvent = query2.Skip(random).FirstOrDefault();
+
+            if (winEvent == null)
+            {
+                return HttpNotFound();
+            }
+
+            EventLog log = new EventLog();
+
+            log.CharacterId = character.Id;
+            log.EventId = winEvent.Id;
+            log.Created_at = DateTime.Now;
+
+            try
+            {
+                db.EventLogs.Add(log);
+                db.SaveChanges();
+            }
+            catch (Exception)
+            {
+                FlashMessageHelper.SetMessage(this, FlashMessageType.Danger, "Wystąpił nieoczekiwany błąd związany z aktualizowaniem danych.");
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("Index");
+        }
     }
 }

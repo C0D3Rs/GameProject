@@ -48,6 +48,8 @@
       <thead>
         <tr>
           <td>Eventy Lokacji</td>
+          <td></td>
+          <td></td>
         </tr>
       </thead>
       <tbody>
@@ -55,6 +57,16 @@
       {
         <tr>
           <td>@Html.DisplayFor(model => one_event.Name)</td>
+          <td>
+            <a type="button" class="btn btn-danger" href="@Url.Action("Delete/"+@one_event.Id, "Event")">
+                <i class="glyphicon glyphicon-trash"></i> Usuń
+            </a>
+          </td>
+          <td>
+            <a type="button" class="btn btn-info" href="@Url.Action("Details/"+@one_event.Id, "Event")">
+                <i class="glyphicon glyphicon-eye-open"></i> Zobacz
+            </a>
+          </td>
         </tr>
       }
       </tbody>

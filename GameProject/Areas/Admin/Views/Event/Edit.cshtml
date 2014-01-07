@@ -1,47 +1,183 @@
-﻿@model GameProject.Models.Entities.Location
+﻿@model CreateEventViewModel
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Create Event";
 }
+<script type="text/javascript" language="Javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 
-<h2>Edit Location</h2>
+<script>
+    $(document).ready(function () {
+        $(".Monster").click(function () {
+            monster_id = this.id;
+            $("input#MonsterId").val(monster_id);
+        });
 
-@using (Html.BeginForm("Edit", "Location"))
+        $('select').on('change', function () {
+            select = this.value;
+
+            if (select == "Random") {
+                $(".table").hide("slow");
+                $(".random_options").show(2000);
+                $("input#MonsterId").val("0");
+            }
+            else if (select == "Monster") {
+                $(".table").show(2000);
+                $(".random_options").hide("slow");
+            }
+        })
+    });
+</script>
+
+<h2>Create Event</h2>
+<div style="display: block;overflow:auto;">
+@using (Html.BeginForm())
 {
+    @Html.AntiForgeryToken()
 
-@Html.AntiForgeryToken()
-
-@Html.HiddenFor(model => model.ID)
-@Html.HiddenFor(model => model.CurrentVersion)
-
-   <div class="form-horizontal">
-        <h4>Location</h4>
+   <div class="form-horizontal col-md-6">
+        <h4>Event</h4>
         <hr />
 
+        <div class="alert alert-info">
+          <b>Informacja!</b>
+          Aktualnie edytujesz event do lokacji "<u>@Model.Location.Name</u>"
+        </div>
+
         <div class="form-group">
-            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Name)
-                @Html.ValidationMessageFor(model => model.Name)
+            <label class = "control-label col-md-4"> Monster ID</label>
+
+            <div class="col-md-4">
+                @Html.TextBoxFor(model => model.Event.MonsterId,  new { Id = "MonsterId", Name="MonsterId", @readonly="readonly" } )
+                @Html.ValidationMessage("MonsterId")
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Description)
-                @Html.ValidationMessageFor(model => model.Description)
+            <label class = "control-label col-md-4"> LocationID</label>
+
+            <div class="col-md-4">
+                @Html.TextBoxFor(model => model.Event.LocationId,  new { Id = "LocationId", Name="LocationId", @readonly="readonly" })
+                @Html.ValidationMessage("LocationId")
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class = "control-label col-md-4"> Event Type</label>
+
+            <div class="col-md-4">
+                @Html.DropDownList("Type", EnumHelper.GetSelectList<EventType>())
             </div>
         </div>
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+            <label class = "control-label col-md-4"> Name</label>
+            <div class="col-md-4">
+                @Html.TextBoxFor(model => model.Event.Name,  new { Id = "Name", Name="Name" })
+                @Html.ValidationMessage("Name")
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Event.MainDescription, new { @class = "control-label col-md-4" })
+            <div class="col-md-4">
+                @Html.TextAreaFor(model => model.Event.MainDescription, new { Id = "MainDescription", Name="MainDescription" })
+                @Html.ValidationMessage("MainDescription")
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Event.SuccessDescription, new { @class = "control-label col-md-4" })
+            <div class="col-md-4">
+                @Html.TextAreaFor(model => model.Event.SuccessDescription, new { Id = "SuccessDescription", Name="SuccessDescription" })
+                @Html.ValidationMessage("SuccessDescription")
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Event.LostDescription, new { @class = "control-label col-md-4" })
+            <div class="col-md-4">
+                @Html.TextAreaFor(model => model.Event.LostDescription, new { Id = "LostDescription", Name="LostDescription" })
+                @Html.ValidationMessage("LostDescription")
+            </div>
+        </div>
+
+        <div class="random_options">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Event.Reward, new { @class = "control-label col-md-4" })
+            <div class="col-md-4">
+                @Html.TextBoxFor(model => model.Event.Reward, new { Id = "Reward", Name="Reward" })
+                @Html.ValidationMessage("Reward")
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Event.RequireStrength, new { @class = "control-label col-md-4" })
+            <div class="col-md-4">
+                @Html.TextBoxFor(model => model.Event.RequireStrength, new { Id = "RequireStrength", Name="RequireStrength"  })
+                @Html.ValidationMessage("RequireStrength")
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Event.RequireDexterity , new { @class = "control-label col-md-4" })
+            <div class="col-md-4">
+                @Html.TextBoxFor(model => model.Event.RequireDexterity, new { Id = "RequireDexterity", Name="RequireDexterity" })
+                @Html.ValidationMessage("RequireDexterity")
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Event.RequireVitality , new { @class = "control-label col-md-4" })
+            <div class="col-md-4">
+                @Html.TextBoxFor(model => model.Event.RequireVitality, new { Id = "RequireVitality", Name="RequireVitality" })
+                @Html.ValidationMessage("RequireVitality")
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Event.RequireInteligence , new { @class = "control-label col-md-4" })
+            <div class="col-md-4">
+                @Html.TextBoxFor(model => model.Event.RequireInteligence, new { Id = "RequireInteligence", Name="RequireInteligence" })
+                @Html.ValidationMessage("RequireInteligence")
+            </div>
+        </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-4 col-md-6">
+                <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
+@if(Model.Monsters != null)
+{
+<div class="col-md-6">
+   <table class="table" style="display:none;">
+      <thead>
+        <tr>
+          <td><h4>Monsters</h4></td>
+          <td></td>
+          <td>Level</td>
+        </tr>
+      </thead>
 
-<div>
+      <tbody>
+        @foreach(var one_monster in Model.Monsters) 
+        {
+        <tr id="@one_monster.Monster.Id" class="Monster">
+          <td><img src="@Url.Action("Show","Image", new { imageName = one_monster.Image.FileName })" class="img-rounded col-md-4" width="150px" /></td>
+          <td>@Html.DisplayFor(model => one_monster.Monster.Name)</td>
+          <td>@Html.DisplayFor(model => one_monster.Monster.Level)</td>
+        </tr>
+        }
+      </tbody>
+    </table>
+</div>
+}
+</div>
+
+<div class="col-md-12">
     @Html.ActionLink("Back to List", "Index")
 </div>

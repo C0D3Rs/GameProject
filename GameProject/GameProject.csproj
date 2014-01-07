@@ -142,12 +142,14 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
     <Compile Include="Areas\Admin\Controllers\AffixController.cs" />
+    <Compile Include="Areas\Admin\Controllers\EventLogController.cs" />
     <Compile Include="Areas\Admin\Controllers\EventController.cs" />
     <Compile Include="Areas\Admin\Controllers\LocationController.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Admin\Controllers\ImageController.cs" />
     <Compile Include="Areas\Admin\Controllers\ItemController.cs" />
     <Compile Include="Areas\Admin\Controllers\MonsterController.cs" />
+    <Compile Include="Areas\Admin\ViewModels\DetailsEventViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\CreateEventViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\DetailsLocationViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\DetailsMonsterViewModel.cs" />
@@ -185,6 +187,7 @@
     <Compile Include="Models\DatabaseContext.cs" />
     <Compile Include="Models\DatabaseInitializer.cs" />
     <Compile Include="Models\Entities\Character.cs" />
+    <Compile Include="Models\Entities\EventLog.cs" />
     <Compile Include="Models\Entities\Event.cs" />
     <Compile Include="Models\Entities\Location.cs" />
     <Compile Include="Models\Entities\GeneratedItem.cs" />

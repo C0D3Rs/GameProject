@@ -98,10 +98,11 @@ namespace GameProject.Controllers
 
             Random dice = new Random();
 
-            int random = dice.Next(0,eventCouter);
+            int random = dice.Next(0, eventCouter);
 
             var query2 = from i in db.Events
                         where i.Id == locationID
+                        orderby i.Id
                         select i;
             var winEvent = query2.Skip(random).FirstOrDefault();
 

@@ -5,12 +5,9 @@ using System.Web;
 
 namespace GameProject.Enums
 {
-    public class MessageType
+    public enum MessageType
     {
-        public enum MessageOfType
-        {
-            messageFromSystem = 1,
-            messageFromUser = 2,
-        }
+        System = 1,
+        User = 2
     }
 }

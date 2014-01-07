@@ -27,7 +27,6 @@ namespace GameProject.Controllers
         private DatabaseContext db = new DatabaseContext();
         private CharacterService cs = new CharacterService();
 
-
         // GET: /Message/
         public ActionResult Index()
         {
@@ -38,13 +37,14 @@ namespace GameProject.Controllers
                 return HttpNotFound();
             }
 
-            var query = from d1 in db.Messages
-                        where d1.ToUserId == character.Id
-                        orderby d1.Date
-                        select d1;
+            var query_message = from d1 in db.Messages
+                                where d1.ToUserId == character.Id
+                                orderby d1.Date
+                                select d1;
 
-            //return View(db.Messages.ToList());
-            return View(query.ToList());
+            var messages = query_message.Take(10).ToList();
+            messages.Reverse();
+            return View(messages);
         }
 
         // GET: /Message/Details/5
@@ -58,6 +58,11 @@ namespace GameProject.Controllers
             if (message == null)
             {
                 return HttpNotFound();
+            }
+            MessageService ms_service = new MessageService();
+            if (message.Type == MessageType.System)
+            {
+                message.ContentOfMessage = ms_service.GetHtmlSystemRaport(message.ContentOfMessage);
             }
             return View(message);
         }
@@ -87,6 +92,7 @@ namespace GameProject.Controllers
             {
                 var oneCharacter = query.FirstOrDefault();
                 message.ToUserId = oneCharacter;
+                message.Type = MessageType.User;
             }
             else
             {

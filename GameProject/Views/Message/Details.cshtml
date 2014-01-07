@@ -4,8 +4,6 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
-
 <div>
     <h4>Message</h4>
     <hr />
@@ -39,17 +37,15 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ContentOfMessage)
+            @if (@Model.Type == MessageType.System)
+            {
+                @Html.Raw(@Model.ContentOfMessage)
+            }
+            else
+            {
+                @Html.DisplayFor(model => model.ContentOfMessage)
+            }
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ToUserId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ToUserId)
-        </dd>
-
     </dl>
 </div>
 <p>

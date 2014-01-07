@@ -16,7 +16,6 @@ namespace GameProject.Filters
     public class EventFilter : ActionFilterAttribute, IActionFilter, IDisposable
     {
         private DatabaseContext db = new DatabaseContext();
-        
 
         void IActionFilter.OnActionExecuting(ActionExecutingContext filterContext)
         {
@@ -137,7 +136,7 @@ namespace GameProject.Filters
                             generatedItem.Status = ItemStatus.Bagpack;
                             generatedItem.CharacterId = character.Id;
 
-                            db.GeneratedItems.Add(generatedItem); ;
+                            db.GeneratedItems.Add(generatedItem);
                         }
                     }
                 }
@@ -163,7 +162,6 @@ namespace GameProject.Filters
                 if (characterWinner)
                 {
                     character.Gold += oneEvent.Reward;
-                    db.Entry(character).State = EntityState.Modified;
                 }
             }
 
@@ -180,10 +178,15 @@ namespace GameProject.Filters
             };
 
             eventLog.IsCompleted = true;
-            db.Entry(eventLog).State = EntityState.Modified;
-
+            
             try
             {
+                if (characterWinner && oneEvent.Type == EventType.Random)
+                {
+                    db.Entry(character).State = EntityState.Modified;
+                }
+
+                db.Entry(eventLog).State = EntityState.Modified;
                 db.Messages.Add(message);
                 db.SaveChanges();
             }
@@ -191,6 +194,13 @@ namespace GameProject.Filters
             {
                 // ??
             }
+
+            if (characterWinner && oneEvent.Type == EventType.Random)
+            {
+                filterContext.HttpContext.Items["Character"] = character;
+            }
+            
+            this.OnActionExecuting(filterContext);
         }
 
         protected virtual void Dispose(bool disposing)

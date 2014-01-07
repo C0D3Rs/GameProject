@@ -11,8 +11,8 @@ namespace GameProject.Controllers
 {
     [AuthorizationFilter(UserRole.Normal, Order = 1)]
     [CharacterCreatorFilter(Order = 2)]
-    [CharacterResourcesFilter(Order = 3)]
-    [EventFilter(Order = 4)]
+    [EventFilter(Order = 3)]
+    [CharacterResourcesFilter(Order = 4)]
     public class MonsterLoreController : Controller
     {
         private DatabaseContext db = new DatabaseContext();
@@ -22,7 +22,7 @@ namespace GameProject.Controllers
             var query = from m in db.Monsters
                         from el in db.EventLogs
                         from e in db.Events
-                        where el.IsCompleted == true && el.EventId == e.Id && e.MonsterId == m.Id
+                        where el.IsCompleted == true && el.EventId == e.Id && e.Type == EventType.Monster && e.MonsterId == m.Id
                         orderby m.Id descending
                         select m;
 

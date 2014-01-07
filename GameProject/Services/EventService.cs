@@ -191,12 +191,23 @@ namespace GameProject.Services
 
             int requiemtPoints = randomEvent.RequireStrength + randomEvent.RequireDexterity + randomEvent.RequireInteligence + randomEvent.RequireVitality;
 
-            /*
-            int result = (points * 100) / requiemtPoints;
+            if(requiemtPoints == 0)
+            {
+                return true;
+            }
+
+            int range = (points * 100) / requiemtPoints;
+
             Random dice = new Random();
-            dice.Next(1, 100 - result);
-            */
-            return true;
+
+            int random = dice.Next(0, 100);
+
+            if (random <= range)
+            {
+                return true;
+            }
+
+            return false;
         }
 
         public string GetResultDescription(Event randomEvent, bool characterWinner)

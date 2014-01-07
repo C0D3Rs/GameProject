@@ -23,6 +23,7 @@ namespace GameProject.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Login(LoginUserViewModel model)
         {
             if (!ModelState.IsValid)
@@ -54,6 +55,7 @@ namespace GameProject.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Register(RegisterUserViewModel model)
         {
             var query = from u in db.Users

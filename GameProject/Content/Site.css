@@ -59,3 +59,20 @@ input[type="checkbox"].input-validation-error {
     opacity: 0.8;
     margin-top: -41px;
 }
+
+textarea { 
+    width:400px !important; 
+    min-width:400px !important; 
+    max-width:400px !important; 
+    height:400px !important; 
+    min-height:400px !important; 
+    max-height:400px !important; 
+}
+
+tr:hover { 
+    background: lightgrey; 
+}
+
+#tr_message {
+    background-color: white;
+}

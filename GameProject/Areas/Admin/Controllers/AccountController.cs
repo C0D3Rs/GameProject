@@ -23,6 +23,7 @@ namespace GameProject.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Login(LoginUserViewModel model)
         {
             if (!ModelState.IsValid)
@@ -45,12 +46,6 @@ namespace GameProject.Areas.Admin.Controllers
             UserSessionContext us = new UserSessionContext(HttpContext);
             us.SetUserId(user.Id);
 
-            return RedirectToAction("Index", "Dashboard");
-        }
-
-        [AuthorizationFilter(UserRole.Admin)]
-        public ActionResult Manage()
-        {
             return RedirectToAction("Index", "Dashboard");
         }
 

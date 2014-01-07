@@ -19,7 +19,11 @@ namespace GameProject.Models
         public DbSet<Character> Characters { get; set; }
         public DbSet<Location> Locations { get; set; }
         public DbSet<Event> Events { get; set; }
+<<<<<<< HEAD
         public DbSet<EventLog> EventLogs { get; set; }
+=======
+        public DbSet<Message> Messages { get; set; }
+>>>>>>> 9360b935d574d8e77b28fe161674b5264ee260e9
 
         public DatabaseContext()
         {

@@ -1,3 +1,44 @@
-﻿@model String
+﻿@model IEnumerable<GameProject.Models.Entities.Message>
 
-@Html.Raw(CharacterHelpers.GetHtmlBattleResult(@Model))
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Wiadomości w skrzynce: (@Model.Count())</h2>
+
+<p>
+    @Html.ActionLink("Napisz wiadomość", "Create")
+</p>
+<table class="table">
+    <tr id="tr_message">
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FromUser)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr onclick="window.location.href = '@Url.Action("Details", new { id = item.Id })';">
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FromUser)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.ActionLink("Usuń", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>

@@ -19,6 +19,7 @@ namespace GameProject.Controllers
     [AuthorizationFilter(UserRole.Normal, Order = 1)]
     [CharacterCreatorFilter(Order = 2)]
     [CharacterResourcesFilter(Order = 3)]
+    [EventFilter(Order = 4)]
     public class LocationController : Controller
     {
         private DatabaseContext db = new DatabaseContext();
@@ -86,7 +87,8 @@ namespace GameProject.Controllers
             var query = from e in db.Events
                         from l in db.Locations
                         from i in db.Images
-                        where e.Id == locationID && l.ID == locationID && i.ID == l.ImageId
+                        where l.ID == locationID && l.ImageId == i.ID && e.LocationId == locationID
+                        orderby e.Id
                         select e;
 
             int eventCouter = query.Count();
@@ -100,11 +102,7 @@ namespace GameProject.Controllers
 
             int random = dice.Next(0, eventCouter);
 
-            var query2 = from i in db.Events
-                        where i.Id == locationID
-                        orderby i.Id
-                        select i;
-            var winEvent = query2.Skip(random).FirstOrDefault();
+            var winEvent = query.Skip(random).Take(1).FirstOrDefault();
 
             if (winEvent == null)
             {
@@ -116,6 +114,7 @@ namespace GameProject.Controllers
             log.CharacterId = character.Id;
             log.EventId = winEvent.Id;
             log.Created_at = DateTime.Now;
+            log.IsCompleted = false;
 
             try
             {

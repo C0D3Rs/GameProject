@@ -19,8 +19,9 @@ namespace GameProject.Controllers
         private DatabaseContext db = new DatabaseContext();
         private CharacterService cs = new CharacterService();
 
-        [CharacterCreatorFilter(Order = 1)]
-        [CharacterResourcesFilter(Order = 2)]
+        [CharacterCreatorFilter(Order = 2)]
+        [CharacterResourcesFilter(Order = 3)]
+        [EventFilter(Order = 4)]
         public ActionResult Index()
         {
             Character character = this.HttpContext.Items["Character"] as Character;

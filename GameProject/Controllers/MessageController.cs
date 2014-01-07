@@ -22,6 +22,7 @@ namespace GameProject.Controllers
     [AuthorizationFilter(UserRole.Normal, Order = 1)]
     [CharacterCreatorFilter(Order = 2)]
     [CharacterResourcesFilter(Order = 3)]
+    [EventFilter(Order = 4)]
     public class MessageController : Controller
     {
         private DatabaseContext db = new DatabaseContext();

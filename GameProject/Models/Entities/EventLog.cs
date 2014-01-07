@@ -18,6 +18,9 @@ namespace GameProject.Models.Entities
         public int EventId { get; set; }
 
         [Required]
+        public bool IsCompleted { get; set; }
+
+        [Required]
         public DateTime Created_at { get; set; }
 
         [Timestamp]

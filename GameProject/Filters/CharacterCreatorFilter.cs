@@ -3,6 +3,7 @@ using GameProject.Models;
 using GameProject.Models.Entities;
 using GameProject.Services;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -22,10 +23,10 @@ namespace GameProject.Filters
                 this.OnActionExecuting(filterContext);
                 return;
             }
-
+            
             User user = filterContext.HttpContext.Items["User"] as User;
 
-            var query = from c in db.Characters
+            var query = from c in db.Characters.AsNoTracking()
                         where c.UserId == user.Id
                         select c;
 

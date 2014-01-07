@@ -179,6 +179,9 @@ namespace GameProject.Filters
                 FromUser = "System"
             };
 
+            eventLog.IsCompleted = true;
+            db.Entry(eventLog).State = EntityState.Modified;
+
             try
             {
                 db.Messages.Add(message);

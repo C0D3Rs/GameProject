@@ -20,6 +20,9 @@ namespace GameProject.Controllers
         public ActionResult Index()
         {
             var query = from m in db.Monsters
+                        from el in db.EventLogs
+                        from e in db.Events
+                        where el.IsCompleted == true && el.EventId == e.Id && e.MonsterId == m.Id
                         orderby m.Id descending
                         select m;
 

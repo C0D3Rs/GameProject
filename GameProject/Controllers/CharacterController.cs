@@ -13,15 +13,15 @@ using System.Web.Mvc;
 
 namespace GameProject.Controllers
 {
-    [AuthorizationFilter(UserRole.Normal)]
+    [AuthorizationFilter(UserRole.Normal, Order = 1)]
     public class CharacterController : Controller
     {
         private DatabaseContext db = new DatabaseContext();
         private CharacterService cs = new CharacterService();
 
         [CharacterCreatorFilter(Order = 2)]
-        [CharacterResourcesFilter(Order = 3)]
-        [EventFilter(Order = 4)]
+        [EventFilter(Order = 3)]
+        [CharacterResourcesFilter(Order = 4)]
         public ActionResult Index()
         {
             Character character = this.HttpContext.Items["Character"] as Character;

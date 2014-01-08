@@ -18,6 +18,7 @@ namespace GameProject.Models
             var users = new List<User>
             {
                 new User { Name = "admin", Password = PasswordHashService.CreateHash("admin"), Role = UserRole.Admin },
+                new User { Name = "user@example.pl", Password = PasswordHashService.CreateHash("admin"), Role = UserRole.Admin }
             };
 
             users.ForEach(o => context.Users.Add(o));

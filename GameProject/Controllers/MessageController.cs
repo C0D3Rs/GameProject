@@ -21,8 +21,8 @@ namespace GameProject.Controllers
 {
     [AuthorizationFilter(UserRole.Normal, Order = 1)]
     [CharacterCreatorFilter(Order = 2)]
-    [CharacterResourcesFilter(Order = 3)]
-    [EventFilter(Order = 4)]
+    [EventFilter(Order = 3)]
+    [CharacterResourcesFilter(Order = 4)]
     public class MessageController : Controller
     {
         private DatabaseContext db = new DatabaseContext();
@@ -97,7 +97,8 @@ namespace GameProject.Controllers
             }
             else
             {
-                return Content("Nie znaleziono użytkownika.");
+                FlashMessageHelper.SetMessage(this, FlashMessageType.Warning, "Nazwa użytkownika jest nie poprawna lub nie istnieje w bazie danych.");
+                return View("Create");
             }
 
             if (ModelState.IsValid)

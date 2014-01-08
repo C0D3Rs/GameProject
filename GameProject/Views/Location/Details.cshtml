@@ -25,5 +25,16 @@
     <dd>
         @Model.Location.Description
     </dd>
+    
+    @if(CharacterHelpers.GetLeftTimeToEventComplete(this.Context) == 0)
+    {
+        <button class="btn btn-large btn-block btn-info" type="button" onclick="location.href='@Url.Action("Travel", "Location", new { locationID=@Model.Location.ID })'">
+            <i class="glyphicon glyphicon-plane"></i> Wyrusz na wyprawę
+        </button>
+    }
+    else
+    {
+        <label>@CharacterHelpers.GetLeftTimeToEventComplete(this.Context)</label>
+    }
 </dl>
 </div>

@@ -80,6 +80,7 @@ namespace GameProject.Controllers
         {
             Character character = this.HttpContext.Items["Character"] as Character;
 
+
             if (locationID == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -88,6 +89,13 @@ namespace GameProject.Controllers
             if (character.AvailableMoves == 0)
             {
                 FlashMessageHelper.SetMessage(this, FlashMessageType.Danger, "Nie masz wystarczającej ilości ruchów. Spróbuj za chwilę...");
+                return RedirectToAction("Index");
+            }
+
+
+            if ()
+            {
+                FlashMessageHelper.SetMessage(this, FlashMessageType.Danger, "Jesteś aktualnie w trakcie wyprawy. Spróbuj za chwilę...");
                 return RedirectToAction("Index");
             }
 

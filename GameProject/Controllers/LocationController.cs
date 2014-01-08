@@ -91,34 +91,48 @@ namespace GameProject.Controllers
                 return RedirectToAction("Index");
             }
 
-            character.AvailableMoves -= 2;
+            if (character.AvailableMoves == 10)
+            {
+                character.RenewalTime = DateTime.Now;
+            }
+
+            character.AvailableMoves -= 1;
 
             CharacterService characterserv = new CharacterService();
 
             CharacterViewModel characterview = characterserv.GetCharacterViewModel(character, new List<ItemViewModel>());
 
             var query = from e in db.Events
-                        from l in db.Locations
-                        from i in db.Images
-                        where l.ID == locationID && l.ImageId == i.ID && e.LocationId == locationID
-                        join m in db.Monsters on e.MonsterId equals m.Id into M1
-                        from m2 in M1.DefaultIfEmpty()
-                        where m2.Level <= characterview.Level
-                        orderby e.Id
+                        where e.Type == EventType.Random
                         select e;
 
-            int eventCouter = query.Count();
+            var querycounter = query.Count();
 
-            if (eventCouter == 0)
+            var query2 = from e in db.Events
+                         from m in db.Monsters
+                         from i in db.Images
+                         where e.Type == EventType.Monster && e.MonsterId == m.Id && m.ImageId == i.ID && m.Level <= characterview.Level
+                         select e;
+
+            var query3 = from e in query.Concat(query2)
+                         from l in db.Locations
+                         from i in db.Images
+                         where locationID == l.ID && e.LocationId == locationID && l.ImageId == i.ID
+                         orderby e.Id
+                         select e;
+
+            int eventcounter = query3.Count();
+
+            if (eventcounter <= 0)
             {
                 return HttpNotFound();
             }
 
             Random dice = new Random();
 
-            int random = dice.Next(0, eventCouter);
+            int random = dice.Next(0, eventcounter);
 
-            var winEvent = query.Skip(random).Take(1).FirstOrDefault();
+            var winEvent = query3.Skip(random).Take(1).FirstOrDefault();
 
             if (winEvent == null)
             {
@@ -134,6 +148,7 @@ namespace GameProject.Controllers
 
             try
             {
+                db.Entry(character).State = EntityState.Modified;
                 db.EventLogs.Add(log);
                 db.SaveChanges();
             }

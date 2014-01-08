@@ -1,4 +1,4 @@
-﻿@model IEnumerable<GameProject.Models.Entities.Monster>
+﻿@model IEnumerable<DetailsMonsterViewModel>
 
 @{
     ViewBag.Title = "Index";
@@ -6,31 +6,20 @@
 
 <h2>Bestiariusz</h2>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Level)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Level)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-    </tr>
-}
-
-</table>
+<div class="container" id="lokacje">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <a href="@Url.Action("Details", "MonsterLore", new { id = item.Monster.Id })">
+                <div class="col-xs-12 col-md-3">
+                    <div class="panel panel-primary">
+                        <img src="@Url.Action("Show", "Image", new { imageName = item.Image.FileName })" />
+                        <div class="panel-footer">
+                            @Html.DisplayFor(model => item.Monster.Name)
+                        </div>
+                    </div>
+                </div>
+            </a>
+        }
+    </div>
+</div>

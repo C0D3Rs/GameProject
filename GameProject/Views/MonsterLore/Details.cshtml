@@ -1,0 +1,13 @@
+﻿@model DetailsMonsterViewModel
+
+@{
+    ViewBag.Title = "Szczegóły Potwora";
+}
+
+<h2>@Model.Monster.Name</h2>
+
+<div class="container" style="display:block;">
+    @Model.Monster.Description
+
+    <img src="@Url.Action("Show","Image", new { imageName = Model.Image.FileName })" class="img-rounded col-md-4" width="150" />
+</div>

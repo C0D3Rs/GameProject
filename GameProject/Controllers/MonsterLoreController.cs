@@ -1,6 +1,7 @@
 ﻿using GameProject.Enums;
 using GameProject.Filters;
 using GameProject.Models;
+using GameProject.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,11 +23,40 @@ namespace GameProject.Controllers
             var query = from m in db.Monsters
                         from el in db.EventLogs
                         from e in db.Events
-                        where el.IsCompleted == true && el.EventId == e.Id && e.Type == EventType.Monster && e.MonsterId == m.Id
+                        from i in db.Images
+                        where el.IsCompleted == true && el.EventId == e.Id && e.Type == EventType.Monster && e.MonsterId == m.Id && m.ImageId == i.ID
                         orderby m.Id descending
-                        select m;
+                        select new DetailsMonsterViewModel
+                        {
+                            Monster = m,
+                            Image = i
+                        };
 
-            return View(query.ToList());
+            return View(query.Distinct().ToList());
+        }
+
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+
+            var query = from m in db.Monsters
+                        from el in db.EventLogs
+                        from e in db.Events
+                        from i in db.Images
+                        where m.Id == id && el.IsCompleted == true && el.EventId == e.Id && e.Type == EventType.Monster && e.MonsterId == m.Id && m.ImageId == i.ID
+                        orderby m.Id descending
+                        select new DetailsMonsterViewModel
+                        {
+                            Monster = m,
+                            Image = i
+                        };
+
+            var monster = query.FirstOrDefault();
+
+            return View(monster);
         }
 	}
 }

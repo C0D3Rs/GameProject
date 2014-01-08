@@ -13,6 +13,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using GameProject.Services;
 
 namespace GameProject.Controllers
 {
@@ -90,10 +91,19 @@ namespace GameProject.Controllers
                 return RedirectToAction("Index");
             }
 
+            character.AvailableMoves -= 2;
+
+            CharacterService characterserv = new CharacterService();
+
+            CharacterViewModel characterview = characterserv.GetCharacterViewModel(character, new List<ItemViewModel>());
+
             var query = from e in db.Events
                         from l in db.Locations
                         from i in db.Images
                         where l.ID == locationID && l.ImageId == i.ID && e.LocationId == locationID
+                        join m in db.Monsters on e.MonsterId equals m.Id into M1
+                        from m2 in M1.DefaultIfEmpty()
+                        where m2.Level <= characterview.Level
                         orderby e.Id
                         select e;
 

@@ -92,8 +92,9 @@ namespace GameProject.Controllers
                 return RedirectToAction("Index");
             }
 
-
-            if ()
+            EventLog eventlog = this.HttpContext.Items["NotCompletedEventLog"] as EventLog;
+            
+            if (eventlog != null)
             {
                 FlashMessageHelper.SetMessage(this, FlashMessageType.Danger, "Jesteś aktualnie w trakcie wyprawy. Spróbuj za chwilę...");
                 return RedirectToAction("Index");

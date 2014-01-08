@@ -23,29 +23,15 @@ namespace GameProject.Helpers
 
         public static int GetLeftTimeToEventComplete(HttpContextBase context)
         {
-            if (!context.Items.Contains("Character"))
+            if (!context.Items.Contains("NotCompletedEventLog"))
             {
                 return 0;
             }
 
-            var character = context.Items["Character"] as Character;
+            EventLog eventTime = context.Items["NotCompletedEventLog"] as EventLog;
 
-            using (DatabaseContext db = new DatabaseContext())
-            {
-                var eventlogs = from el in db.EventLogs.AsNoTracking()
-                                where el.CharacterId == character.Id && el.IsCompleted == false
-                                select el;
-
-                var eventTime = eventlogs.FirstOrDefault();
-
-                if (eventTime == null)
-                {
-                    return 0;
-                }
-
-                return (int)(DateTime.Now - eventTime.Created_at).TotalSeconds;
-            }
-                     
+            return (int)(DateTime.Now - eventTime.Created_at).TotalSeconds;
+               
         }
     }
 }

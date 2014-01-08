@@ -39,12 +39,15 @@ namespace GameProject.Filters
                 return;
             }
 
+            filterContext.HttpContext.Items.Add("NotCompletedEventLog", eventLog);
+
             DateTime timeNow = DateTime.Now;
 
             double differentSeconds = (timeNow - eventLog.Created_at).TotalSeconds;
 
             if (differentSeconds < 10)
             {
+                this.OnActionExecuting(filterContext);
                 return;
             }
 
@@ -56,6 +59,7 @@ namespace GameProject.Filters
 
             if(oneEvent == null)
             {
+                this.OnActionExecuting(filterContext);
                 return;
             }
 
@@ -77,6 +81,7 @@ namespace GameProject.Filters
 
                 if (monster == null)
                 {
+                    this.OnActionExecuting(filterContext);
                     return;
                 }
 
@@ -178,6 +183,7 @@ namespace GameProject.Filters
             };
 
             eventLog.IsCompleted = true;
+            filterContext.HttpContext.Items["NotCompletedEventLog"] =  eventLog;
             
             try
             {
@@ -188,8 +194,6 @@ namespace GameProject.Filters
 
                 db.Messages.Add(message);
                 db.SaveChanges();
-
-                filterContext.HttpContext.Items.Add("NotCompletedEventLog", eventLog);
             }
             catch(Exception)
             {

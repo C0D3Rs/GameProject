@@ -307,7 +307,6 @@
     <Content Include="Views\Equipment\_Shield.cshtml" />
     <Content Include="Views\Equipment\_Armor.cshtml" />
     <Content Include="Views\Message\Create.cshtml" />
-    <Content Include="Views\Message\Delete.cshtml" />
     <Content Include="Views\Message\Details.cshtml" />
     <Content Include="Views\Message\Edit.cshtml" />
     <Content Include="Views\MonsterLore\Details.cshtml" />

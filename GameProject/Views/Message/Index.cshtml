@@ -8,6 +8,7 @@
 
 <p>
     @Html.ActionLink("Napisz wiadomość", "Create")
+
 </p>
 <table class="table">
     <tr id="tr_message">
@@ -25,20 +26,41 @@
 
     @foreach (var item in Model)
     {
-        <tr onclick="window.location.href = '@Url.Action("Details", new { id = item.Id })';">
-            <td>
+        <tr class="tr_grey">
+            <td onclick="window.location.href = '@Url.Action("Details", new { id = item.Id })';">
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
-            <td>
+            <td onclick="window.location.href = '@Url.Action("Details", new { id = item.Id })';">
                 @Html.DisplayFor(modelItem => item.FromUser)
             </td>
-            <td>
+            <td onclick="window.location.href = '@Url.Action("Details", new { id = item.Id })';">
                 @Html.DisplayFor(modelItem => item.Date)
             </td>
             <td>
-                @Html.ActionLink("Usuń", "Delete", new { id = item.Id })
+                <!-- Button trigger modal -->
+                <button class="btn btn-default" data-toggle="modal" data-target="#myModal">
+                    Usuń
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title" id="myModalLabel">Usuwanie wiadomości</h4>
+                            </div>
+                            <div class="modal-body">
+                                Czy na pewno chcesc usunąć wiadomość ?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Wróć</button>
+                                <button type="button" class="btn btn-primary deleteButton">@Html.ActionLink("Usuń", "Delete", "Message", new { id = item.Id, @class = "asd" }, null)</button>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
             </td>
         </tr>
     }
-
 </table>

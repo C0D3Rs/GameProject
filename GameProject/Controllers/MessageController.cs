@@ -21,8 +21,7 @@ namespace GameProject.Controllers
 {
     [AuthorizationFilter(UserRole.Normal, Order = 1)]
     [CharacterCreatorFilter(Order = 2)]
-    [EventFilter(Order = 3)]
-    [CharacterResourcesFilter(Order = 4)]
+    [CharacterResourcesFilter(Order = 3)]
     public class MessageController : Controller
     {
         private DatabaseContext db = new DatabaseContext();
@@ -123,15 +122,6 @@ namespace GameProject.Controllers
             {
                 return HttpNotFound();
             }
-            return View(message);
-        }
-
-        // POST: /Message/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Message message = db.Messages.Find(id);
             db.Messages.Remove(message);
             db.SaveChanges();
             return RedirectToAction("Index");

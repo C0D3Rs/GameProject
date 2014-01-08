@@ -60,7 +60,7 @@ input[type="checkbox"].input-validation-error {
     margin-top: -41px;
 }
 
-textarea { 
+#ContentOfMessage { 
     width:400px !important; 
     min-width:400px !important; 
     max-width:400px !important; 
@@ -69,10 +69,23 @@ textarea {
     max-height:400px !important; 
 }
 
-tr:hover { 
+.tr_grey:hover { 
     background: lightgrey; 
 }
 
 #tr_message {
     background-color: white;
+}
+
+.deleteButton {
+    background-color: lightgrey;
+}
+.deleteButton:hover {
+    background-color: darkred;
+}
+.deleteButton:link,
+.deleteButton:focus,
+.deleteButton.active,
+.deleteButton:active {
+    background-color: darkred;
 }

@@ -33,34 +33,40 @@ namespace GameProject.Services
             int fullLifeOfMonster = monster.Life;
             int characterChanceToHitMinInterval = 10;
             int characterChanceToHitMaxInterval = 90;
+            int monster_chanceToHit = monster.ChanceToHit;
+            int monster_life = monster.Life;
+            decimal monster_AttackSpeed = monster.AttackSpeed;
+            int character_chanceToHit = characterViewModel.ChanceToHit;
+            int character_life = characterViewModel.Life;
+            decimal character_AttackSpeed = characterViewModel.AttackSpeed;
 
             if (characterViewModel.Level < monster.Level)
             {
-                characterViewModel.ChanceToHit = characterViewModel.ChanceToHit - 5;
+                character_chanceToHit = character_chanceToHit - 5;
             }
 
             // Przedział chance to hit 10 < chance to hit < 90
-            if (characterChanceToHitMinInterval > characterViewModel.ChanceToHit)
+            if (characterChanceToHitMinInterval > character_chanceToHit)
             {
-                characterViewModel.ChanceToHit = characterViewModel.ChanceToHit + 9;
+                character_chanceToHit = character_chanceToHit + 9;
             }
 
-            if (characterViewModel.ChanceToHit > characterChanceToHitMaxInterval)
+            if (character_chanceToHit > characterChanceToHitMaxInterval)
             {
-                characterViewModel.ChanceToHit = characterViewModel.ChanceToHit - 9;
+                character_chanceToHit = character_chanceToHit - 9;
             }
 
-            if (characterChanceToHitMinInterval > monster.ChanceToHit)
+            if (characterChanceToHitMinInterval > monster_chanceToHit)
             {
-                monster.ChanceToHit = monster.ChanceToHit + 9;
+                monster_chanceToHit = 10;
             }
 
-            if (monster.ChanceToHit > characterChanceToHitMaxInterval)
+            if (monster_chanceToHit > characterChanceToHitMaxInterval)
             {
-                monster.ChanceToHit = monster.ChanceToHit - 9;
+                monster_chanceToHit = 90;
             }
 
-            if (monster.AttackSpeed > characterViewModel.AttackSpeed)
+            if (monster_AttackSpeed > character_AttackSpeed)
             { // atak characteru 
                 firstHitByMonster = true;
             }
@@ -78,15 +84,15 @@ namespace GameProject.Services
                     goto monster;
                 }
             character:
-                for (int i = 0; i < GetNumberOfHits(round, characterViewModel.AttackSpeed); i++)
+                for (int i = 0; i < GetNumberOfHits(round, character_AttackSpeed); i++)
                 {
                     intervalOfChanceToHit = dice.Next(1, 101);
-                    if (characterViewModel.ChanceToHit >= intervalOfChanceToHit)
+                    if (character_chanceToHit >= intervalOfChanceToHit)
                     {
-                        finalDMG = HitBy(monster.Life, monster.Defense, dice.Next(characterViewModel.MinDamage, characterViewModel.MaxDamage + 1));
-                        monster.Life = monster.Life - finalDMG;
+                        finalDMG = HitBy(monster_life, monster.Defense, dice.Next(characterViewModel.MinDamage, characterViewModel.MaxDamage + 1));
+                        monster_life = monster_life - finalDMG;
 
-                        if (monster.Life > 0)
+                        if (monster_life > 0)
                         {
                             raport += String.Format("<characterattack><characternamewhenattack>{0}</characternamewhenattack><characterattackmonstername>{1}</characterattackmonstername><characterattackdmg>{2}</characterattackdmg></characterattack>", characterViewModel.Name, monster.Name, finalDMG);
                         }
@@ -99,7 +105,7 @@ namespace GameProject.Services
                     }
                     else
                     {
-                        if (monster.Life <= 0 || characterViewModel.Life <= 0)
+                        if (monster_life <= 0 || character_life <= 0)
                             break;
 
                         raport += String.Format("<charactermissattack><characternamewhenmonsterdododge>{0}</characternamewhenmonsterdododge><charactermonsternamewhenmonsterdododge>{1}</charactermonsternamewhenmonsterdododge></charactermissattack>", characterViewModel.Name, monster.Name);
@@ -107,8 +113,8 @@ namespace GameProject.Services
                 }
                 if (firstHitByMonster == true)
                 {   // Podsumowanie
-                    raport += String.Format("<summation><summationcharactername>{0}</summationcharactername><summationcharacterlifefalldown>{1}</summationcharacterlifefalldown>/<summationcharacterlifeconstantly>{2}</summationcharacterlifeconstantly>", characterViewModel.Name, characterViewModel.Life, fullLifeOfCharacter);
-                    raport += String.Format("<summationmonstername>{0}</summationmonstername><summationmonsterlifefalldown>{1}</summationmonsterlifefalldown>/<summationmonsterlifeconstantly>{2}</summationmonsterlifeconstantly></summation>", monster.Name, monster.Life, fullLifeOfMonster);
+                    raport += String.Format("<summation><summationcharactername>{0}</summationcharactername><summationcharacterlifefalldown>{1}</summationcharacterlifefalldown>/<summationcharacterlifeconstantly>{2}</summationcharacterlifeconstantly>", characterViewModel.Name, character_life, fullLifeOfCharacter);
+                    raport += String.Format("<summationmonstername>{0}</summationmonstername><summationmonsterlifefalldown>{1}</summationmonsterlifefalldown>/<summationmonsterlifeconstantly>{2}</summationmonsterlifeconstantly></summation>", monster.Name, monster_life, fullLifeOfMonster);
 
                     round++;
                     raport += String.Format("<round><roundvalue>{0}</roundvalue></round>", round);
@@ -116,15 +122,15 @@ namespace GameProject.Services
 
 
             monster:
-                for (int i = 0; i < GetNumberOfHits(round, monster.AttackSpeed); i++)
+                for (int i = 0; i < GetNumberOfHits(round, monster_AttackSpeed); i++)
                 {
                     intervalOfChanceToHit = dice.Next(1, 101);
-                    if (monster.ChanceToHit >= intervalOfChanceToHit)
+                    if (monster_chanceToHit >= intervalOfChanceToHit)
                     {
-                        finalDMG = HitBy(characterViewModel.Life, characterViewModel.Armor, dice.Next(monster.MinDamage, monster.MaxDamage + 1));
-                        characterViewModel.Life = characterViewModel.Life - finalDMG;
+                        finalDMG = HitBy(character_life, characterViewModel.Armor, dice.Next(monster.MinDamage, monster.MaxDamage + 1));
+                        character_life = character_life - finalDMG;
 
-                        if (characterViewModel.Life > 0)
+                        if (character_life > 0)
                         {
                             raport += String.Format("<monsterattack><monsterattackmonstername>{0}</monsterattackmonstername><monsterattackcharactername>{1}</monsterattackcharactername><monsterattackdmg>{2}</monsterattackdmg></monsterattack>", monster.Name, characterViewModel.Name, finalDMG);
                         }
@@ -136,7 +142,7 @@ namespace GameProject.Services
                     }
                     else
                     {
-                        if (characterViewModel.Life <= 0 || monster.Life <= 0)
+                        if (character_life <= 0 || monster_life <= 0)
                             break;
 
                         raport += String.Format("<monstermissattack><monstermissattackmonstername>{0}</monstermissattackmonstername><monstermissattackcharactername>{1}</monstermissattackcharactername></monstermissattack>", monster.Name, characterViewModel.Name);
@@ -148,29 +154,29 @@ namespace GameProject.Services
                 }
                 else
                 {   // Podsumowanie
-                    raport += String.Format("<summation><summationcharactername>{0}</summationcharactername><summationcharacterlifefalldown>{1}</summationcharacterlifefalldown>/<summationcharacterlifeconstantly>{2}</summationcharacterlifeconstantly>", characterViewModel.Name, characterViewModel.Life, fullLifeOfCharacter);
-                    raport += String.Format("<summationmonstername>{0}</summationmonstername><summationmonsterlifefalldown>{1}</summationmonsterlifefalldown>/<summationmonsterlifeconstantly>{2}</summationmonsterlifeconstantly></summation>", monster.Name, monster.Life, fullLifeOfMonster);
+                    raport += String.Format("<summation><summationcharactername>{0}</summationcharactername><summationcharacterlifefalldown>{1}</summationcharacterlifefalldown>/<summationcharacterlifeconstantly>{2}</summationcharacterlifeconstantly>", characterViewModel.Name, character_life, fullLifeOfCharacter);
+                    raport += String.Format("<summationmonstername>{0}</summationmonstername><summationmonsterlifefalldown>{1}</summationmonsterlifefalldown>/<summationmonsterlifeconstantly>{2}</summationmonsterlifeconstantly></summation>", monster.Name, monster_life, fullLifeOfMonster);
                 }
             }
-            while (monster.Life > 0 && characterViewModel.Life > 0);
+            while (monster_life > 0 && character_life > 0);
 
         CharacterWin:
-            if (monster.Life == 0 || monster.Life < 0)
+            if (monster_life == 0 || monster_life < 0)
             {
-                monster.Life = 0;
-                raport += String.Format("<summation><summationcharactername>{0}</summationcharactername><summationcharacterlifefalldown>{1}</summationcharacterlifefalldown>/<summationcharacterlifeconstantly>{2}</summationcharacterlifeconstantly>", characterViewModel.Name, characterViewModel.Life, fullLifeOfCharacter);
-                raport += String.Format("<summationmonstername>{0}</summationmonstername><summationmonsterlifefalldown>{1}</summationmonsterlifefalldown>/<summationmonsterlifeconstantly>{2}</summationmonsterlifeconstantly></summation>", monster.Name, monster.Life, fullLifeOfMonster);
-                raport += String.Format("<characterwinthebattle></characterwinthebattle>");
+                monster_life = 0;
+                raport += String.Format("<summation><summationcharactername>{0}</summationcharactername><summationcharacterlifefalldown>{1}</summationcharacterlifefalldown>/<summationcharacterlifeconstantly>{2}</summationcharacterlifeconstantly>", characterViewModel.Name, character_life, fullLifeOfCharacter);
+                raport += String.Format("<summationmonstername>{0}</summationmonstername><summationmonsterlifefalldown>{1}</summationmonsterlifefalldown>/<summationmonsterlifeconstantly>{2}</summationmonsterlifeconstantly></summation>", monster.Name, monster_life, fullLifeOfMonster);
+                //raport += String.Format("<characterwinthebattle></characterwinthebattle>");
                 characterWinner = true;
             }
 
         MonsterWin:
-            if (characterViewModel.Life == 0 || characterViewModel.Life < 0)
+        if (character_life == 0 || character_life < 0)
             {
-                characterViewModel.Life = 0;
-                raport += String.Format("<summation><summationcharactername>{0}</summationcharactername><summationcharacterlifefalldown>{1}</summationcharacterlifefalldown>/<summationcharacterlifeconstantly>{2}</summationcharacterlifeconstantly>", characterViewModel.Name, characterViewModel.Life, fullLifeOfCharacter);
-                raport += String.Format("<summationmonstername>{0}</summationmonstername><summationmonsterlifefalldown>{1}</summationmonsterlifefalldown>/<summationmonsterlifeconstantly>{2}</summationmonsterlifeconstantly></summation>", monster.Name, monster.Life, fullLifeOfMonster);
-                raport += String.Format("<monsterwinthebattle></monsterwinthebattle>");
+                character_life = 0;
+                raport += String.Format("<summation><summationcharactername>{0}</summationcharactername><summationcharacterlifefalldown>{1}</summationcharacterlifefalldown>/<summationcharacterlifeconstantly>{2}</summationcharacterlifeconstantly>", characterViewModel.Name, character_life, fullLifeOfCharacter);
+                raport += String.Format("<summationmonstername>{0}</summationmonstername><summationmonsterlifefalldown>{1}</summationmonsterlifefalldown>/<summationmonsterlifeconstantly>{2}</summationmonsterlifeconstantly></summation>", monster.Name, monster_life, fullLifeOfMonster);
+                //raport += String.Format("<monsterwinthebattle></monsterwinthebattle>");
                 characterWinner = false;
             }
 

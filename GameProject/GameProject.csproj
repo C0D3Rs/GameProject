@@ -210,6 +210,7 @@
     <Compile Include="Services\PasswordHashService.cs" />
     <Compile Include="ViewModels\CharacterResourcesViewModel.cs" />
     <Compile Include="ViewModels\CharacterViewModel.cs" />
+    <Compile Include="ViewModels\DetailsMonsterViewModel.cs" />
     <Compile Include="ViewModels\DetailsLocationViewModel.cs" />
     <Compile Include="ViewModels\ItemViewModel.cs" />
     <Compile Include="ViewModels\LoginUserViewModel.cs" />
@@ -306,9 +307,9 @@
     <Content Include="Views\Equipment\_Shield.cshtml" />
     <Content Include="Views\Equipment\_Armor.cshtml" />
     <Content Include="Views\Message\Create.cshtml" />
-    <Content Include="Views\Message\Delete.cshtml" />
     <Content Include="Views\Message\Details.cshtml" />
     <Content Include="Views\Message\Edit.cshtml" />
+    <Content Include="Views\MonsterLore\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

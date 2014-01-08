@@ -27,7 +27,7 @@ namespace GameProject.Filters
 
             Character character = filterContext.HttpContext.Items["Character"] as Character;
 
-            var query = from el in db.EventLogs
+            var query = from el in db.EventLogs.AsNoTracking()
                         where el.CharacterId == character.Id && el.IsCompleted == false
                         orderby el.Created_at descending
                         select el;
@@ -48,7 +48,7 @@ namespace GameProject.Filters
                 return;
             }
 
-            var query2 = from e in db.Events
+            var query2 = from e in db.Events.AsNoTracking()
                          where e.Id == eventLog.EventId
                          select e;
 
@@ -69,7 +69,7 @@ namespace GameProject.Filters
 
             if (oneEvent.Type == EventType.Monster)
             {
-                var query3 = from m in db.Monsters
+                var query3 = from m in db.Monsters.AsNoTracking()
                              where m.Id == oneEvent.MonsterId
                              select m;
 
@@ -186,9 +186,10 @@ namespace GameProject.Filters
                     db.Entry(character).State = EntityState.Modified;
                 }
 
-                //db.Entry(eventLog).State = EntityState.Modified;
                 db.Messages.Add(message);
                 db.SaveChanges();
+
+                filterContext.HttpContext.Items.Add("NotCompletedEventLog", eventLog);
             }
             catch(Exception)
             {

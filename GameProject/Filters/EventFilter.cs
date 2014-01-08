@@ -39,14 +39,13 @@ namespace GameProject.Filters
                 return;
             }
 
-            filterContext.HttpContext.Items.Add("NotCompletedEventLog", eventLog);
-
             DateTime timeNow = DateTime.Now;
 
             double differentSeconds = (timeNow - eventLog.Created_at).TotalSeconds;
 
             if (differentSeconds < 10)
             {
+                filterContext.HttpContext.Items.Add("NotCompletedEventLog", eventLog);
                 this.OnActionExecuting(filterContext);
                 return;
             }
@@ -183,7 +182,6 @@ namespace GameProject.Filters
             };
 
             eventLog.IsCompleted = true;
-            filterContext.HttpContext.Items["NotCompletedEventLog"] =  eventLog;
             
             try
             {

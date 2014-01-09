@@ -3,64 +3,85 @@
 @{
     ViewBag.Title = "Index";
 }
+<script type="text/javascript" language="Javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#icon_checkbox').click(function (event) {
+            var selected = this.checked;
+            $(':checkbox').each(function () { this.checked = selected; });
 
-<h2>Wiadomości w skrzynce: (@Model.Count())</h2>
+        });
+    });
+</script>
 
+<h2>Ilość wszystkich wiadomości: (@ViewData["count_messages"]/10)</h2>
 <p>
-    @Html.ActionLink("Napisz wiadomość", "Create")
-
+    <a type="button" class="btn btn-success" href="@Url.Action("Create", "Message")">
+        <i class="glyphicon glyphicon-plus"></i> Utwórz wiadomość
+    </a>
 </p>
-<table class="table">
-    <tr id="tr_message">
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FromUser)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Date)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr class="tr_grey">
-            <td onclick="window.location.href = '@Url.Action("Details", new { id = item.Id })';">
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td onclick="window.location.href = '@Url.Action("Details", new { id = item.Id })';">
-                @Html.DisplayFor(modelItem => item.FromUser)
-            </td>
-            <td onclick="window.location.href = '@Url.Action("Details", new { id = item.Id })';">
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            <td>
-                <!-- Button trigger modal -->
-                <button class="btn btn-default" data-toggle="modal" data-target="#myModal">
-                    Usuń
-                </button>
-
-                <!-- Modal -->
-                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                <h4 class="modal-title" id="myModalLabel">Usuwanie wiadomości</h4>
-                            </div>
-                            <div class="modal-body">
-                                Czy na pewno chcesc usunąć wiadomość ?
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Wróć</button>
-                                <button type="button" class="btn btn-primary deleteButton">@Html.ActionLink("Usuń", "Delete", "Message", new { id = item.Id, @class = "asd" }, null)</button>
-                            </div>
-                        </div><!-- /.modal-content -->
-                    </div><!-- /.modal-dialog -->
-                </div><!-- /.modal -->
-            </td>
+<br />
+@using (Html.BeginForm("Delete", "Message", FormMethod.Post))
+{
+    <table class="table">
+        <tr id="tr_message">
+            <th>
+                <input type="checkbox" id="icon_checkbox" />
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FromUser)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th></th>
         </tr>
-    }
-</table>
+
+        @foreach (var item in Model)
+        {
+            <tr class="tr_grey">
+                <td>
+                    <input type="checkbox" id="messages_checkbox" value="@item.Id" name="messages_checkbox" />
+                </td>
+                <td onclick="window.location.href = '@Url.Action("Details", new { id = item.Id })';">
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td onclick="window.location.href = '@Url.Action("Details", new { id = item.Id })';">
+                    @Html.DisplayFor(modelItem => item.FromUser)
+                </td>
+                <td onclick="window.location.href = '@Url.Action("Details", new { id = item.Id })';">
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    <!-- Button trigger modal -->
+                    <button class="btn btn-danger" data-toggle="modal" data-target="#myModal">
+                        <i class="glyphicon glyphicon-trash"></i> Usuń
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title" id="myModalLabel">Usuwanie wiadomości</h4>
+                                </div>
+                                <div class="modal-body">
+                                    Czy na pewno chcesc usunąć wiadomość ?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Wróć</button>
+                                    <button class="btn btn-primary" type="button" onclick="location.href='@Url.Action("Delete", "Message", new { id = item.Id}, null)'">Usuń</button>
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal-dialog -->
+                    </div><!-- /.modal -->
+                </td>
+            </tr>
+        }
+    </table>
+    <input type="submit" value="Usuń wiadomości" class="btn btn-primary" />
+}

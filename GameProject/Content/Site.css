@@ -76,16 +76,3 @@ input[type="checkbox"].input-validation-error {
 #tr_message {
     background-color: white;
 }
-
-.deleteButton {
-    background-color: lightgrey;
-}
-.deleteButton:hover {
-    background-color: darkred;
-}
-.deleteButton:link,
-.deleteButton:focus,
-.deleteButton.active,
-.deleteButton:active {
-    background-color: darkred;
-}

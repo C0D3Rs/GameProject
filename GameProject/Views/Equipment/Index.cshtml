@@ -4,8 +4,18 @@
     ViewBag.Title = "Index";
 }
 
-<h4>Założone Przedmioty</h4>
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#wear_items" data-toggle="tab">Założone Przedmioty</a></li>
+  <li><a href="#bag" data-toggle="tab">Plecak</a></li>
+  <li><a href="#box" data-toggle="tab">Skrzynka</a></li>
+</ul>
 
+<div class="tab-content">
+<div class="tab-pane fade in active" id="wear_items">
+@if(Model.EquippedItems.Count() == 0)
+{
+    <div class="alert alert-info"><b>Informacja!</b> Brak założonych przedmiotów...</div>
+}
 @foreach (var item in Model.EquippedItems)
 {
     if (item.Item.Type == ItemType.Weapon)
@@ -24,12 +34,19 @@
     {
         @Html.Partial("_Jewelry", item)
     }
-    
-    @Html.ActionLink("Zdejmij", "ChangeStatusToChest", new { id = item.GeneratedItem.Id })
+
+    <button class="btn btn-large btn-block btn-warning" type="button" onclick="location.href='@Url.Action("ChangeStatusToChest", "Equipment", new { id = item.GeneratedItem.Id })'">
+        <i class="glyphicon glyphicon-sort"></i> Zdejmij
+    </button>
+    <br />
 }
+</div>
 
-<h4>Plecak</h4>
-
+<div class="tab-pane fade" id="bag">
+@if(Model.BackpackItems.Count() == 0)
+{
+    <div class="alert alert-info"><b>Informacja!</b> Brak przedmiotów w plecaku...</div>
+}
 @foreach (var item in Model.BackpackItems)
 {
     if (item.Item.Type == ItemType.Weapon)
@@ -48,12 +65,18 @@
     {
         @Html.Partial("_Jewelry", item)
     }
-    
-    @Html.ActionLink("Przenieś do skrzyni", "ChangeStatusToChest", new { id = item.GeneratedItem.Id })
+    <button class="btn btn-large btn-block btn-info" type="button" onclick="location.href='@Url.Action("ChangeStatusToChest", "Equipment", new { id = item.GeneratedItem.Id })'">
+        <i class="glyphicon glyphicon-transfer"></i> Przenieś do skrzyni
+    </button>
+    <br />
 }
+</div>
 
-<h4>Skrzynka</h4>
-
+<div class="tab-pane fade" id="box">
+@if(Model.ChestItems.Count() == 0)
+{
+    <div class="alert alert-info"><b>Informacja!</b> Brak przedmiotów w skrzyni...</div>
+}
 @foreach (var item in Model.ChestItems)
 {
     if (item.Item.Type == ItemType.Weapon)
@@ -72,6 +95,10 @@
     {
         @Html.Partial("_Jewelry", item)
     }
-    
-    @Html.ActionLink("Załóż", "ChangeStatusToEquipped", new { id = item.GeneratedItem.Id })
+    <button class="btn btn-large btn-block btn-success" type="button" onclick="location.href='@Url.Action("ChangeStatusToChest", "Equipment", new { id = item.GeneratedItem.Id })'">
+        <i class="glyphicon glyphicon-resize-full"></i> Załóż
+    </button>
+    <br />
 }
+</div>
+</div>

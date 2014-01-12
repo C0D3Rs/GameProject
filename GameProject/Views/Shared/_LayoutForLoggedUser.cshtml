@@ -7,6 +7,9 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
+<script type="text/javascript" language="Javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -40,6 +43,24 @@
             </div>
         }
 
+        @if (CharacterHelpers.GetLeftTimeToEventComplete(this.Context) != 0)
+        {
+            <script type="text/javascript">
+                $(function () {
+                    $('.countdown.callback').countdown({
+                        date: +(new Date) + @CharacterHelpers.GetLeftTimeToEventComplete(this.Context),
+                        render: function (data) {
+                            $(this.el).text(this.leadingZeros(data.sec, 2) + " sec");
+                        },
+                        onEnd: function () {
+                            $(this.el).addClass('ended');
+                        }
+                    });
+                });
+            </script>
+            <span>Czas do końca wyprawy: </span><span class="countdown callback"></span>
+        }
+
         @Html.Partial("_FlashMessagePartial")
         @RenderBody()
         <hr />
@@ -50,6 +71,7 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/timer_countdown")
     @RenderSection("scripts", required: false)
 </body>
 </html>

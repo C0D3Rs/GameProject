@@ -1,88 +1,183 @@
 ﻿@model ItemViewModel
+<div class="row user-infos cyruxx">
+    <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-xs-offset-0 col-sm-offset-0 col-md-offset-1 col-lg-offset-1">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                @if (Model.Prefix != null)
+                {
+                    @Model.Prefix.Name
+                }
 
-<div>
-    @if (Model.Image != null)
-    {
-        <img src="@Url.Action("Show","Image", new { imageName = Model.Image.FileName })" />
-    }
-    <dl>
-        <dt>Nazwa</dt>
-        <dd>
-            @if (Model.Prefix != null)
-            {
-                @Model.Prefix.Name
-            }
+                @Model.Item.Name
 
-            @Model.Item.Name
+                @if (Model.Suffix != null)
+                {
+                    @Model.Suffix.Name
+                }
+                </h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    @if (Model.Image != null)
+                    {
+                    <div class="col-md-3 col-lg-3 hidden-xs hidden-sm">
+                        <img class="img-circle"
+                                src="@Url.Action("Show","Image", new { imageName = Model.Image.FileName })"
+                                alt="User Pic"
+                                style="height:120px;">
+                    </div>
+                    <div class="col-xs-2 col-sm-2 hidden-md hidden-lg">
+                        <img class="img-circle"
+                                src="@Url.Action("Show","Image", new { imageName = Model.Image.FileName })"
+                                alt="User Pic"
+                                style="height:50px;">
+                    </div>
+                    }
+                    <div class="col-xs-10 col-sm-10 hidden-md hidden-lg">
+                        <dl>
+                            <dt>Rodzaj Przedmiotu:</dt>
+                            <dd>@Model.Item.SubType</dd>
+                            <dt>Obrażenia:</dt>
+                            <dd>
+                                @Model.GeneratedItem.PrimaryMinValue
+                                -
+                                @Model.GeneratedItem.PrimaryMaxValue
+                            </dd>
+                            @if (Model.GeneratedItem.Strength != 0)
+                            {
+                                <dt>Siła</dt>
+                                <dd>
+                                    @Model.GeneratedItem.Strength
+                                </dd>
+                            }
+                            @if (Model.GeneratedItem.Dexterity != 0)
+                            {
+                                <dt>Zręczność</dt>
+                                <dd>
+                                    @Model.GeneratedItem.Dexterity
+                                </dd>
+                            }
+                            @if (Model.GeneratedItem.Intelligence != 0)
+                            {
+                                <dt>Inteligencja</dt>
+                                <dd>
+                                    @Model.GeneratedItem.Intelligence
+                                </dd>
+                            }
 
-            @if (Model.Suffix != null)
-            {
-                @Model.Suffix.Name
-            }
-        </dd>
-
-        <dt>Rodzaj przedmiotu</dt>
-        <dd>
-            @Model.Item.SubType
-        </dd>
-
-        <dt>Obrażenia</dt>
-        <dd>
-            @Model.GeneratedItem.PrimaryMinValue
-            -
-            @Model.GeneratedItem.PrimaryMaxValue
-        </dd>
-
-        @if (Model.GeneratedItem.Strength != 0)
-        {
-            <dt>Siła</dt>
-            <dd>
-                @Model.GeneratedItem.Strength
-            </dd>
-        }
-
-        @if (Model.GeneratedItem.Dexterity != 0)
-        {
-            <dt>Zręczność</dt>
-            <dd>
-                @Model.GeneratedItem.Dexterity
-            </dd>
-        }
-
-        @if (Model.GeneratedItem.Intelligence != 0)
-        {
-            <dt>Inteligencja</dt>
-            <dd>
-                @Model.GeneratedItem.Intelligence
-            </dd>
-        }
-
-        @if (Model.GeneratedItem.Vitality != 0)
-        {
-            <dt>Witalność</dt>
-            <dd>
-                @Model.GeneratedItem.Vitality
-            </dd>
-        }
+                            @if (Model.GeneratedItem.Vitality != 0)
+                            {
+                                <dt>Witalność</dt>
+                                <dd>
+                                    @Model.GeneratedItem.Vitality
+                                </dd>
+                            }
+                            <dt>Wymagana siła</dt>
+                            <dd>
+                                @Model.Item.RequireStrength
+                            </dd>
         
-        <dt>Wymagana siła</dt>
-        <dd>
-            @Model.Item.RequireStrength
-        </dd>
-        
-        <dt>Poziom jakości</dt>
-        <dd>
-            @Model.Item.QualityLevel
-        </dd>
+                            <dt>Poziom jakości</dt>
+                            <dd>
+                                @Model.Item.QualityLevel
+                            </dd>
 
-        <dt>Wytrzymałość</dt>
-        <dd>
-            @Model.Item.Durability
-        </dd>
+                            <dt>Wytrzymałość</dt>
+                            <dd>
+                                @Model.Item.Durability
+                            </dd>
 
-        <dt>Wartość</dt>
-        <dd>
-            @Model.Item.Price
-        </dd>
-    </dl>
+                            <dt>Wartość</dt>
+                            <dd>
+                                @Model.Item.Price
+                            </dd>
+                        </dl>
+                    </div>
+                    <div class=" col-md-9 col-lg-9 hidden-xs hidden-sm">
+                        <table class="table table-user-information">
+                            <tbody>
+                            <tr>
+                                <td>Rodzaj Przedmiotu:</td>
+                                <td>@Model.Item.SubType</td>
+                            </tr>
+                            <tr>
+                                <td>Obrażenia:</td>
+                                <td>
+                                    @Model.GeneratedItem.PrimaryMinValue
+                                    -
+                                    @Model.GeneratedItem.PrimaryMaxValue
+                                </td>
+                            </tr>
+                            @if (Model.GeneratedItem.Strength != 0)
+                            {
+                            <tr>
+                                <td>Siła:</td>
+                                <td>
+                                    @Model.GeneratedItem.Strength
+                                </td>
+                            </tr>
+                            }
+                            @if (Model.GeneratedItem.Dexterity != 0)
+                            {
+                            <tr>
+                                <td>Zręczność</td>
+                                <td>
+                                    @Model.GeneratedItem.Dexterity
+                                </td>
+                            </tr>
+                            }
+                            @if (Model.GeneratedItem.Intelligence != 0)
+                            {
+                            <tr>
+                                <td>Inteligencja</td>
+                                <td>
+                                    @Model.GeneratedItem.Intelligence
+                                </td>
+                            </tr>
+                            }
+
+                            @if (Model.GeneratedItem.Vitality != 0)
+                            {
+                            <tr>
+                                <td>Witalność</td>
+                                <td>
+                                    @Model.GeneratedItem.Vitality
+                                </td>
+                            </tr>
+                            }
+                            <tr>
+                                <td>Wymagana siła</td>
+                                <td>
+                                    @Model.Item.RequireStrength
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Poziom jakości</td>
+                                <td>
+                                    @Model.Item.QualityLevel
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Wytrzymałość</td>
+                                <td>
+                                    @Model.Item.Durability
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Wartość</td>
+                                <td>
+                                    @Model.Item.Price
+                                </td>
+                            <tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

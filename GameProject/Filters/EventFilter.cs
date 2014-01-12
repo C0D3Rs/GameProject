@@ -190,6 +190,8 @@ namespace GameProject.Filters
                     db.Entry(character).State = EntityState.Modified;
                 }
 
+                db.Entry(eventLog).State = EntityState.Modified;
+
                 db.Messages.Add(message);
                 db.SaveChanges();
             }

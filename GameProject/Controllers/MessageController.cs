@@ -21,7 +21,8 @@ namespace GameProject.Controllers
 {
     [AuthorizationFilter(UserRole.Normal, Order = 1)]
     [CharacterCreatorFilter(Order = 2)]
-    [CharacterResourcesFilter(Order = 3)]
+    [EventFilter(Order = 3)]
+    [CharacterResourcesFilter(Order = 4)]
     public class MessageController : Controller
     {
         private DatabaseContext db = new DatabaseContext();
@@ -43,6 +44,8 @@ namespace GameProject.Controllers
                                 select d1;
 
             var messages = query_message.Take(10).ToList();
+            int count_messages = query_message.Count();
+            ViewData["count_messages"] = count_messages;
             messages.Reverse();
             return View(messages);
         }
@@ -123,6 +126,20 @@ namespace GameProject.Controllers
                 return HttpNotFound();
             }
             db.Messages.Remove(message);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult Delete(IEnumerable<int> messages_checkbox)
+        {
+            if (messages_checkbox == null)
+            {
+                FlashMessageHelper.SetMessage(this, FlashMessageType.Warning, "Nie zaznaczono wiadomości");
+                return RedirectToAction("Index");
+            }
+
+            db.Messages.Where(x => messages_checkbox.Contains(x.Id)).ToList().ForEach(x => db.Messages.Remove(x));
             db.SaveChanges();
             return RedirectToAction("Index");
         }

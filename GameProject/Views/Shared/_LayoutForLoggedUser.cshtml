@@ -43,7 +43,7 @@
             </div>
         }
 
-        @if (CharacterHelpers.GetLeftTimeToEventComplete(this.Context) != 0)
+        @if (CharacterHelpers.GetLeftTimeToEventComplete(this.Context) > 0)
         {
             <script type="text/javascript">
                 $(function () {

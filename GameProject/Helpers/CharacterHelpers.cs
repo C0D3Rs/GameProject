@@ -31,9 +31,9 @@ namespace GameProject.Helpers
             EventLog eventTime = context.Items["NotCompletedEventLog"] as EventLog;
 
             DateTime maxTime = DateTime.Now;
-            maxTime.AddSeconds(-10);
+            maxTime.AddSeconds(10);
 
-            return (int)(eventTime.Created_at - maxTime).TotalMilliseconds;
+            return  (int)(eventTime.Created_at.AddSeconds(10) - DateTime.Now).TotalMilliseconds;
         }
     }
 }

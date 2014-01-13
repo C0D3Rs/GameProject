@@ -1,10 +1,10 @@
 ﻿@model DetailsLocationViewModel
 
 @{
-    ViewBag.Title = "Details Location";
+    ViewBag.Title = "Lokacja - "+@Model.Location.Name;
 }
 
-<h2>Details Location</h2>
+<h2>@Model.Location.Name</h2>
 <div class="container" style="display:block;">
 
 @if(Model.Image != null)
@@ -13,18 +13,9 @@
 }
 
 <dl class="dl-horizontal col-md-8">
-    <dt>
-        <i class="glyphicon glyphicon-bookmark"></i> @Html.DisplayNameFor(model => model.Location.Name)
-    </dt>      
-    <dd>
-        @Model.Location.Name
-    </dd>
-    <dt>
-       <i class="glyphicon glyphicon-list-alt"></i> @Html.DisplayNameFor(model => model.Location.Description)
-    </dt>
-    <dd>
+    <div>
         @Model.Location.Description
-    </dd>
+    </div>
     
     @if(CharacterHelpers.GetLeftTimeToEventComplete(this.Context) == 0)
     {

@@ -1,9 +1,8 @@
 ﻿@model CreateEventViewModel
 
 @{
-    ViewBag.Title = "Create Event";
+    ViewBag.Title = "Edycja Wyprawy";
 }
-<script type="text/javascript" language="Javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 
 <script>
     $(document).ready(function () {
@@ -28,7 +27,7 @@
     });
 </script>
 
-<h2>Create Event</h2>
+<h2>Edycja Wyprawy</h2>
 <div style="display: block;overflow:auto;">
 @using (Html.BeginForm())
 {
@@ -37,7 +36,7 @@
     @Html.HiddenFor(model => model.Event.CurrentVersion,  new { Id = "CurrentVersion", Name="CurrentVersion"} ) 
 
    <div class="form-horizontal col-md-6">
-        <h4>Event</h4>
+        <h4>Wyprawa</h4>
         <hr />
 
         <div class="alert alert-info">
@@ -45,7 +44,7 @@
           Aktualnie edytujesz event do lokacji "<u>@Model.Location.Name</u>"
         </div>
 
-        <div class="form-group">
+        <div class="form-group" style="display:none">
             <label class = "control-label col-md-4"> Monster ID</label>
 
             <div class="col-md-4">
@@ -54,7 +53,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" style="display:none">
             <label class = "control-label col-md-4"> LocationID</label>
 
             <div class="col-md-4">
@@ -65,7 +64,7 @@
 
 
         <div class="form-group">
-            <label class = "control-label col-md-4"> Event Type</label>
+            <label class = "control-label col-md-4"> Typ Wyprawy</label>
 
             <div class="col-md-4">
                 @Html.DropDownList("Type", EnumHelper.GetSelectList<EventType>())
@@ -73,7 +72,7 @@
         </div>
 
         <div class="form-group">
-            <label class = "control-label col-md-4"> Name</label>
+            <label class = "control-label col-md-4"> Nazwa Wyprawy</label>
             <div class="col-md-4">
                 @Html.TextBoxFor(model => model.Event.Name,  new { Id = "Name", Name="Name" })
                 @Html.ValidationMessage("Name")
@@ -81,7 +80,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Event.MainDescription, new { @class = "control-label col-md-4" })
+            <label class = "control-label col-md-4"> Opis Główny</label>
             <div class="col-md-4">
                 @Html.TextAreaFor(model => model.Event.MainDescription, new { Id = "MainDescription", Name="MainDescription" })
                 @Html.ValidationMessage("MainDescription")
@@ -89,7 +88,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Event.SuccessDescription, new { @class = "control-label col-md-4" })
+            <label class = "control-label col-md-4"> Opis Wygranej</label>
             <div class="col-md-4">
                 @Html.TextAreaFor(model => model.Event.SuccessDescription, new { Id = "SuccessDescription", Name="SuccessDescription" })
                 @Html.ValidationMessage("SuccessDescription")
@@ -97,7 +96,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Event.LostDescription, new { @class = "control-label col-md-4" })
+            <label class = "control-label col-md-4"> Opis Przegranej</label>
             <div class="col-md-4">
                 @Html.TextAreaFor(model => model.Event.LostDescription, new { Id = "LostDescription", Name="LostDescription" })
                 @Html.ValidationMessage("LostDescription")
@@ -106,7 +105,7 @@
 
         <div class="random_options">
         <div class="form-group">
-            @Html.LabelFor(model => model.Event.Reward, new { @class = "control-label col-md-4" })
+            <label class = "control-label col-md-4"> Wysokość Wygranej</label>
             <div class="col-md-4">
                 @Html.TextBoxFor(model => model.Event.Reward, new { Id = "Reward", Name="Reward" })
                 @Html.ValidationMessage("Reward")
@@ -114,7 +113,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Event.RequireStrength, new { @class = "control-label col-md-4" })
+            <label class = "control-label col-md-4"> Wymagana Siła</label>
             <div class="col-md-4">
                 @Html.TextBoxFor(model => model.Event.RequireStrength, new { Id = "RequireStrength", Name="RequireStrength"  })
                 @Html.ValidationMessage("RequireStrength")
@@ -122,7 +121,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Event.RequireDexterity , new { @class = "control-label col-md-4" })
+            <label class = "control-label col-md-4"> Wymagana Zręczność</label>
             <div class="col-md-4">
                 @Html.TextBoxFor(model => model.Event.RequireDexterity, new { Id = "RequireDexterity", Name="RequireDexterity" })
                 @Html.ValidationMessage("RequireDexterity")
@@ -130,7 +129,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Event.RequireVitality , new { @class = "control-label col-md-4" })
+            <label class = "control-label col-md-4"> Wymagana Witalność</label>
             <div class="col-md-4">
                 @Html.TextBoxFor(model => model.Event.RequireVitality, new { Id = "RequireVitality", Name="RequireVitality" })
                 @Html.ValidationMessage("RequireVitality")
@@ -138,7 +137,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Event.RequireInteligence , new { @class = "control-label col-md-4" })
+            <label class = "control-label col-md-4"> Wymagana Inteligencja</label>
             <div class="col-md-4">
                 @Html.TextBoxFor(model => model.Event.RequireInteligence, new { Id = "RequireInteligence", Name="RequireInteligence" })
                 @Html.ValidationMessage("RequireInteligence")
@@ -148,7 +147,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-4 col-md-6">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Zapisz" class="btn btn-default" />
             </div>
         </div>
     </div>
@@ -159,7 +158,7 @@
    <table class="table" style="display:none;">
       <thead>
         <tr>
-          <td><h4>Monsters</h4></td>
+          <td><h4>Potwory</h4></td>
           <td></td>
           <td>Level</td>
         </tr>
@@ -181,5 +180,5 @@
 </div>
 
 <div class="col-md-12">
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Wróć do listy", "Index")
 </div>

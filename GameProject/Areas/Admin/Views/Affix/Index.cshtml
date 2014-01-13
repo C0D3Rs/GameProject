@@ -1,39 +1,39 @@
 ﻿@model IEnumerable<GameProject.Models.Entities.Affix>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Spis Affixów";
 }
 
-<h2>Index</h2>
+<h2>Spis</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Dodaj Affix", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Type)
+            Typ
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            Nazwa
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ForWeapon)
+            Dla Broni
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ForShield)
+            Dla Tarczy
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ForArmor)
+            Dla Zbroi
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ForJewelry)
+            Dla Biżuterii
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.QualityLevel)
+            Jakość
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Price)
+            Cena
         </th>
         <th></th>
     </tr>
@@ -65,9 +65,9 @@
             @Html.DisplayFor(modelItem => item.Price)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Edytuj", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Zobacz", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Usuń", "Delete", new { id=item.Id })
         </td>
     </tr>
 }

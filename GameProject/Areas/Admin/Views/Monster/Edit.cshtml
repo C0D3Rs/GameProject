@@ -10,6 +10,7 @@
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.ImageId)
     @Html.HiddenFor(model => model.CurrentVersion)
     
     <div class="form-horizontal">

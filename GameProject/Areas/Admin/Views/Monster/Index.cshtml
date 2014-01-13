@@ -1,13 +1,13 @@
 ﻿@model PagedList.IPagedList<Monster>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Spis Potworów";
 }
 
-<h2>Monster</h2>
+<h2>Potwory</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Dodaj Potwora", "Create")
 </p>
 <table class="table">
     <tr>
@@ -38,10 +38,10 @@
             @Html.DisplayFor(modelItem => item.Defense)
         </td>
         <td>
-            @Html.ActionLink("Ustaw Obrazek", "Set", "Image", new { category = ImageCategory.Monster, id = item.Id }, null)
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Ustaw Obrazek", "Set", "Image", new { category = ImageCategory.Monster, id = item.Id }, null) |
+            @Html.ActionLink("Edytuj", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Zobacz", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Usuń", "Delete", new { id=item.Id })
         </td>
     </tr>
 }

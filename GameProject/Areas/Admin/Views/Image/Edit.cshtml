@@ -1,10 +1,10 @@
 ﻿@model GameProject.Models.Entities.Image
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Edycja Obrazka";
 }
 
-<h2>Edytowanie Zdjęcia</h2>
+<h2>Edytowanie Obrazka</h2>
 
 @using (Html.BeginForm("Edit", "Image", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
@@ -15,7 +15,7 @@
 @Html.HiddenFor(model => model.CurrentVersion)
 
    <div class="form-horizontal">
-        <h4>Image</h4>
+        <h4>Obrazek</h4>
         <hr />
 
         <div class="form-group">
@@ -30,5 +30,5 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Wróć do listy", "Index")
 </div>

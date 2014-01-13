@@ -1,7 +1,7 @@
 ﻿@model Image
 
 @{
-    ViewBag.Title = "Create Image";
+    ViewBag.Title = "Dodanie Obrazka";
 }
 
 <script>
@@ -25,7 +25,7 @@ $(document).ready(function () {
 });
 </script>
 
-<h2>Create Image</h2>
+<h2>Dodawanie Obrazka</h2>
 <div style="display: block;overflow:auto;">
 @using (Html.BeginForm("Create", "Image", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
@@ -66,5 +66,5 @@ $(document).ready(function () {
 </div>
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Wróć do listy", "Index")
 </div>

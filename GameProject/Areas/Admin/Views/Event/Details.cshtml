@@ -1,11 +1,11 @@
 ﻿@model DetailsEventViewModel
 
 @{
-    ViewBag.Title = "Details Event";
+    ViewBag.Title = "Szczególy Wyprawy";
 }
 
 <h2>
-Details Event
+@Model.Event.Name
 <a type="button" class="btn btn-warning" href="@Url.Action("Edit/"+@Model.Event.Id, "Event")">
     <i class="glyphicon glyphicon-edit"></i> Edytuj
 </a>

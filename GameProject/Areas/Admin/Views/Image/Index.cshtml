@@ -1,11 +1,11 @@
 ﻿@model IEnumerable<GameProject.Models.Entities.Image>
 @{
-    ViewBag.Title = "Index Image";
+    ViewBag.Title = "Spis Obrazków";
 }
 
-<h2>Image</h2>
+<h2>Obrazki</h2>
 <p>
-    @Html.ActionLink("Create New Image", "Create", "Image" )
+    @Html.ActionLink("Dodaj Obrazek", "Create", "Image" )
 </p>
 <div class="row">
 @foreach (var image in Model) {

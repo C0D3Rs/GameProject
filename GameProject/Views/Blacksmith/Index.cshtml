@@ -1,0 +1,38 @@
+﻿@model IEnumerable<ItemViewModel>
+
+@{
+    ViewBag.Title = "Kowal";
+}
+
+<h2>Kowal</h2>
+
+<table class="table">
+    <tr>
+        <th>Nazwa</th>
+        <th>Wytrzymałość</th>
+        <th>Cena</th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @ItemHelper.GetFullName(item.Item != null ? item.Item.Name : "",
+                item.Prefix != null ? item.Prefix.Name : "",
+                item.Suffix != null ? item.Suffix.Name : "")</td>
+        <td>@item.Item.Durability</td>
+        <td>
+            @ItemHelper.GetCalculatedPrice(item.Item != null ? item.Item.Price : 0,
+                item.Prefix != null ? item.Prefix.Price : 0,
+                item.Suffix != null ? item.Suffix.Price : 0,
+                item.Item != null ? item.Item.Durability : 0,
+                item.Item != null ? item.Item.Durability : 0)
+        </td>
+        <td>
+            @Html.ActionLink("Napraw", "Repair", new { id = item.GeneratedItem.Id })
+            @Html.ActionLink("Sprzedaj", "Sell", new { id = item.GeneratedItem.Id })
+        </td>
+    </tr>
+}
+
+</table>

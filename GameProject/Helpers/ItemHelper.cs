@@ -46,5 +46,16 @@ namespace GameProject.Helpers
             }
             return prefixName;
         }
+
+        public static string GetFullName(string itemName = "", string prefixName = "", string suffixName = "")
+        {
+            return string.Format("{1} {0} {2}", itemName, GetCorrectPrefixName(prefixName, itemName), suffixName);
+        }
+
+        public static int GetCalculatedPrice(int itemPrice = 0, int prefixPrice = 0, int suffixPrice = 0, int itemDurbality = 0, int itemDurbalityMax = 1)
+        {
+            decimal totalPrice = (itemPrice + prefixPrice + suffixPrice) * (itemDurbality / itemDurbalityMax);
+            return (int)Math.Ceiling(totalPrice);
+        }
     }
 }

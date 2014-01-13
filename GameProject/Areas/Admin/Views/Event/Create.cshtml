@@ -3,21 +3,13 @@
 @{
     ViewBag.Title = "Create Event";
 }
-<script src="http://ajax.googleapis.com/code.jquery.com/jquery-1.9.1.js"></script>
-<script src="http://api.jqueryui.com/ui/1.10.3/jquery-ui.js"></script>
 
-
-  <script>
-      $(function () {
-          $("#dialog").dialog();
-      });
-  </script>
 <script>
     $(document).ready(function () {
         $(".Monster").on("click", function () {
-            alert("asd");
             monster_id = this.id;
             $("input#MonsterId").val(monster_id);
+            $(".table").hide("slow");
         });
 
         $('select').on('change', function () {
@@ -25,11 +17,11 @@
 
             if (select == "Random") {
                 $(".table").hide("slow");
-                $(".random_options").show("fold", 2000);
+                $(".random_options").show(2000);
                 $("input#MonsterId").val("0");
             }
             else if (select == "Monster") {
-                $(".table").show("fold", 2000);
+                $(".table").show(2000);
                 $(".random_options").hide("slow");
             }
         })
@@ -188,6 +180,7 @@
 
 <div class="col-md-12">
     @Html.ActionLink("Back to List", "Index")
+<<<<<<< HEAD
 </div>
 
 <button class="btest">hide the div</button>
@@ -198,3 +191,6 @@
         $("div.test").hide();
     });
 </script>
+=======
+</div>
+>>>>>>> c2d7b7a065f6ec49bcd8579de0f75c4b93e5590e

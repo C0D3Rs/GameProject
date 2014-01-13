@@ -3,11 +3,19 @@
 @{
     ViewBag.Title = "Create Event";
 }
-<script type="text/javascript" language="Javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://api.jqueryui.com/ui/1.10.3/jquery-ui.js"></script>
 
+
+  <script>
+      $(function () {
+          $("#dialog").dialog();
+      });
+  </script>
 <script>
     $(document).ready(function () {
-        $(".Monster").click(function () {
+        $(".Monster").on("click", function () {
+            alert("asd");
             monster_id = this.id;
             $("input#MonsterId").val(monster_id);
         });
@@ -17,11 +25,11 @@
 
             if (select == "Random") {
                 $(".table").hide("slow");
-                $(".random_options").show(2000);
+                $(".random_options").show("fold", 2000);
                 $("input#MonsterId").val("0");
             }
             else if (select == "Monster") {
-                $(".table").show(2000);
+                $(".table").show("fold", 2000);
                 $(".random_options").hide("slow");
             }
         })
@@ -181,3 +189,12 @@
 <div class="col-md-12">
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+<button class="btest">hide the div</button>
+<div class="test" style="width:100px;height:100px;background:gray;"></div>
+<script>
+    $("button.btest").click(function () {
+        $("div.test").hide("drop", { direction: "down" }, "slow");
+    });
+</script>
+

@@ -33,7 +33,7 @@ namespace GameProject.Helpers
             DateTime maxTime = DateTime.Now;
             maxTime.AddSeconds(10);
 
-            return  (int)(eventTime.Created_at.AddSeconds(10) - DateTime.Now).TotalMilliseconds;
+            return (int)(eventTime.Created_at.AddSeconds(10) - DateTime.Now).TotalMilliseconds;
         }
     }
 }

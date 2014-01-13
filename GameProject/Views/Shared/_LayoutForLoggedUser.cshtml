@@ -24,6 +24,7 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Karta Postaci", "Index", "Character")</li>
                     <li>@Html.ActionLink("Ekwipunek", "Index", "Equipment")</li>
+                    <li>@Html.ActionLink("Kowal", "Index", "Blacksmith")</li>
                     <li>@Html.ActionLink("Bestiariusz", "Index", "MonsterLore")</li>
                     <li>@Html.ActionLink("Lokacje", "Index", "Location")</li>
                     <li>@Html.ActionLink("Skrzynka", "Index", "Message")</li>
@@ -49,7 +50,7 @@
                     $('.countdown.styled').countdown({  
                         date: +(new Date) + @CharacterHelpers.GetLeftTimeToEventComplete(this.Context),
                         render: function(data) {
-                        $(this.el).html("<div>" + this.leadingZeros(data.hours, 2) + " <span>godz</span></div><div>" + this.leadingZeros(data.min, 2) + " <span>min</span></div><div>" + this.leadingZeros(data.sec, 2) + " <span>sek</span></div>");
+                            $(this.el).html("<div>" + this.leadingZeros(data.hours, 2) + " <span>godz</span></div><div>" + this.leadingZeros(data.min, 2) + " <span>min</span></div><div>" + this.leadingZeros(data.sec, 2) + " <span>sek</span></div>");
                         }
                     });
                 });

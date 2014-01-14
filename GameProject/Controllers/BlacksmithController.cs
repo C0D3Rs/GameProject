@@ -69,28 +69,110 @@ namespace GameProject.Controllers
                 return HttpNotFound();
             }
 
-            var query = from i in db.GeneratedItems
-                        where i.CharacterId == character.Id
-                        select i;
+            var query = from r1 in db.GeneratedItems
+                        from r2 in db.Items
+                        join r4 in db.Affixes on r1.PrefixId equals r4.Id into R4
+                        from r5 in R4.DefaultIfEmpty()
+                        join r6 in db.Affixes on r1.SuffixId equals r6.Id into R6
+                        from r7 in R6.DefaultIfEmpty()
+                        where r1.Id == id && r1.CharacterId == character.Id && r1.ItemId == r2.Id && r1.Durability != r2.Durability
+                        select new ItemViewModel
+                         {
+                             GeneratedItem = r1,
+                             Item = r2,
+                             Prefix = r5 != null ? r5 : null,
+                             Suffix = r7 != null ? r7 : null
+                         };
 
-            List<GeneratedItem> items = query.ToList();
-
-            var item = items.FirstOrDefault(i => i.Id == id && i.Status != ItemStatus.Chest);
+            var item = query.FirstOrDefault();
 
             if (item == null)
             {
                 return RedirectToAction("Index");
             }
 
-            if (items.Count(i => i.Status == ItemStatus.Chest) >= 10)
+            int price = itemService.GetCalculatedPrice(item.Item != null ? item.Item.Price : 0,
+                item.Prefix != null ? item.Prefix.Price : 0,
+                item.Suffix != null ? item.Suffix.Price : 0,
+                item.GeneratedItem != null ? item.GeneratedItem.Durability : 0,
+                item.Item != null ? item.Item.Durability : 1);
+
+            int totalPrice = itemService.GetCalculatedPrice(item.Item != null ? item.Item.Price : 0,
+                item.Prefix != null ? item.Prefix.Price : 0,
+                item.Suffix != null ? item.Suffix.Price : 0,
+                item.Item != null ? item.Item.Durability : 1,
+                item.Item != null ? item.Item.Durability : 1);
+
+            int difference = totalPrice - price;
+
+            if (character.Gold < difference)
             {
                 return RedirectToAction("Index");
             }
 
             try
             {
-                item.Status = ItemStatus.Chest;
-                db.Entry(item).State = EntityState.Modified;
+                character.Gold -= difference;
+                db.Entry(character).State = EntityState.Modified;
+                item.GeneratedItem.Durability = item.Item.Durability;
+                db.Entry(item.GeneratedItem).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+            catch (Exception)
+            {
+                // komunikat jakiś
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Sell(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Character character = this.HttpContext.Items["Character"] as Character;
+
+            if (character == null)
+            {
+                return HttpNotFound();
+            }
+
+            var query = from r1 in db.GeneratedItems
+                        from r2 in db.Items
+                        join r4 in db.Affixes on r1.PrefixId equals r4.Id into R4
+                        from r5 in R4.DefaultIfEmpty()
+                        join r6 in db.Affixes on r1.SuffixId equals r6.Id into R6
+                        from r7 in R6.DefaultIfEmpty()
+                        where r1.Id == id && r1.CharacterId == character.Id && r1.ItemId == r2.Id
+                        select new ItemViewModel
+                        {
+                            GeneratedItem = r1,
+                            Item = r2,
+                            Prefix = r5 != null ? r5 : null,
+                            Suffix = r7 != null ? r7 : null
+                        };
+
+            var item = query.FirstOrDefault();
+
+            if (item == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            int price = itemService.GetCalculatedPrice(item.Item != null ? item.Item.Price : 0,
+                item.Prefix != null ? item.Prefix.Price : 0,
+                item.Suffix != null ? item.Suffix.Price : 0,
+                item.GeneratedItem != null ? item.GeneratedItem.Durability : 0,
+                item.Item != null ? item.Item.Durability : 1);
+
+            try
+            {
+                character.Gold += price;
+                db.Entry(character).State = EntityState.Modified;
+                db.GeneratedItems.Remove(item.GeneratedItem);
                 db.SaveChanges();
             }
             catch (Exception)

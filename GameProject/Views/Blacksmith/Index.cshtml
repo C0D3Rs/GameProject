@@ -20,13 +20,17 @@
             @ItemHelper.GetFullName(item.Item != null ? item.Item.Name : "",
                 item.Prefix != null ? item.Prefix.Name : "",
                 item.Suffix != null ? item.Suffix.Name : "")</td>
-        <td>@item.Item.Durability</td>
+        <td>
+            @item.GeneratedItem.Durability
+            /
+            @item.Item.Durability 
+        </td>
         <td>
             @ItemHelper.GetCalculatedPrice(item.Item != null ? item.Item.Price : 0,
                 item.Prefix != null ? item.Prefix.Price : 0,
                 item.Suffix != null ? item.Suffix.Price : 0,
-                item.Item != null ? item.Item.Durability : 0,
-                item.Item != null ? item.Item.Durability : 0)
+                item.GeneratedItem != null ? item.GeneratedItem.Durability : 0,
+                item.Item != null ? item.Item.Durability : 1)
         </td>
         <td>
             @Html.ActionLink("Napraw", "Repair", new { id = item.GeneratedItem.Id })

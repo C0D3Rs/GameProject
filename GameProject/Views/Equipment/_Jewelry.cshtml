@@ -60,12 +60,18 @@
 
         <dt>Wytrzymałość</dt>
         <dd>
+            @Model.GeneratedItem.Durability
+            /
             @Model.Item.Durability
         </dd>
 
         <dt>Wartość</dt>
         <dd>
-            @Model.Item.Price
+            @ItemHelper.GetCalculatedPrice(Model.Item != null ? Model.Item.Price : 0,
+                Model.Prefix != null ? Model.Prefix.Price : 0,
+                Model.Suffix != null ? Model.Suffix.Price : 0,
+                Model.GeneratedItem != null ? Model.GeneratedItem.Durability : 0,
+                Model.Item != null ? Model.Item.Durability : 1)
         </dd>
     </dl>
 </div>

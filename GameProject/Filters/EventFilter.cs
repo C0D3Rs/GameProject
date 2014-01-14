@@ -96,7 +96,8 @@ namespace GameProject.Filters
                              };
 
                 List<ItemViewModel> items = query4.ToList();
-                CharacterViewModel characterViewModel = cs.GetCharacterViewModel(character, items);
+
+                CharacterViewModel characterViewModel = cs.GetCharacterViewModel(character, items.FindAll(i => i.GeneratedItem.Durability > 0));
 
                 messageContent += es.GetBattleReport(characterViewModel, monster, ref characterWinner);
 
@@ -142,6 +143,22 @@ namespace GameProject.Filters
 
                             db.GeneratedItems.Add(generatedItem);
                         }
+                    }
+
+                    foreach (var item in items)
+                    {
+                        item.GeneratedItem.Durability -= 5;
+                        item.GeneratedItem.Durability = item.GeneratedItem.Durability < 0 ? 0 : item.GeneratedItem.Durability;
+                        db.Entry(item.GeneratedItem).State = EntityState.Modified;
+                    }
+                }
+                else
+                {
+                    foreach (var item in items)
+                    {
+                        item.GeneratedItem.Durability -= item.Item.Durability / 3;
+                        item.GeneratedItem.Durability = item.GeneratedItem.Durability < 0 ? 0 : item.GeneratedItem.Durability;
+                        db.Entry(item.GeneratedItem).State = EntityState.Modified;
                     }
                 }
             }

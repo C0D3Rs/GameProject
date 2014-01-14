@@ -52,9 +52,9 @@ namespace GameProject.Helpers
             return string.Format("{1} {0} {2}", itemName, GetCorrectPrefixName(prefixName, itemName), suffixName);
         }
 
-        public static int GetCalculatedPrice(int itemPrice = 0, int prefixPrice = 0, int suffixPrice = 0, int itemDurbality = 0, int itemDurbalityMax = 1)
+        public static int GetCalculatedPrice(int itemPrice, int prefixPrice, int suffixPrice, int itemDurability, int itemDurabilityMax)
         {
-            decimal totalPrice = (itemPrice + prefixPrice + suffixPrice) * (itemDurbality / itemDurbalityMax);
+            decimal totalPrice = (itemPrice + prefixPrice + suffixPrice) * ((decimal)itemDurability / (decimal)itemDurabilityMax);
             return (int)Math.Ceiling(totalPrice);
         }
     }

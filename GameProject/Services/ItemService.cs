@@ -90,6 +90,7 @@ namespace GameProject.Services
                 ItemId = item.Id,
                 PrimaryMinValue = item.PrimaryMinValue,
                 PrimaryMaxValue = item.PrimaryMaxValue,
+                Durability = item.Durability
             };
 
             Random dice = new Random();
@@ -113,6 +114,12 @@ namespace GameProject.Services
             }
 
             return generatedItem;
+        }
+
+        public int GetCalculatedPrice(int itemPrice, int prefixPrice, int suffixPrice, int itemDurability, int itemDurabilityMax)
+        {
+            decimal totalPrice = (itemPrice + prefixPrice + suffixPrice) * ((decimal)itemDurability / (decimal)itemDurabilityMax);
+            return (int)Math.Ceiling(totalPrice);
         }
 
         protected virtual void Dispose(bool disposing)

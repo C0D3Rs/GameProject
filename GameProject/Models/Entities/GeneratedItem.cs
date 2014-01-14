@@ -36,6 +36,9 @@ namespace GameProject.Models.Entities
 
         public int Vitality { get; set; }
 
+        [Required]
+        public int Durability { get; set; }
+
         [Timestamp]
         public byte[] CurrentVersion { get; set; }
     }

@@ -11,6 +11,7 @@ using GameProject.ViewModels;
 using System.Net;
 using System.Data.Entity;
 using GameProject.Filters;
+using GameProject.Helpers;
 
 namespace GameProject.Controllers
 {
@@ -22,6 +23,7 @@ namespace GameProject.Controllers
     {
         private DatabaseContext db = new DatabaseContext();
         private ItemService itemService = new ItemService();
+        private CharacterService cs = new CharacterService();
 
         public ActionResult Index()
         {
@@ -80,58 +82,72 @@ namespace GameProject.Controllers
 
             var query = from r1 in db.GeneratedItems
                         from r2 in db.Items
-                        where r1.CharacterId == character.Id && r1.ItemId == r2.Id
+                        where r1.CharacterId == character.Id && r1.ItemId == r2.Id && r1.Id == id && r1.Status == ItemStatus.Chest
                         select new ItemViewModel
                         {
                             GeneratedItem = r1,
                             Item = r2,
                         };
 
-            // lista przedmiotów postaci
-            List<ItemViewModel> characterItems = query.ToList();
+            // przedmiot do założenia
+            ItemViewModel itemToEquip = query.FirstOrDefault();
 
-            // przedmiot, który chcemy założyć
-            var item = characterItems.FirstOrDefault(i => i.GeneratedItem.Id == id && i.GeneratedItem.Status == ItemStatus.Chest);
-
-            if (item == null)
+            if (itemToEquip == null)
             {
                 return RedirectToAction("Index");
             }
 
-            // lista przedmiotów założonych
-            List<ItemViewModel> equippedItems = characterItems.FindAll(i => i.GeneratedItem.Status == ItemStatus.Equipped);
+            var query2 = from r1 in db.GeneratedItems
+                         from r2 in db.Items
+                         where r1.CharacterId == character.Id && r1.ItemId == r2.Id && r1.Status == ItemStatus.Equipped
+                         select new ItemViewModel
+                         {
+                             GeneratedItem = r1,
+                             Item = r2,
+                         };
 
-            if (item.Item.Type == ItemType.Armor)
+            // lista przedmiotów postaci
+            List<ItemViewModel> equippedItems = query2.ToList();
+
+            CharacterViewModel characterViewModel = cs.GetCharacterViewModel(character, equippedItems);
+
+            if (characterViewModel.Strength < itemToEquip.Item.RequireStrength)
+            {
+                FlashMessageHelper.SetMessage(this, FlashMessageType.Info, "Nie możesz założyć tego przedmiotu, masz za mało siły.");
+                return RedirectToAction("Index");
+            }
+
+            if (itemToEquip.Item.Type == ItemType.Armor)
             {
                 if (equippedItems.Count(i => i.Item.Type == ItemType.Armor) == 0)
                 {
-                    item.GeneratedItem.Status = ItemStatus.Equipped;
+                    itemToEquip.GeneratedItem.Status = ItemStatus.Equipped;
                 }
             }
-            else if (item.Item.Type == ItemType.Jewelry)
+            else if (itemToEquip.Item.Type == ItemType.Jewelry)
             {
-                if (item.Item.SubType == SubType.Amulet)
+                if (itemToEquip.Item.SubType == SubType.Amulet)
                 {
                     if (equippedItems.Count(i => i.Item.SubType == SubType.Amulet) == 0)
                     {
-                        item.GeneratedItem.Status = ItemStatus.Equipped;
+                        itemToEquip.GeneratedItem.Status = ItemStatus.Equipped;
                     }
                 }
                 else
                 {
                     if (equippedItems.Count(i => i.Item.SubType == SubType.Ring) < 2)
                     {
-                        item.GeneratedItem.Status = ItemStatus.Equipped;
+                        itemToEquip.GeneratedItem.Status = ItemStatus.Equipped;
                     }
                 }
             }
-            else if (item.Item.Type == ItemType.Weapon)
+            else if (itemToEquip.Item.Type == ItemType.Weapon)
             {
                 if (equippedItems.Count(i => i.Item.Type == ItemType.Weapon) == 0)
                 {
                     if (equippedItems.Count(i => i.Item.Type == ItemType.Shield) == 0)
                     {
-                        item.GeneratedItem.Status = ItemStatus.Equipped;
+                        itemToEquip.GeneratedItem.Status = ItemStatus.Equipped;
                     }
                 }
             }
@@ -139,23 +155,24 @@ namespace GameProject.Controllers
             {
                 if (equippedItems.Count(i => i.Item.SubType == SubType.TwoHanded) == 0)
                 {
-                    item.GeneratedItem.Status = ItemStatus.Equipped;
+                    itemToEquip.GeneratedItem.Status = ItemStatus.Equipped;
                 }
             }
 
-            if (item.GeneratedItem.Status != ItemStatus.Equipped)
+            if (itemToEquip.GeneratedItem.Status != ItemStatus.Equipped)
             {
+                FlashMessageHelper.SetMessage(this, FlashMessageType.Info, "Nie masz wolnego miejsca by założyć ten przedmiot.");
                 return RedirectToAction("Index");
             }
 
             try
             {
-                db.Entry(item.GeneratedItem).State = EntityState.Modified;
+                db.Entry(itemToEquip.GeneratedItem).State = EntityState.Modified;
                 db.SaveChanges();
             }
             catch(Exception)
             {
-                // komunikat jakiś
+                FlashMessageHelper.SetMessage(this, FlashMessageType.Danger, "Wystąpił nieoczekiwany błąd. Skontaktuj się z administratorem.");
             }
 
             return RedirectToAction("Index");
@@ -190,6 +207,7 @@ namespace GameProject.Controllers
 
             if (items.Count(i => i.Status == ItemStatus.Chest) >= 10)
             {
+                FlashMessageHelper.SetMessage(this, FlashMessageType.Info, "Twoja skrzynia jest już pełna");
                 return RedirectToAction("Index");
             }
 
@@ -201,7 +219,7 @@ namespace GameProject.Controllers
             }
             catch (Exception)
             {
-                // komunikat jakiś
+                FlashMessageHelper.SetMessage(this, FlashMessageType.Danger, "Wystąpił nieoczekiwany błąd. Skontaktuj się z administratorem.");
             }
 
             return RedirectToAction("Index");

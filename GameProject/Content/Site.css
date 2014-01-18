@@ -134,3 +134,18 @@ input[type="checkbox"].input-validation-error {
   text-transform: uppercase;
   text-align: left;
 }
+
+.main-description,
+.success-description,
+.lost-description,
+.round,
+.character-attack,
+.character-final-attack,
+.character-attack-miss,
+.monster-attack,
+.monster-final-attack,
+.monster-attack-miss,
+.character-summation,
+.monster-summation {
+    display: block;
+}

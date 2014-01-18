@@ -77,7 +77,7 @@ namespace GameProject.Services
             do
             {
                 round++;
-                raport += String.Format("<round><roundvalue>{0}</roundvalue></round>", round);
+                raport += String.Format("<roundvalue>{0}</roundvalue>", round);
 
                 if (firstHitByMonster == true)
                 {
@@ -94,11 +94,11 @@ namespace GameProject.Services
 
                         if (monster_life > 0)
                         {
-                            raport += String.Format("<characterattack><characternamewhenattack>{0}</characternamewhenattack><characterattackmonstername>{1}</characterattackmonstername><characterattackdmg>{2}</characterattackdmg></characterattack>", characterViewModel.Name, monster.Name, finalDMG);
+                            raport += String.Format("<characternamewhenattack>{0}</characternamewhenattack><characterattackmonstername>{1}</characterattackmonstername><characterattackdmg>{2}</characterattackdmg>", characterViewModel.Name, monster.Name, finalDMG);
                         }
                         else
                         {
-                            raport += String.Format("<characterfinalattack><characternamewhenfinalattack>{0}</characternamewhenfinalattack><characterattackfinaldmg>{1}</characterattackfinaldmg></characterfinalattack>", characterViewModel.Name, finalDMG);
+                            raport += String.Format("<characternamewhenfinalattack>{0}</characternamewhenfinalattack><characterattackfinaldmg>{1}</characterattackfinaldmg>", characterViewModel.Name, finalDMG);
                             goto CharacterWin;
                         }
 
@@ -108,16 +108,16 @@ namespace GameProject.Services
                         if (monster_life <= 0 || character_life <= 0)
                             break;
 
-                        raport += String.Format("<charactermissattack><characternamewhenmonsterdododge>{0}</characternamewhenmonsterdododge><charactermonsternamewhenmonsterdododge>{1}</charactermonsternamewhenmonsterdododge></charactermissattack>", characterViewModel.Name, monster.Name);
+                        raport += String.Format("<characternamewhenmonsterdododge>{0}</characternamewhenmonsterdododge><charactermonsternamewhenmonsterdododge>{1}</charactermonsternamewhenmonsterdododge>", characterViewModel.Name, monster.Name);
                     }
                 }
                 if (firstHitByMonster == true)
                 {   // Podsumowanie
-                    raport += String.Format("<summation><summationcharactername>{0}</summationcharactername><summationcharacterlifefalldown>{1}</summationcharacterlifefalldown>/<summationcharacterlifeconstantly>{2}</summationcharacterlifeconstantly>", characterViewModel.Name, character_life, fullLifeOfCharacter);
-                    raport += String.Format("<summationmonstername>{0}</summationmonstername><summationmonsterlifefalldown>{1}</summationmonsterlifefalldown>/<summationmonsterlifeconstantly>{2}</summationmonsterlifeconstantly></summation>", monster.Name, monster_life, fullLifeOfMonster);
+                    raport += String.Format("<summationcharactername>{0}</summationcharactername><summationcharacterlifefalldown>{1}</summationcharacterlifefalldown><summationcharacterlifeconstantly>{2}</summationcharacterlifeconstantly>", characterViewModel.Name, character_life, fullLifeOfCharacter);
+                    raport += String.Format("<summationmonstername>{0}</summationmonstername><summationmonsterlifefalldown>{1}</summationmonsterlifefalldown><summationmonsterlifeconstantly>{2}</summationmonsterlifeconstantly>", monster.Name, monster_life, fullLifeOfMonster);
 
                     round++;
-                    raport += String.Format("<round><roundvalue>{0}</roundvalue></round>", round);
+                    raport += String.Format("<roundvalue>{0}</roundvalue>", round);
                 }
 
 
@@ -132,11 +132,11 @@ namespace GameProject.Services
 
                         if (character_life > 0)
                         {
-                            raport += String.Format("<monsterattack><monsterattackmonstername>{0}</monsterattackmonstername><monsterattackcharactername>{1}</monsterattackcharactername><monsterattackdmg>{2}</monsterattackdmg></monsterattack>", monster.Name, characterViewModel.Name, finalDMG);
+                            raport += String.Format("<monsterattackmonstername>{0}</monsterattackmonstername><monsterattackcharactername>{1}</monsterattackcharactername><monsterattackdmg>{2}</monsterattackdmg>", monster.Name, characterViewModel.Name, finalDMG);
                         }
                         else
                         {
-                            raport += String.Format("<monsterfinalattack><monsterfinalattackmonstername>{0}</monsterfinalattackmonstername><monsterfinalattackdmg>{1}</monsterfinalattackdmg></monsterfinalattack>", monster.Name, finalDMG);
+                            raport += String.Format("<monsterfinalattackmonstername>{0}</monsterfinalattackmonstername><monsterfinalattackdmg>{1}</monsterfinalattackdmg>", monster.Name, finalDMG);
                             goto MonsterWin;
                         }
                     }
@@ -145,7 +145,7 @@ namespace GameProject.Services
                         if (character_life <= 0 || monster_life <= 0)
                             break;
 
-                        raport += String.Format("<monstermissattack><monstermissattackmonstername>{0}</monstermissattackmonstername><monstermissattackcharactername>{1}</monstermissattackcharactername></monstermissattack>", monster.Name, characterViewModel.Name);
+                        raport += String.Format("<monstermissattackmonstername>{0}</monstermissattackmonstername><monstermissattackcharactername>{1}</monstermissattackcharactername>", monster.Name, characterViewModel.Name);
                     }
                 }
                 if (firstHitByMonster == true)
@@ -154,8 +154,8 @@ namespace GameProject.Services
                 }
                 else
                 {   // Podsumowanie
-                    raport += String.Format("<summation><summationcharactername>{0}</summationcharactername><summationcharacterlifefalldown>{1}</summationcharacterlifefalldown>/<summationcharacterlifeconstantly>{2}</summationcharacterlifeconstantly>", characterViewModel.Name, character_life, fullLifeOfCharacter);
-                    raport += String.Format("<summationmonstername>{0}</summationmonstername><summationmonsterlifefalldown>{1}</summationmonsterlifefalldown>/<summationmonsterlifeconstantly>{2}</summationmonsterlifeconstantly></summation>", monster.Name, monster_life, fullLifeOfMonster);
+                    raport += String.Format("<summationcharactername>{0}</summationcharactername><summationcharacterlifefalldown>{1}</summationcharacterlifefalldown><summationcharacterlifeconstantly>{2}</summationcharacterlifeconstantly>", characterViewModel.Name, character_life, fullLifeOfCharacter);
+                    raport += String.Format("<summationmonstername>{0}</summationmonstername><summationmonsterlifefalldown>{1}</summationmonsterlifefalldown><summationmonsterlifeconstantly>{2}</summationmonsterlifeconstantly>", monster.Name, monster_life, fullLifeOfMonster);
                 }
             }
             while (monster_life > 0 && character_life > 0);
@@ -164,9 +164,8 @@ namespace GameProject.Services
             if (monster_life == 0 || monster_life < 0)
             {
                 monster_life = 0;
-                raport += String.Format("<summation><summationcharactername>{0}</summationcharactername><summationcharacterlifefalldown>{1}</summationcharacterlifefalldown>/<summationcharacterlifeconstantly>{2}</summationcharacterlifeconstantly>", characterViewModel.Name, character_life, fullLifeOfCharacter);
-                raport += String.Format("<summationmonstername>{0}</summationmonstername><summationmonsterlifefalldown>{1}</summationmonsterlifefalldown>/<summationmonsterlifeconstantly>{2}</summationmonsterlifeconstantly></summation>", monster.Name, monster_life, fullLifeOfMonster);
-                //raport += String.Format("<characterwinthebattle></characterwinthebattle>");
+                raport += String.Format("<summationcharactername>{0}</summationcharactername><summationcharacterlifefalldown>{1}</summationcharacterlifefalldown><summationcharacterlifeconstantly>{2}</summationcharacterlifeconstantly>", characterViewModel.Name, character_life, fullLifeOfCharacter);
+                raport += String.Format("<summationmonstername>{0}</summationmonstername><summationmonsterlifefalldown>{1}</summationmonsterlifefalldown><summationmonsterlifeconstantly>{2}</summationmonsterlifeconstantly>", monster.Name, monster_life, fullLifeOfMonster);
                 characterWinner = true;
             }
 
@@ -174,9 +173,8 @@ namespace GameProject.Services
         if (character_life == 0 || character_life < 0)
             {
                 character_life = 0;
-                raport += String.Format("<summation><summationcharactername>{0}</summationcharactername><summationcharacterlifefalldown>{1}</summationcharacterlifefalldown>/<summationcharacterlifeconstantly>{2}</summationcharacterlifeconstantly>", characterViewModel.Name, character_life, fullLifeOfCharacter);
-                raport += String.Format("<summationmonstername>{0}</summationmonstername><summationmonsterlifefalldown>{1}</summationmonsterlifefalldown>/<summationmonsterlifeconstantly>{2}</summationmonsterlifeconstantly></summation>", monster.Name, monster_life, fullLifeOfMonster);
-                //raport += String.Format("<monsterwinthebattle></monsterwinthebattle>");
+                raport += String.Format("<summationcharactername>{0}</summationcharactername><summationcharacterlifefalldown>{1}</summationcharacterlifefalldown><summationcharacterlifeconstantly>{2}</summationcharacterlifeconstantly>", characterViewModel.Name, character_life, fullLifeOfCharacter);
+                raport += String.Format("<summationmonstername>{0}</summationmonstername><summationmonsterlifefalldown>{1}</summationmonsterlifefalldown><summationmonsterlifeconstantly>{2}</summationmonsterlifeconstantly>", monster.Name, monster_life, fullLifeOfMonster);
                 characterWinner = false;
             }
 

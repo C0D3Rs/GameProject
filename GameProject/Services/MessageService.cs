@@ -9,78 +9,47 @@ namespace GameProject.Services
     {
         public string GetHtmlSystemRaport(string message)
         {
-            return message.Replace("\n", "<br/>")
-                //Character
-            .Replace("<characterattack>", " ").Replace("</characterattack>", " <br/>") //characterattack
-            .Replace("<characterfinalattack>", "").Replace("</characterfinalattack>", "<br/>") //characterfinalattack
-            .Replace("<charactermissattack>", "").Replace("</charactermissattack>", "<br/>") //charactermissattack
-            .Replace("<characterwinthebattle>", "Wygrałeś bitwę.").Replace("</characterwinthebattle>", "<br/>") //characterwinthebattle
+            return message.Replace("<maindescription>", "<div class=\"main-description\">").Replace("</maindescription>", "</div>")
+                .Replace("<successdescription>", "<div class=\"success-description\">").Replace("</successdescription>", "</div>")
+                .Replace("<lostdescription>", "<div class=\"lost-description\">").Replace("</lostdescription>", "</div>")
 
-            //Character - tagi oznaczone w walce.
-                // -- nazwa charactera podczas ataku
-            .Replace("<characternamewhenattack>", "").Replace("</characternamewhenattack>", " zdaje obrażenia, ")
-                // -- nazwa monstera, kiedy character wykonuje atak
-            .Replace("<characterattackmonstername>", "").Replace("</characterattackmonstername>", " zostaje zraniony za ")
-                // -- dotyczy DMG charactera, podczas ataku charactera
-            .Replace("<characterattackdmg>", "").Replace("</characterattackdmg>", " PKT ŻYCIA.")
+                // Runda
+                .Replace("<roundvalue>", "<div class=\"round\">Runda ").Replace("</roundvalue>", "</div>")
 
-             //Character - tagi oznaczone podczas ostatniego ataku ( final dmg )
-                // -- nazwa charactera podczas finałowego ostatniego ataku
-            .Replace("<characternamewhenfinalattack>", "").Replace("</characternamewhenfinalattack>", " zadał ostateczny atak przeciwnikowi wynoszący ")
-                // -- dotyczy DMG charactera, podczas finałowego ataku
-            .Replace("<characterattackfinaldmg>", "").Replace("</characterattackfinaldmg>", " PKT ŻYCIA.")
-                // -- nazwa charactera podczas ataku charactera na monstera kiedy ten robi UNIK
-            .Replace("<characternamewhenmonsterdododge>", "").Replace("</characternamewhenmonsterdododge>", " zadaje obrażenia, ")
-                // -- nazwa monstera podczas ataku charactera na monstera kiedy ten robi UNIK
-            .Replace("<charactermonsternamewhenmonsterdododge>", "").Replace("</charactermonsternamewhenmonsterdododge>", " unika ciosu. ")
+                // Postać atakuje potwora
+                .Replace("<characternamewhenattack>", "<div class=\"character-attack\">").Replace("</characternamewhenattack>", " zdaje obrażenia, ")
+                .Replace("<characterattackmonstername>", "").Replace("</characterattackmonstername>", " zostaje zraniony za ")
+                .Replace("<characterattackdmg>", "").Replace("</characterattackdmg>", " PKT ŻYCIA.</div>")
 
-            //Monster
-            .Replace("<monsterattack>", "").Replace("</monsterattack>", "<br/>") //monsterattack
-            .Replace("<monsterfinalattack>", "").Replace("</monsterfinalattack>", "<br/>") //monsterfinalattack
-            .Replace("<monstermissattack>", "").Replace("</monstermissattack>", "<br/>") //monstermissattack
-            .Replace("<monsterwinthebattle>", "Przegrałeś bitwę.").Replace("</monsterwinthebattle>", "<br/>") //monsterwinthebattle
+                // Postać zadaje ostatnie obrażenia potworowi
+                .Replace("<characternamewhenfinalattack>", "<div class=\"character-final-attack\"").Replace("</characternamewhenfinalattack>", " zadał ostateczny atak przeciwnikowi wynoszący ")
+                .Replace("<characterattackfinaldmg>", "").Replace("</characterattackfinaldmg>", " PKT ŻYCIA.</div>")
 
-           //Monster - tagi oznaczone w walce. 
-                // -- nazwa monstera podczas ataku monstera na charactera
-           .Replace("<monsterattackmonstername>", "").Replace("</monsterattackmonstername>", " zadaje obrażenia, ")
-                // -- nazwa charactera podczas ataku monstera 
-           .Replace("<monsterattackcharactername>", "").Replace("</monsterattackcharactername>", " zostaje zraniony za ")
-                // -- dmg monstera podczas ataku monstera na charactera
-           .Replace("<monsterattackdmg>", "").Replace("</monsterattackdmg>", " PKT ŻYCIA.")
-                // -- nazwa monstera podczas ostatecznego jego ataku ( final dmg )
-           .Replace("<monsterfinalattackmonstername>", "").Replace("</monsterfinalattackmonstername>", " zadał Tobie ostateczny atak wynoszący ")
-                // -- DMG monstera podczas ataku finalnego ataku monstera na charactera
-           .Replace("<monsterfinalattackdmg>", "").Replace("</monsterfinalattackdmg>", " PKT ŻYCIA.")
-                // -- nazwa monstera podczas UNIKu charactera
-           .Replace("<monstermissattackmonstername>", "").Replace("</monstermissattackmonstername>", " zadaje obrażenia, ")
-                // -- nazwa charactera podczas ataku monstera na charactera, gdy character robi UNIK
-           .Replace("<monstermissattackcharactername>", "").Replace("</monstermissattackcharactername>", " unika ciosu.")
+                // Postać chybia podczas ataku
+                .Replace("<characternamewhenmonsterdododge>", "<div class=\"character-attack-miss\">").Replace("</characternamewhenmonsterdododge>", " zadaje obrażenia, ")
+                .Replace("<charactermonsternamewhenmonsterdododge>", "").Replace("</charactermonsternamewhenmonsterdododge>", " unika ciosu.</div>")
 
+                // Potwór atakuje postać
+                .Replace("<monsterattackmonstername>", "<div class=\"monster-attack\">").Replace("</monsterattackmonstername>", " zadaje obrażenia, ")
+                .Replace("<monsterattackcharactername>", "").Replace("</monsterattackcharactername>", " zostaje zraniony za ")
+                .Replace("<monsterattackdmg>", "").Replace("</monsterattackdmg>", " PKT ŻYCIA.</div>")
 
-            //Round
-            .Replace("<round>", "Runda: ").Replace("</round>", "<br/>") //round
-                //Round value
-            .Replace("<roundvalue>", "").Replace("</roundvalue>", "")
+                // Potwór zadaje ostatnie obrażenia postaci
+                .Replace("<monsterfinalattackmonstername>", "<div class=\"monster-final-attack\"").Replace("</monsterfinalattackmonstername>", " zadał Tobie ostateczny atak wynoszący ")
+                .Replace("<monsterfinalattackdmg>", "").Replace("</monsterfinalattackdmg>", " PKT ŻYCIA.</div>")
 
-             //Podsumowanie
-             .Replace("<summation>", "<br/>Podsumowanie <br/>").Replace("</summation>", "<br/><br/>")
+                // Potwór chybia podczas ataku
+                .Replace("<monstermissattackmonstername>", "<div class=\"monster-attack-miss\">").Replace("</monstermissattackmonstername>", " zadaje obrażenia, ")
+                .Replace("<monstermissattackcharactername>", "").Replace("</monstermissattackcharactername>", " unika ciosu.</div>")
 
-             //Podsumowanie - dotyczy NAPISU PODSUMOWANIE
-             .Replace("<summationname>", "").Replace("</summationname>", "")
+                // Podsumowanie
+                .Replace("<summationcharactername>", "<div class=\"character-summation\">").Replace("</summationcharactername>", " ")
+                .Replace("<summationcharacterlifefalldown>", "").Replace("</summationcharacterlifefalldown>", "")
+                .Replace("<summationcharacterlifeconstantly>", "/").Replace("</summationcharacterlifeconstantly>", "</div>")
 
-             //Podsumowanie - nazwa characteru
-             .Replace("<summationcharactername>", "").Replace("</summationcharactername>", " ")
-                //Podsumowanie - spadające życie charactera. Wartość cały czas się zmienia.
-             .Replace("<summationcharacterlifefalldown>", "").Replace("</summationcharacterlifefalldown>", "")
-                //Podsumowanie - życie charactera po slashu "/". Jest ono stałe.
-             .Replace("<summationcharacterlifeconstantly>", "").Replace("</summationcharacterlifeconstantly>", "<br/>")
-
-             //Podsumowanie - nazwa monstera
-            .Replace("<summationmonstername>", "").Replace("</summationmonstername>", " ")
-                //Podsumowanie - spadające życie monstera. Wartość się zmienia.
-             .Replace("<summationmonsterlifefalldown>", "").Replace("</summationmonsterlifefalldown>", "")
-                //Podsumowanie - stałe życie monstera które nie ulega zmianie. Występuje ono po slashu "/"
-             .Replace("<summationmonsterlifeconstantly>", "").Replace("</summationmonsterlifeconstantly>", "");
+                .Replace("<summationmonstername>", "<div class=\"monster-summation\">").Replace("</summationmonstername>", " ")
+                .Replace("<summationmonsterlifefalldown>", "").Replace("</summationmonsterlifefalldown>", "")
+                .Replace("<summationmonsterlifeconstantly>", "/").Replace("</summationmonsterlifeconstantly>", "</div>");
         }
     }
 }

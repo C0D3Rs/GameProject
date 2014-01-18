@@ -1,5 +1,6 @@
 ﻿using GameProject.Enums;
 using GameProject.Filters;
+using GameProject.Helpers;
 using GameProject.Models;
 using GameProject.Models.Entities;
 using GameProject.Services;
@@ -107,6 +108,7 @@ namespace GameProject.Controllers
 
             if (character.Gold < difference)
             {
+                FlashMessageHelper.SetMessage(this, FlashMessageType.Info, "Nie masz wystarczającej ilości złota przy sobie.");
                 return RedirectToAction("Index");
             }
 
@@ -120,7 +122,7 @@ namespace GameProject.Controllers
             }
             catch (Exception)
             {
-                // komunikat jakiś
+                FlashMessageHelper.SetMessage(this, FlashMessageType.Danger, "Wystąpił nieoczekiwany błąd. Skontaktuj się z administratorem.");
             }
 
             return RedirectToAction("Index");
@@ -177,7 +179,7 @@ namespace GameProject.Controllers
             }
             catch (Exception)
             {
-                // komunikat jakiś
+                FlashMessageHelper.SetMessage(this, FlashMessageType.Danger, "Wystąpił nieoczekiwany błąd. Skontaktuj się z administratorem.");
             }
 
             return RedirectToAction("Index");

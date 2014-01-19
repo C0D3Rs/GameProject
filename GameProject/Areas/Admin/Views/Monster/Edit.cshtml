@@ -10,9 +10,8 @@
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(model => model.Id)
-    @Html.HiddenFor(model => model.ImageId)
     @Html.HiddenFor(model => model.CurrentVersion)
-    
+
     <div class="form-horizontal">
         <div class="form-group">
             <label class="control-label col-md-2">Nazwa</label>
@@ -88,8 +87,15 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Zapisz" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
+<div>
+    <p>
+        <a type="button" class="btn btn-default" href="@Url.Action("Index", "Monster")">
+            <i class="glyphicon glyphicon-arrow-left"></i> Wróć do listy
+        </a>
+    </p>
+</div>

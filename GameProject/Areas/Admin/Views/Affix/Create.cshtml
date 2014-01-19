@@ -6,13 +6,13 @@
 
 <h2>Utwórz Affix</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <div class="form-group">
-            <label class = "control-label col-md-2"> Typ</label>
+            @Html.LabelFor(model => model.Type, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.Type, EnumHelper.GetSelectList<AffixType>())
                 @Html.ValidationMessageFor(model => model.Type)
@@ -20,7 +20,7 @@
         </div>
 
         <div class="form-group">
-            <label class = "control-label col-md-2"> Nazwa</label>
+            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Name)
                 @Html.ValidationMessageFor(model => model.Name)
@@ -28,7 +28,7 @@
         </div>
 
         <div class="form-group">
-            <label class = "control-label col-md-2"> Dla Broni</label>
+            @Html.LabelFor(model => model.ForWeapon, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.ForWeapon)
                 @Html.ValidationMessageFor(model => model.ForWeapon)
@@ -36,7 +36,7 @@
         </div>
 
         <div class="form-group">
-            <label class = "control-label col-md-2"> Dla Tarczy</label>
+            @Html.LabelFor(model => model.ForShield, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.ForShield)
                 @Html.ValidationMessageFor(model => model.ForShield)
@@ -44,7 +44,7 @@
         </div>
 
         <div class="form-group">
-            <label class = "control-label col-md-2"> Dla Zbroi</label>
+            @Html.LabelFor(model => model.ForArmor, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.ForArmor)
                 @Html.ValidationMessageFor(model => model.ForArmor)
@@ -52,7 +52,7 @@
         </div>
 
         <div class="form-group">
-            <label class = "control-label col-md-2"> Dla Biżuterii</label>
+            @Html.LabelFor(model => model.ForJewelry, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.ForJewelry)
                 @Html.ValidationMessageFor(model => model.ForJewelry)
@@ -60,7 +60,7 @@
         </div>
 
         <div class="form-group">
-            <label class = "control-label col-md-2"> Minimalna Siła</label>
+            @Html.LabelFor(model => model.MinStrength, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.MinStrength)
                 @Html.ValidationMessageFor(model => model.MinStrength)
@@ -68,7 +68,7 @@
         </div>
 
         <div class="form-group">
-            <label class = "control-label col-md-2"> Maksymalna Siła</label>
+            @Html.LabelFor(model => model.MaxStrength, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.MaxStrength)
                 @Html.ValidationMessageFor(model => model.MaxStrength)
@@ -76,7 +76,7 @@
         </div>
 
         <div class="form-group">
-            <label class = "control-label col-md-2"> Minimalna Zręczność</label>
+            @Html.LabelFor(model => model.MinDexterity, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.MinDexterity)
                 @Html.ValidationMessageFor(model => model.MinDexterity)
@@ -84,7 +84,7 @@
         </div>
 
         <div class="form-group">
-            <label class = "control-label col-md-2"> Maksymalna Zręczność</label>
+            @Html.LabelFor(model => model.MaxDexterity, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.MaxDexterity)
                 @Html.ValidationMessageFor(model => model.MaxDexterity)
@@ -92,7 +92,7 @@
         </div>
 
         <div class="form-group">
-            <label class = "control-label col-md-2"> Minimalna Inteligencja</label>
+            @Html.LabelFor(model => model.MinIntelligence, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.MinIntelligence)
                 @Html.ValidationMessageFor(model => model.MinIntelligence)
@@ -100,7 +100,7 @@
         </div>
 
         <div class="form-group">
-            <label class = "control-label col-md-2"> Maksymalna Inteligencja</label>
+            @Html.LabelFor(model => model.MaxIntelligence, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.MaxIntelligence)
                 @Html.ValidationMessageFor(model => model.MaxIntelligence)
@@ -108,7 +108,7 @@
         </div>
 
         <div class="form-group">
-            <label class = "control-label col-md-2"> Minimalna Witalność</label>
+            @Html.LabelFor(model => model.MinVitality, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.MinVitality)
                 @Html.ValidationMessageFor(model => model.MinVitality)
@@ -116,7 +116,7 @@
         </div>
 
         <div class="form-group">
-            <label class = "control-label col-md-2"> Maksymalna Witalność</label>
+            @Html.LabelFor(model => model.MaxVitality, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.MaxVitality)
                 @Html.ValidationMessageFor(model => model.MaxVitality)
@@ -124,7 +124,7 @@
         </div>
 
         <div class="form-group">
-            <label class = "control-label col-md-2"> Jakość</label>
+            @Html.LabelFor(model => model.QualityLevel, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.QualityLevel)
                 @Html.ValidationMessageFor(model => model.QualityLevel)
@@ -132,7 +132,7 @@
         </div>
 
         <div class="form-group">
-            <label class = "control-label col-md-2"> Cena</label>
+            @Html.LabelFor(model => model.Price, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Price)
                 @Html.ValidationMessageFor(model => model.Price)
@@ -141,7 +141,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Stwórz" class="btn btn-default" />
+                <input type="submit" value="Utwórz" class="btn btn-default" />
             </div>
         </div>
     </div>

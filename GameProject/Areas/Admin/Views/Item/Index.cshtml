@@ -4,23 +4,28 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Lista przedmiotów</h2>
+<h2>Tworzenie przedmiotów</h2>
 
 <p>
-    @Html.ActionLink("Nowa Broń", "CreateWeapon")
-</p>
-<p>
-    @Html.ActionLink("Nowa Tarcza", "CreateShield")
-</p>
-<p>
-    @Html.ActionLink("Nowa Zbroja", "CreateArmor")
-</p>
-<p>
-    @Html.ActionLink("Nowa Biżuteria", "CreateJewelry")
+    <a type="button" class="btn btn-success" href="@Url.Action("CreateWeapon", "Item")">
+        <i class="glyphicon glyphicon-plus"></i> Nowa Broń
+    </a>
+
+    <a type="button" class="btn btn-success" href="@Url.Action("CreateShield", "Item")">
+        <i class="glyphicon glyphicon-plus"></i> Nowa Tarcza
+    </a>
+
+    <a type="button" class="btn btn-success" href="@Url.Action("CreateArmor", "Item")">
+        <i class="glyphicon glyphicon-plus"></i> Nowa Zbroja
+    </a>
+
+    <a type="button" class="btn btn-success" href="@Url.Action("CreateJewelry", "Item")">
+        <i class="glyphicon glyphicon-plus"></i> Nowa Biżuteria
+    </a>
 </p>
 
 <table class="table">
-    <tr>
+    <tr class="pool_grey">
         <th>Typ</th>
         <th>Podtyp</th>
         <th>Nazwa</th>
@@ -30,34 +35,53 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Type)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SubType)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.QualityLevel)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Durability)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.ActionLink("Ustaw Obrazek", "Set", "Image", new { category = ImageCategory.Item, id = item.Id }, null)
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QualityLevel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Durability)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                <a type="button" class="btn btn-success" href="@Url.Action("Set", "Image", new { category = ImageCategory.Item, id = item.Id }, null)">
+                    <i class="glyphicon glyphicon-picture"></i> Ustaw Obrazek
+                </a>
+
+                |
+
+                <a type="button" class="btn btn-warning" href="@Url.Action("Edit", "Item", new { id = item.Id })">
+                    <i class="glyphicon glyphicon-edit"></i> Edytuj
+                </a>
+
+                |
+
+                <a type="button" class="btn btn-primary" href="@Url.Action("Details", "Item", new { id = item.Id })">
+                    <i class="glyphicon glyphicon-eye-open"></i> Szczegóły
+                </a>
+
+                |
+
+                <a type="button" class="btn btn-danger" href='@Url.Action("Delete", "Item", new { id = item.Id}, null)'>
+                    <i class="glyphicon glyphicon-trash"></i> Usuń
+                </a>
+
+            </td>
+        </tr>
+    }
 
 </table>
 

@@ -1,15 +1,15 @@
 ﻿@model Monster
 
 @{
-    ViewBag.Title = "Tworzenie Potwora";
+    ViewBag.Title = "Create";
 }
 
 <h2>Utwórz Potwora</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <div class="form-group">
             <label class="control-label col-md-2">Nazwa</label>
@@ -85,8 +85,15 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Stwórz" class="btn btn-default" />
+                <input type="submit" value="Utwórz" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
+<div>
+    <p>
+        <a type="button" class="btn btn-default" href="@Url.Action("Index", "Monster")">
+            <i class="glyphicon glyphicon-arrow-left"></i> Wróć do listy
+        </a>
+    </p>
+</div>

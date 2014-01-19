@@ -1,48 +1,51 @@
 ﻿@model IEnumerable<GameProject.Models.Entities.Location>
 @{
-    ViewBag.Title = "Spis Lokacji";
+    ViewBag.Title = "Index Image";
 }
 
-<h2>Lokacje</h2>
+<h2>Locations</h2>
 <p>
-    @Html.ActionLink("Dodaj Lokacje", "Create", "Location" )
+    <a type="button" class="btn btn-success" href="@Url.Action("Create", "Location")">
+        <i class="glyphicon glyphicon-plus"></i> Utwórz nową lokację
+    </a>
 </p>
 <table class="table">
-    <tr>
+    <tr class="pool_grey">
         <th>
-            Nazwa
+            @Html.DisplayNameFor(model => model.Name)
         </th>
         <th></th>
     </tr>
 
-@foreach (var location in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelLocation => location.Name)
-        </td>
-        <td>
+    @foreach (var location in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelLocation => location.Name)
+            </td>
+            <td>
 
-        <a type="button" class="btn btn-warning" href="@Url.Action("Edit/"+location.ID, "Location")">
-            <i class="glyphicon glyphicon-edit"></i> Edytuj
-        </a>
+                <a type="button" class="btn btn-warning" href="@Url.Action("Edit/"+location.ID, "Location")">
+                    <i class="glyphicon glyphicon-edit"></i> Edytuj
+                </a>
 
-        @if(ViewData["isAnyImages"] != null) {
-            <a type="button" class="btn btn-info" href="@Url.Action("Set", "Image", new { category = ImageCategory.Location, id = location.ID })">
-                <i class="glyphicon glyphicon-picture"></i> Ustaw obrazek
-            </a>
-        }
+                @if (ViewData["isAnyImages"] != null)
+                {
+                    <a type="button" class="btn btn-info" href="@Url.Action("Set", "Image", new { category = ImageCategory.Location, id = location.ID })">
+                        <i class="glyphicon glyphicon-picture"></i> Ustaw obrazek
+                    </a>
+                }
 
-        <a type="button" class="btn btn-primary" href="@Url.Action("Details/"+location.ID, "Location")">
-            <i class="glyphicon glyphicon-eye-open"></i> Zobacz
-        </a>
+                <a type="button" class="btn btn-primary" href="@Url.Action("Details/"+location.ID, "Location")">
+                    <i class="glyphicon glyphicon-eye-open"></i> Zobacz
+                </a>
 
-        <a type="button" class="btn btn-success" href="@Url.Action("Create", "Event", new { locationID=location.ID })">
-            <i class="glyphicon glyphicon-plus"></i> Dodaj Event
-        </a>
+                <a type="button" class="btn btn-success" href="@Url.Action("Create", "Event", new { locationID=location.ID })">
+                    <i class="glyphicon glyphicon-plus"></i> Dodaj Event
+                </a>
 
-        </td>
-    </tr>
-}
+            </td>
+        </tr>
+    }
 
 </table>
-

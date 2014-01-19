@@ -1,19 +1,22 @@
 ﻿@model IEnumerable<GameProject.Models.Entities.Image>
 @{
-    ViewBag.Title = "Spis Obrazków";
+    ViewBag.Title = "Index Image";
 }
 
-<h2>Obrazki</h2>
+<h2>Image</h2>
 <p>
-    @Html.ActionLink("Dodaj Obrazek", "Create", "Image" )
+    <a type="button" class="btn btn-success" href="@Url.Action("Create","Image")">
+        <i class="glyphicon glyphicon-plus"></i> Dodaj zdjęcie
+    </a>
 </p>
 <div class="row">
-@foreach (var image in Model) {
-  <div class="col-sm-6 col-md-2">
-    <a href="@Url.Action("Details","Image", new { id = image.ID })" class="thumbnai">
-        <img src="@Url.Action("Show","Image", new { imageName = image.FileName })" class="img-rounded" width="150px" />
-    </a>
-  </div>
-}
+    @foreach (var image in Model)
+    {
+        <div class="col-sm-6 col-md-2">
+            <a href="@Url.Action("Details","Image", new { id = image.ID })" class="thumbnai">
+                <img src="@Url.Action("Show","Image", new { imageName = image.FileName })" class="img-rounded" width="150px" />
+            </a>
+        </div>
+    }
 </div>
 </table>

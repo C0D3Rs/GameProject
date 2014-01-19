@@ -1,14 +1,14 @@
 ﻿@model DetailsMonsterViewModel
 
 @{
-    ViewBag.Title = "Szczegóły Potwora";
+    ViewBag.Title = "Details";
 }
 
-<h2>Szczegółowo</h2>
+<h2>Details</h2>
 
 <div>
-    <h4>Potwór</h4>
-	<hr />
+    <h4>Monster</h4>
+    <hr />
     <dl class="dl-horizontal">
         <dt>Nazwa</dt>
 
@@ -68,4 +68,10 @@
             </dd>
         }
     </dl>
+</div>
+<div>
+    <br />
+    <a type="button" class="btn btn-default" href="@Url.Action("Index", "Monster")">
+        <i class="glyphicon glyphicon-arrow-left"></i> Wróć do listy
+    </a>
 </div>

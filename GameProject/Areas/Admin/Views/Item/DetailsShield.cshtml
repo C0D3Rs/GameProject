@@ -7,7 +7,7 @@
 <h2>Details Shield</h2>
 
 <div>
-	<hr />
+    <hr />
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Item.Type)
@@ -83,3 +83,9 @@
         }
     </dl>
 </div>
+<br />
+<p>
+    <a type="button" class="btn btn-default" href="@Url.Action("Index", "Item")">
+        <i class="glyphicon glyphicon-arrow-left"></i> Wróć do listy
+    </a>
+</p>

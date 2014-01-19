@@ -1,7 +1,7 @@
 ﻿@model SetImageViewModel
 
 @{
-    ViewBag.Title = "Ustaw Obrazek";
+    ViewBag.Title = "SetToItem";
 }
 
 <h2>Ustaw Obrazek</h2>
@@ -15,4 +15,10 @@
             </a>
         </div>
     }
+</div>
+<div>
+    <br />
+    <a type="button" class="btn btn-default" href="@Url.Action("Index", "Image")">
+        <i class="glyphicon glyphicon-arrow-left"></i> Wróć do listy
+    </a>
 </div>

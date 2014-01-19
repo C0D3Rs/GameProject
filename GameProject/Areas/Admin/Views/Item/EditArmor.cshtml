@@ -10,10 +10,9 @@
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(model => model.Id)
-    @Html.HiddenFor(model => model.ImageId)
     @Html.HiddenFor(model => model.CurrentVersion)
     @Html.HiddenFor(model => model.Type)
-    
+
     <div class="form-horizontal">
         <div class="form-group">
             @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
@@ -73,12 +72,16 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Zapisz" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    <p>
+        <a type="button" class="btn btn-default" href="@Url.Action("Index", "Item")">
+            <i class="glyphicon glyphicon-arrow-left"></i> Wróć do listy
+        </a>
+    </p>
 </div>

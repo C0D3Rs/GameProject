@@ -7,69 +7,76 @@
 <h2>Details Location</h2>
 <div class="container" style="display:block;">
 
-@if(Model.Image != null)
-{
-    <img src="@Url.Action("Show","Image", new { imageName = Model.Image.FileName })" class="img-rounded col-md-4" width="150px" />
-}
+    @if (Model.Image != null)
+    {
+        <img src="@Url.Action("Show","Image", new { imageName = Model.Image.FileName })" class="img-rounded col-md-4" width="150px" />
+    }
 
-<dl class="dl-horizontal col-md-8">
-    <dt>
-        <i class="glyphicon glyphicon-bookmark"></i> @Html.DisplayNameFor(model => model.Location.Name)
-    </dt>      
-    <dd>
-        @Model.Location.Name
-    </dd>
-    <dt>
-       <i class="glyphicon glyphicon-list-alt"></i> @Html.DisplayNameFor(model => model.Location.Description)
-    </dt>
-    <dd>
-        @Model.Location.Description
-    </dd>
-    <br />
-    <div class="btn-group">
+    <dl class="dl-horizontal col-md-8">
         <dt>
-       
-        <a type="button" class="btn btn-warning" href="@Url.Action("Edit/"+@Model.Location.ID, "Location")">
-            <i class="glyphicon glyphicon-edit"></i> Edytuj
-        </a>
+            <i class="glyphicon glyphicon-bookmark"></i> @Html.DisplayNameFor(model => model.Location.Name)
         </dt>
         <dd>
-        <a type="button" class="btn btn-danger" href="@Url.Action("Delete/"+@Model.Location.ID, "Location")">
-            <i class="glyphicon glyphicon-trash"></i> Usuń
-        </a>
-
-        <a type="button" class="btn btn-success" href="@Url.Action("Create", "Event", new { locationID=@Model.Location.ID })">
-            <i class="glyphicon glyphicon-plus"></i> Dodaj Event
-        </a>
+            @Model.Location.Name
         </dd>
-    </div>
+        <dt>
+            <i class="glyphicon glyphicon-list-alt"></i> @Html.DisplayNameFor(model => model.Location.Description)
+        </dt>
+        <dd>
+            @Model.Location.Description
+        </dd>
+        <br />
+        <div class="btn-group">
+            <dt>
 
-    <table class="table">
-      <thead>
-        <tr>
-          <td>Eventy Lokacji</td>
-          <td></td>
-          <td></td>
-        </tr>
-      </thead>
-      <tbody>
-      @foreach(var one_event in Model.Events) 
-      {
-        <tr>
-          <td>@Html.DisplayFor(model => one_event.Name)</td>
-          <td>
-            <a type="button" class="btn btn-danger" href="@Url.Action("Delete/"+@one_event.Id, "Event")">
-                <i class="glyphicon glyphicon-trash"></i> Usuń
-            </a>
-          </td>
-          <td>
-            <a type="button" class="btn btn-info" href="@Url.Action("Details/"+@one_event.Id, "Event")">
-                <i class="glyphicon glyphicon-eye-open"></i> Zobacz
-            </a>
-          </td>
-        </tr>
-      }
-      </tbody>
-    </table>
-</dl>
+                <a type="button" class="btn btn-warning" href="@Url.Action("Edit/"+@Model.Location.ID, "Location")">
+                    <i class="glyphicon glyphicon-edit"></i> Edytuj
+                </a>
+            </dt>
+            <dd>
+                <a type="button" class="btn btn-danger" href="@Url.Action("Delete/"+@Model.Location.ID, "Location")">
+                    <i class="glyphicon glyphicon-trash"></i> Usuń
+                </a>
+
+                <a type="button" class="btn btn-success" href="@Url.Action("Create", "Event", new { locationID=@Model.Location.ID })">
+                    <i class="glyphicon glyphicon-plus"></i> Dodaj Event
+                </a>
+            </dd>
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>Eventy Lokacji</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var one_event in Model.Events)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(model => one_event.Name)</td>
+                        <td>
+                            <a type="button" class="btn btn-danger" href="@Url.Action("Delete/"+@one_event.Id, "Event")">
+                                <i class="glyphicon glyphicon-trash"></i> Usuń
+                            </a>
+                        </td>
+                        <td>
+                            <a type="button" class="btn btn-info" href="@Url.Action("Details/"+@one_event.Id, "Event")">
+                                <i class="glyphicon glyphicon-eye-open"></i> Zobacz
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a type="button" class="btn btn-default" href="@Url.Action("Index", "Location")">
+                                <i class="glyphicon glyphicon-arrow-left"></i> Wróć do listy
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </dl>
 </div>

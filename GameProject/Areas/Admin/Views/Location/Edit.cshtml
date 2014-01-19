@@ -1,26 +1,25 @@
 ﻿@model GameProject.Models.Entities.Location
 
 @{
-    ViewBag.Title = "Edycja";
+    ViewBag.Title = "Edit";
 }
 
-<h2>Edycja Lokacji</h2>
+<h2>Edit Location</h2>
 
 @using (Html.BeginForm("Edit", "Location"))
 {
 
-@Html.AntiForgeryToken()
+    @Html.AntiForgeryToken()
 
-@Html.HiddenFor(model => model.ID)
-@Html.HiddenFor(model => model.ImageId)
-@Html.HiddenFor(model => model.CurrentVersion)
+    @Html.HiddenFor(model => model.ID)
+    @Html.HiddenFor(model => model.CurrentVersion)
 
-   <div class="form-horizontal">
-        <h4>Lokacja</h4>
+    <div class="form-horizontal">
+        <h4>Location</h4>
         <hr />
 
         <div class="form-group">
-            <label class = "control-label col-md-2"> Nazwa</label>
+            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Name)
                 @Html.ValidationMessageFor(model => model.Name)
@@ -28,7 +27,7 @@
         </div>
 
         <div class="form-group">
-            <label class = "control-label col-md-2"> Opis</label>
+            @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Description)
                 @Html.ValidationMessageFor(model => model.Description)
@@ -44,5 +43,9 @@
 }
 
 <div>
-    @Html.ActionLink("Wróć do listy", "Index")
+    <p>
+        <a type="button" class="btn btn-default" href="@Url.Action("Index", "Location")">
+            <i class="glyphicon glyphicon-arrow-left"></i> Wróć do listy
+        </a>
+    </p>
 </div>

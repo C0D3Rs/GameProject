@@ -1,75 +1,93 @@
 ﻿@model IEnumerable<GameProject.Models.Entities.Affix>
 
 @{
-    ViewBag.Title = "Spis Affixów";
+    ViewBag.Title = "Affix";
 }
 
-<h2>Spis</h2>
+<h2>Affix</h2>
 
 <p>
-    @Html.ActionLink("Dodaj Affix", "Create")
+    <a type="button" class="btn btn-success" href="@Url.Action("Create", "Affix")">
+        <i class="glyphicon glyphicon-plus"></i> Utwórz Affix
+    </a>
+
 </p>
 <table class="table">
-    <tr>
+    <tr class="pool_grey">
         <th>
-            Typ
+            @Html.DisplayNameFor(model => model.Type)
         </th>
         <th>
-            Nazwa
+            @Html.DisplayNameFor(model => model.Name)
         </th>
         <th>
-            Dla Broni
+            @Html.DisplayNameFor(model => model.ForWeapon)
         </th>
         <th>
-            Dla Tarczy
+            @Html.DisplayNameFor(model => model.ForShield)
         </th>
         <th>
-            Dla Zbroi
+            @Html.DisplayNameFor(model => model.ForArmor)
         </th>
         <th>
-            Dla Biżuterii
+            @Html.DisplayNameFor(model => model.ForJewelry)
         </th>
         <th>
-            Jakość
+            @Html.DisplayNameFor(model => model.QualityLevel)
         </th>
         <th>
-            Cena
+            @Html.DisplayNameFor(model => model.Price)
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Type)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ForWeapon)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ForShield)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ForArmor)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ForJewelry)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.QualityLevel)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.ActionLink("Edytuj", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Zobacz", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Usuń", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ForWeapon)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ForShield)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ForArmor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ForJewelry)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QualityLevel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                <a type="button" class="btn btn-warning" href="@Url.Action("Edit", "Affix", new { id = item.Id })">
+                    <i class="glyphicon glyphicon-edit"></i> Edytuj
+                </a>
+
+                |
+
+                <a type="button" class="btn btn-primary" href="@Url.Action("Details", "Affix", new { id = item.Id })">
+                    <i class="glyphicon glyphicon-eye-open"></i> Szczegóły
+                </a>
+
+                |
+
+                <a type="button" class="btn btn-danger" href='@Url.Action("Delete", "Affix", new { id = item.Id }, null)'>
+                    <i class="glyphicon glyphicon-trash"></i> Usuń
+                </a>
+
+
+            </td>
+        </tr>
+    }
 
 </table>

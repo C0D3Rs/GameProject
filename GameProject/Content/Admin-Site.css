@@ -9,6 +9,17 @@
 
 .admin_menu {
     color: white;
+    text-decoration: none;
+    border-bottom: 0px !important;
+}
+
+a.submenu {
+    text-decoration: none !important;
+}
+
+div.admin_menu:hover {
+    background: red  !important;
+    background-color: red  !important;
 }
 
 a.submenu, a.dropmenu {
@@ -29,10 +40,6 @@ a.submenu, a.dropmenu {
     margin-top: 3%;
 }
 
-.hidden-sm {
-    display: inline-block;
-}
-
 ul {
     list-style-type: none;
 }
@@ -45,33 +52,32 @@ ul {
     border: 3px solid black;
 }
 
-@media (min-width: 768px) {
+@media (max-width: 765px) {
     .col-sm-10 {
-        width: 83.33333333333334%;
+        width: 100%;
     }
-}
-
-.breadcrumb {
-margin: -20px 0;
-border: 0;
-color: #aaa;
-background: transparent;
--webkit-box-shadow: none;
--moz-box-shadow: none;
-box-shadow: none;
--webkit-border-radius: 2px;
--moz-border-radius: 2px;
-border-radius: 2px;
-}
-
-.breadcrumb {
-padding: 8px 15px;
-margin-bottom: 20px;
-list-style: none;
-background-color: #f5f5f5;
-border-radius: 4px;
 }
 
 .hrPath {
     border: 1px solid lightgrey;
+}
+
+a.dropmenu:hover {
+    background-color: black !important;
+}
+
+.hidden-span {
+    display: inline-block !important;
+    margin-left: 5px;
+}
+
+.logo_title {
+    font-size: 30px;
+    margin-left: 10px;
+    color: white;
+}
+
+a.logo_title, a.logo_title:hover {
+    text-decoration: none;
+    color: white;
 }

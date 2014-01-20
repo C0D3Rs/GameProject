@@ -10,6 +10,7 @@
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
+        <a class="logo_title" href="@Url.Action("Index", "Dashboard")">GameProject</a>
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -28,50 +29,50 @@
         <div class="col-sm-2 main-menu-span">
             <div class="sidebar-nav nav-collapse collapse navbar-collapse">
                 <ul class="nav nav-tabs nav-stacked main-menu admin_menu">
-                    <li><a class="dropmenu" href="@Url.Action("Index", "Dashboard", new { @class = "navbar-brand" })"><i class="glyphicon glyphicon-home"></i><span class="hidden-sm"> Dashboard</span></a></li>
+                    <li><a class="dropmenu" href="@Url.Action("Index", "Dashboard")"><i class="glyphicon glyphicon-home"></i><span class="hidden-sm hidden-span"> Kokpit</span></a></li>
 
                     <li>
                         <!-- Affix -->
-                        <a class="dropmenu" href="@Url.Action("Index", "Affix", new { @class = "navbar-brand" })"><i class="glyphicon glyphicon-tasks"></i><span class="hidden-sm"> Affix</span></a>
+                        <a class="dropmenu" href="@Url.Action("Index", "Affix")"><i class="glyphicon glyphicon-tasks"></i><span class="hidden-sm hidden-span"> Affix</span></a>
                         <ul>
-                            <li><a class="submenu" href="@Url.Action("Create", "Affix", new { @class = "navbar-brand" })"><i class=""></i><span class="hidden-sm"> Create Affix</span></a></li>
+                            <li><a class="submenu" href="@Url.Action("Create", "Affix")"><i class=""></i><span class="hidden-sm"> Nowy Affix</span></a></li>
                         </ul>
                     </li>
 
                     <li>
                         <!-- Item -->
-                        <a class="dropmenu" href="@Url.Action("Index", "Item", new { @class = "navbar-brand" })"><i class="glyphicon glyphicon-wrench"></i><span class="hidden-sm"> Item</span></a>
+                        <a class="dropmenu" href="@Url.Action("Index", "Item")"><i class="glyphicon glyphicon-wrench"></i><span class="hidden-sm hidden-span"> Przedmioty</span></a>
                         <ul>
-                            <li><a class="submenu" href="@Url.Action("CreateWeapon", "Item", new { @class = "navbar-brand" })"><i class="fa fa-file"></i><span class="hidden-sm"> Create Weapon</span></a></li>
-                            <li><a class="submenu" href="@Url.Action("CreateShield", "Item", new { @class = "navbar-brand" })"><i class="fa fa-file"></i><span class="hidden-sm"> Create Shield</span></a></li>
-                            <li><a class="submenu" href="@Url.Action("CreateArmor", "Item", new { @class = "navbar-brand" })"><i class="fa fa-file"></i><span class="hidden-sm"> Create Armor</span></a></li>
-                            <li><a class="submenu" href="@Url.Action("CreateJewelry", "Item", new { @class = "navbar-brand" })"><i class="fa fa-file"></i><span class="hidden-sm"> Create Jewelry</span></a></li>
+                            <li><a class="submenu" href="@Url.Action("CreateWeapon", "Item")"><i class="fa fa-file"></i><span class="hidden-sm"> Nowa Broń</span></a></li>
+                            <li><a class="submenu" href="@Url.Action("CreateShield", "Item")"><i class="fa fa-file"></i><span class="hidden-sm"> Nowa Tarcza</span></a></li>
+                            <li><a class="submenu" href="@Url.Action("CreateArmor", "Item")"><i class="fa fa-file"></i><span class="hidden-sm"> Nowa Zbroja</span></a></li>
+                            <li><a class="submenu" href="@Url.Action("CreateJewelry", "Item")"><i class="fa fa-file"></i><span class="hidden-sm"> Nowa Biżuteria</span></a></li>
                         </ul>
                     </li>
 
                     <li>
                         <!-- Image -->
-                        <a class="dropmenu" href="@Url.Action("Index", "Image", new { @class = "navbar-brand" })"><i class="glyphicon glyphicon-picture"></i><span class="hidden-sm"> Image</span></a>
+                        <a class="dropmenu" href="@Url.Action("Index", "Image")"><i class="glyphicon glyphicon-picture"></i><span class="hidden-sm hidden-span"> Obrazy</span></a>
                         <ul>
-                            <li><a class="submenu" href="@Url.Action("Create", "Image", new { @class = "navbar-brand" })"><i class="fa fa-file"></i><span class="hidden-sm"> Create Image</span></a></li>
+                            <li><a class="submenu" href="@Url.Action("Create", "Image")"><i class="fa fa-file"></i><span class="hidden-sm"> Nowy Obraz</span></a></li>
                         </ul>
                     </li>
 
                     <li>
                         <!-- Location -->
-                        <a class="dropmenu" href="@Url.Action("Index", "Location", new { @class = "navbar-brand" })"><i class="glyphicon glyphicon-globe"></i><span class="hidden-sm"> Location</span></a>
+                        <a class="dropmenu" href="@Url.Action("Index", "Location")"><i class="glyphicon glyphicon-globe"></i><span class="hidden-sm hidden-span"> Lokacje</span></a>
                         <ul>
-                            <li><a class="submenu" href="@Url.Action("Create", "Location", new { @class = "navbar-brand" })"><i class="fa fa-file"></i><span class="hidden-sm"> Create Location</span></a></li>
+                            <li><a class="submenu" href="@Url.Action("Create", "Location")"><i class="fa fa-file"></i><span class="hidden-sm"> Nowa Lokacja</span></a></li>
                         </ul>
                     </li>
                     <li>
                         <!-- Monster -->
-                        <a class="dropmenu" href="@Url.Action("Index", "Monster", new { @class = "navbar-brand" })"><i class="glyphicon glyphicon-user"></i><span class="hidden-sm"> Monster</span></a>
+                        <a class="dropmenu" href="@Url.Action("Index", "Monster")"><i class="glyphicon glyphicon-user"></i><span class="hidden-sm hidden-span"> Potwór</span></a>
                         <ul>
-                            <li><a class="submenu" href="@Url.Action("Create", "Monster", new { @class = "navbar-brand" })"><i class="fa fa-file"></i><span class="hidden-sm"> Create Monster</span></a></li>
+                            <li><a class="submenu" href="@Url.Action("Create", "Monster")"><i class="fa fa-file"></i><span class="hidden-sm"> Nowy Potwór</span></a></li>
                         </ul>
                     </li>
-                    <li><a class="dropmenu" href="@Url.Action("Logout", "Account", new { @class = "navbar-brand" })"><i class="glyphicon glyphicon-log-out"></i><span class="hidden-sm"> Wyloguj</span></a></li>
+                    <li><a class="dropmenu" href="@Url.Action("Logout", "Account")"><i class="glyphicon glyphicon-log-out"></i><span class="hidden-sm hidden-span"> Wyloguj</span></a></li>
                 </ul>
             </div><!--/.well -->
         </div><!-- /col -->
@@ -85,11 +86,9 @@
 
     <div class="body_container col-sm-10">
         <br />
-        <ul class="breadcrumb">
-            <hr class="hrPath" />
-            @Request.Path
-            <hr class="hrPath" />
-        </ul>
+        <hr class="hrPath" />
+        / Admin @ViewBag.Path
+        <hr class="hrPath" />
         @Html.Partial("_FlashMessagePartial")
         @RenderBody()
         <hr />

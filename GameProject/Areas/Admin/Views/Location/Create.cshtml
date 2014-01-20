@@ -1,19 +1,19 @@
 ﻿@model Location
 
 @{
-    ViewBag.Title = "Create Location";
+    ViewBag.Title = "Tworzenie lokacji";
 }
 
-<h2>Create Location</h2>
+<h2>Tworzenie Lokacji</h2>
 
 @using (Html.BeginForm())
 {
-    <div class="form-horizontal">
+   <div class="form-horizontal">
         <h4>Location</h4>
         <hr />
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Nazwa</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Name)
                 @Html.ValidationMessageFor(model => model.Name)
@@ -21,6 +21,8 @@
         </div>
 
         <div class="form-group">
+            <label class="control-label col-md-2">Opis</label>
+
             @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Description)
@@ -30,14 +32,12 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Utwórz" class="btn btn-default" />
+                <input type="submit" value="Stwórz" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    <a type="button" class="btn btn-default" href="@Url.Action("Index", "Location")">
-        <i class="glyphicon glyphicon-arrow-left"></i> Wróć do listy
-    </a>
+    @Html.ActionLink("Wróć do listy", "Index")
 </div>

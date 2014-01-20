@@ -1,18 +1,16 @@
 ﻿@model PagedList.IPagedList<Monster>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Spis Potworów";
 }
 
-<h2>Monster</h2>
+<h2>Potwory</h2>
 
 <p>
-    <a type="button" class="btn btn-success" href="@Url.Action("Create", "Monster")">
-        <i class="glyphicon glyphicon-plus"></i> Dodaj Potwora
-    </a>
+    @Html.ActionLink("Dodaj Potwora", "Create")
 </p>
 <table class="table">
-    <tr class="pool_grey">
+    <tr>
         <th>Nazwa</th>
         <th>Poziom</th>
         <th>Życie</th>
@@ -21,50 +19,32 @@
         <th></th>
     </tr>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Level)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Life)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MinDamage) -
-                @Html.DisplayFor(modelItem => item.MaxDamage)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Defense)
-            </td>
-            <td>
-                <a type="button" class="btn btn-success" href="@Url.Action("Set", "Image", new { category = ImageCategory.Monster, id = item.Id }, null)">
-                    <i class="glyphicon glyphicon-picture"></i> Ustaw Obrazek
-                </a>
-
-                |
-
-                <a type="button" class="btn btn-warning" href="@Url.Action("Edit", "Monster", new { id = item.Id })">
-                    <i class="glyphicon glyphicon-edit"></i> Edytuj
-                </a>
-
-                |
-
-                <a type="button" class="btn btn-primary" href="@Url.Action("Details", "Monster", new { id = item.Id })">
-                    <i class="glyphicon glyphicon-eye-open"></i> Szczegóły
-                </a>
-
-                |
-
-                <a type="button" class="btn btn-danger" href='@Url.Action("Delete", "Monster", new { id = item.Id }, null)'>
-                    <i class="glyphicon glyphicon-trash"></i> Usuń
-                </a>
-            </td>
-        </tr>
-    }
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Level)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Life)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MinDamage) -
+            @Html.DisplayFor(modelItem => item.MaxDamage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Defense)
+        </td>
+        <td>
+            @Html.ActionLink("Ustaw Obrazek", "Set", "Image", new { category = ImageCategory.Monster, id = item.Id }, null) |
+            @Html.ActionLink("Edytuj", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Zobacz", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Usuń", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
 </table>
 
 Strona @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) z @Model.PageCount

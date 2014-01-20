@@ -7,7 +7,7 @@
 <h2>Szczegóły broni</h2>
 
 <div>
-    <hr />
+	<hr />
     <dl class="dl-horizontal">
         <dt>Typ</dt>
 
@@ -81,13 +81,7 @@
         {
             <dd>
                 <img src="@Url.Action("Show","Image", new { imageName = Model.Image.FileName })" />
-            </dd>
+            </dd> 
         }
     </dl>
 </div>
-<br />
-<p>
-    <a type="button" class="btn btn-default" href="@Url.Action("Index", "Item")">
-        <i class="glyphicon glyphicon-arrow-left"></i> Wróć do listy
-    </a>
-</p>

@@ -6,48 +6,40 @@
 
 <h2>Details Image</h2>
 <div class="container" style="display:block;">
-    <img src="@Url.Action("Show","Image", new { imageName = Model.FileName })" class="img-rounded col-md-4" width="150px" />
+<img src="@Url.Action("Show","Image", new { imageName = Model.FileName })" class="img-rounded col-md-4" width="150px" />
 
-    <dl class="dl-horizontal col-md-8">
+<dl class="dl-horizontal col-md-8">
+    <dt>
+        <i class="glyphicon glyphicon-bookmark"></i> @Html.DisplayNameFor(model => model.FileName)
+    </dt>      
+    <dd>
+        @Model.FileName
+    </dd>
+    <dt>
+       <i class="glyphicon glyphicon-picture"></i> @Html.DisplayNameFor(model => model.Type)
+    </dt>
+    <dd>
+        @Model.Type
+    </dd>
+    <dt>
+        <i class="glyphicon glyphicon-paperclip"></i> @Html.DisplayNameFor(model => model.Category)
+    </dt>
+    <dd>
+        @Model.Category
+    </dd>
+    <br />
+    <div class="btn-group">
         <dt>
-            <i class="glyphicon glyphicon-bookmark"></i> @Html.DisplayNameFor(model => model.FileName)
+       
+        <a type="button" class="btn btn-warning" href="@Url.Action("Edit/"+@Model.ID, "Image")">
+            <i class="glyphicon glyphicon-edit"></i> Edytuj
+        </a>
         </dt>
         <dd>
-            @Model.FileName
+        <a type="button" class="btn btn-danger" href="@Url.Action("Delete/"+@Model.ID, "Image")">
+            <i class="glyphicon glyphicon-trash"></i> Usuń
+        </a>
         </dd>
-        <dt>
-            <i class="glyphicon glyphicon-picture"></i> @Html.DisplayNameFor(model => model.Type)
-        </dt>
-        <dd>
-            @Model.Type
-        </dd>
-        <dt>
-            <i class="glyphicon glyphicon-paperclip"></i> @Html.DisplayNameFor(model => model.Category)
-        </dt>
-        <dd>
-            @Model.Category
-        </dd>
-        <br />
-        <div class="btn-group">
-            <dt>
-
-                <a type="button" class="btn btn-warning" href="@Url.Action("Edit/"+@Model.ID, "Image")">
-                    <i class="glyphicon glyphicon-edit"></i> Edytuj
-                </a>
-            </dt>
-            <dd>
-                <a type="button" class="btn btn-danger" href="@Url.Action("Delete/"+@Model.ID, "Image")">
-                    <i class="glyphicon glyphicon-trash"></i> Usuń
-                </a>
-            </dd>
-            <dt>
-                <br />
-                <p>
-                    <a type="button" class="btn btn-default" href="@Url.Action("Index", "Image")">
-                        <i class="glyphicon glyphicon-arrow-left"></i> Wróć do listy
-                    </a>
-                </p>
-            </dt>
-        </div>
-    </dl>
+    </div>
+</dl>
 </div>

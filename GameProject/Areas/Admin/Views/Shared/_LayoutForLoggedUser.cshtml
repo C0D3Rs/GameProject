@@ -5,8 +5,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/admin-css")
+    @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -17,79 +18,37 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-
+                @Html.ActionLink("Kokpit", "Index", "Dashboard", null, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                        @Html.ActionLink("Affix", "Index", "Affix", null, new { @class = "navbar-brand" })
+                    </li>
+                    <li>
+                        @Html.ActionLink("Item", "Index", "Item", null, new { @class = "navbar-brand" })
+                    </li>
+                    <li>
+                        @Html.ActionLink("Image", "Index", "Image", null, new { @class = "navbar-brand" })
+                    </li>
+                    <li>
+                        @Html.ActionLink("Location", "Index", "Location", null, new { @class = "navbar-brand" })
+                    </li>
+                    <li>
+                        @Html.ActionLink("Event", "Index", "Event", null, new { @class = "navbar-brand" })
+                    </li>
+                    <li>
+                        @Html.ActionLink("Monster", "Index", "Monster", null, new { @class = "navbar-brand" })
+                    </li>
+                    <li>
+                        @Html.ActionLink("Wyloguj", "Logout", "Account", null, new { @class = "navbar-brand" })
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
 
-
-    <div class="Menu1">
-        <!-- start: Main Menu -->
-        <div class="col-sm-2 main-menu-span">
-            <div class="sidebar-nav nav-collapse collapse navbar-collapse">
-                <ul class="nav nav-tabs nav-stacked main-menu admin_menu">
-                    <li><a class="dropmenu" href="@Url.Action("Index", "Dashboard", new { @class = "navbar-brand" })"><i class="glyphicon glyphicon-home"></i><span class="hidden-sm"> Dashboard</span></a></li>
-
-                    <li>
-                        <!-- Affix -->
-                        <a class="dropmenu" href="@Url.Action("Index", "Affix", new { @class = "navbar-brand" })"><i class="glyphicon glyphicon-tasks"></i><span class="hidden-sm"> Affix</span></a>
-                        <ul>
-                            <li><a class="submenu" href="@Url.Action("Create", "Affix", new { @class = "navbar-brand" })"><i class=""></i><span class="hidden-sm"> Create Affix</span></a></li>
-                        </ul>
-                    </li>
-
-                    <li>
-                        <!-- Item -->
-                        <a class="dropmenu" href="@Url.Action("Index", "Item", new { @class = "navbar-brand" })"><i class="glyphicon glyphicon-wrench"></i><span class="hidden-sm"> Item</span></a>
-                        <ul>
-                            <li><a class="submenu" href="@Url.Action("CreateWeapon", "Item", new { @class = "navbar-brand" })"><i class="fa fa-file"></i><span class="hidden-sm"> Create Weapon</span></a></li>
-                            <li><a class="submenu" href="@Url.Action("CreateShield", "Item", new { @class = "navbar-brand" })"><i class="fa fa-file"></i><span class="hidden-sm"> Create Shield</span></a></li>
-                            <li><a class="submenu" href="@Url.Action("CreateArmor", "Item", new { @class = "navbar-brand" })"><i class="fa fa-file"></i><span class="hidden-sm"> Create Armor</span></a></li>
-                            <li><a class="submenu" href="@Url.Action("CreateJewelry", "Item", new { @class = "navbar-brand" })"><i class="fa fa-file"></i><span class="hidden-sm"> Create Jewelry</span></a></li>
-                        </ul>
-                    </li>
-
-                    <li>
-                        <!-- Image -->
-                        <a class="dropmenu" href="@Url.Action("Index", "Image", new { @class = "navbar-brand" })"><i class="glyphicon glyphicon-picture"></i><span class="hidden-sm"> Image</span></a>
-                        <ul>
-                            <li><a class="submenu" href="@Url.Action("Create", "Image", new { @class = "navbar-brand" })"><i class="fa fa-file"></i><span class="hidden-sm"> Create Image</span></a></li>
-                        </ul>
-                    </li>
-
-                    <li>
-                        <!-- Location -->
-                        <a class="dropmenu" href="@Url.Action("Index", "Location", new { @class = "navbar-brand" })"><i class="glyphicon glyphicon-globe"></i><span class="hidden-sm"> Location</span></a>
-                        <ul>
-                            <li><a class="submenu" href="@Url.Action("Create", "Location", new { @class = "navbar-brand" })"><i class="fa fa-file"></i><span class="hidden-sm"> Create Location</span></a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <!-- Monster -->
-                        <a class="dropmenu" href="@Url.Action("Index", "Monster", new { @class = "navbar-brand" })"><i class="glyphicon glyphicon-user"></i><span class="hidden-sm"> Monster</span></a>
-                        <ul>
-                            <li><a class="submenu" href="@Url.Action("Create", "Monster", new { @class = "navbar-brand" })"><i class="fa fa-file"></i><span class="hidden-sm"> Create Monster</span></a></li>
-                        </ul>
-                    </li>
-                    <li><a class="dropmenu" href="@Url.Action("Logout", "Account", new { @class = "navbar-brand" })"><i class="glyphicon glyphicon-log-out"></i><span class="hidden-sm"> Wyloguj</span></a></li>
-                </ul>
-            </div><!--/.well -->
-        </div><!-- /col -->
-        <!-- End Menu -->
-    </div>
-
-
-
-
-
-
-    <div class="body_container col-sm-10">
-        <br />
-        <ul class="breadcrumb">
-            <hr class="hrPath" />
-            @Request.Path
-            <hr class="hrPath" />
-        </ul>
+    <div class="container body-content">
         @Html.Partial("_FlashMessagePartial")
         @RenderBody()
         <hr />
@@ -98,7 +57,6 @@
         </footer>
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>

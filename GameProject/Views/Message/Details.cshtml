@@ -4,12 +4,12 @@
     ViewBag.Title = "Details";
 }
 
-<div>
-    <h4>Message</h4>
+<div class="container welcome">
+    <h2>Wiadomość</h2>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Title)
+            Temat
         </dt>
 
         <dd>
@@ -17,7 +17,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.FromUser)
+            Nadawca
         </dt>
 
         <dd>
@@ -25,7 +25,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Date)
+            Data
         </dt>
 
         <dd>
@@ -33,7 +33,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ContentOfMessage)
+            Treść
         </dt>
 
         <dd>
@@ -47,4 +47,8 @@
             }
         </dd>
     </dl>
+<div>
+    @Html.ActionLink("Powrót do spisu wiadomości", "Index")
 </div>
+</div>
+

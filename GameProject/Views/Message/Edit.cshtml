@@ -3,15 +3,15 @@
 @{
     ViewBag.Title = "Edit";
 }
-
-<h2>Edit</h2>
+<div class="container welcome">
+<h2>Edycja</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Message</h4>
+        <h4>Wiadomość</h4>
         <hr />
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.Id)
@@ -65,5 +65,6 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Powrót do spisu wiadomości", "Index")
+</div>
 </div>

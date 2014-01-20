@@ -5,17 +5,19 @@
     ViewBag.Title = "Register";
 }
 
-<h2>Register</h2>
 
-<ul>
-    <li>@Html.ActionLink("Zarejestruj się", "Register", "Account")</li>
-    <li>@Html.ActionLink("Zaloguj", "Login", "Account")</li>
-</ul>
+
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
-    
+
+<div class="wrap-header">
+		<div class="container">
+				<h1 class="logo"><a href="#" title="Muminki">Muminki</a></h1>
+</div>
+</div>
+    <div class="container welcome">
     <div class="form-horizontal">
         <div class="form-group">
             <label class="control-label col-md-2">Email</label>
@@ -47,4 +49,5 @@
             </div>
         </div>
     </div>
+</div><!-- end welcome -->	
 }

@@ -3,16 +3,18 @@
 @{
     ViewBag.Title = "Index";
 }
-
-<ul class="nav nav-tabs">
-  <li class="active"><a href="#wear_items" data-toggle="tab">Założone Przedmioty</a></li>
-  <li><a href="#bag" data-toggle="tab">Plecak</a></li>
-  <li><a href="#box" data-toggle="tab">Skrzynka</a></li>
-</ul>
-
-<div class="tab-content">
-<div class="tab-pane fade in active" id="wear_items">
-@if(Model.EquippedItems.Count() == 0)
+<div class="container welcome">
+<h2>Ekwipunek</h2>
+<div class="container">
+    <table class="tabela_statystyk_postaci">
+<tbody>
+<tr>
+        <td>Założone Przedmioty</td>
+        <td>Plecak</td>
+        <td>Skrzynka</td>
+</tr>
+<tr>
+        <td>@if(Model.EquippedItems.Count() == 0)
 {
     <div class="alert alert-info"><b>Informacja!</b> Brak założonych przedmiotów...</div>
 }
@@ -40,9 +42,8 @@
     </button>
     <br />
 }
-</div>
-
-<div class="tab-pane fade" id="bag">
+        </td>
+<td>
 @if(Model.BackpackItems.Count() == 0)
 {
     <div class="alert alert-info"><b>Informacja!</b> Brak przedmiotów w plecaku...</div>
@@ -70,9 +71,8 @@
     </button>
     <br />
 }
-</div>
-
-<div class="tab-pane fade" id="box">
+</td>
+        <td>
 @if(Model.ChestItems.Count() == 0)
 {
     <div class="alert alert-info"><b>Informacja!</b> Brak przedmiotów w skrzyni...</div>
@@ -95,10 +95,16 @@
     {
         @Html.Partial("_Jewelry", item)
     }
-    <button class="btn btn-large btn-block btn-success" type="button" onclick="location.href='@Url.Action("ChangeStatusToEquipped", "Equipment", new { id = item.GeneratedItem.Id })'">
+    <button class="btn btn-large btn-block btn-success" type="button" onclick="location.href='@Url.Action("ChangeStatusToChest", "Equipment", new { id = item.GeneratedItem.Id })'">
         <i class="glyphicon glyphicon-resize-full"></i> Załóż
     </button>
     <br />
 }
+
+        </td>
+
+</tr>
+</tbody>
+</table>
 </div>
 </div>

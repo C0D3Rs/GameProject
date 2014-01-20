@@ -5,10 +5,33 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Tworzenie Postaci</h2>
 
 @using (Html.BeginForm()) 
-{
+{<div class="wrap-header">
+		<div class="container">
+				<h1 class="logo"><a href="#" title="Muminki">Muminki</a></h1>
+</div>
+</div>
+
+<div class="container welcome">
+<h2>Tworzenie Postaci</h2>
+<div class="container service">	
+		<div class="one-third column">
+<img src="~/images/wojownik.png" alt=""/>
+<h2>wojownik</h2>
+</div>
+
+		<div class="one-third column">
+<img src="~/images/wloczykij.png" alt=""/>
+<h2>włócznik</h2>
+</div>
+		<div class="one-third column">
+<img src="~/images/mag.png" alt=""/>
+<h2>mag</h2>
+</div>
+
+</div>
+
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
@@ -35,6 +58,7 @@
             </div>
         </div>
     </div>
+</div><!-- end welcome -->	
 }
 
 @section Scripts {

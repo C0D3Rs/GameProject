@@ -3,74 +3,94 @@
 @{
     ViewBag.Title = "Index";
 }
-
+@using (Html.BeginForm()) 
+{
+@Html.AntiForgeryToken()
+<div class="container welcome">
 <h2>Karta Postaci</h2>
-
-<div>
-    <dl class="dl-horizontal">
-        <dt>Klasa</dt>
-        <dd>
+<div class="container">
+    <table class="tabela_statystyk_postaci">
+<tbody>
+<tr>
+        <td>Klasa</td>
+        <td>
             @EnumHelper.GetEnumDescription(Model.Class)
-        </dd>
-
-        <dt>Poziom</dt>
-        <dd>
+        </td>
+</tr>
+<tr>
+        <td>Poziom</td>
+        <td>
             @Html.DisplayFor(model => model.Level)
-        </dd>
-
-        <dt>Życia</dt>
-        <dd>
+        </td>
+</tr>
+<tr>
+        <td>Życia</td>
+        <td>
             @Html.DisplayFor(model => model.Life)
-        </dd>
-
-        <dt>Nazwa</dt>
-        <dd>
+        </td>
+</tr>
+<tr>
+        <td>Nazwa</td>
+        <td>
             @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>Doświadczenie</dt>
-        <dd>
+        </td>
+</tr>
+<tr>
+        <td>Doświadczenie</td>
+        <td>
             @Html.DisplayFor(model => model.Experience) / @Html.DisplayFor(model => model.ExperienceToLevel)
-        </dd>
-
-        <dt>Siła</dt>
-        <dd>
+        </td>
+</tr>
+<tr>
+        <td>Siła</td>
+        <td>
             @Html.DisplayFor(model => model.Strength)
-        </dd>
-
-        <dt>Zręczność</dt>
-        <dd>
+        </td>
+</tr>
+<tr>
+        <td>Zręczność</td>
+        <td>
             @Html.DisplayFor(model => model.Dexterity)
-        </dd>
-
-        <dt>Inteligencja</dt>
-        <dd>
+        </td>
+</tr>
+<tr>
+        <td>Inteligencja</td>
+        <td>
             @Html.DisplayFor(model => model.Intelligence)
-        </dd>
-
-        <dt>Witalność</dt>
-        <dd>
+        </td>
+</tr>
+<tr>
+        <td>Witalność</td>
+        <td>
             @Html.DisplayFor(model => model.Vitality)
-        </dd>
-
-        <dt>Obrażenia</dt>
-        <dd>
+        </td>
+</tr>
+<tr>
+        <td>Obrażenia</td>
+        <td>
             @Html.DisplayFor(model => model.MinDamage) - @Html.DisplayFor(model => model.MaxDamage)
-        </dd>
-
-        <dt>Pancerz</dt>
-        <dd>
+        </td>
+</tr>
+<tr>
+        <td>Pancerz</td>
+        <td>
             @Html.DisplayFor(model => model.Armor)
-        </dd>
-
-        <dt>Szansa na trafienie</dt>
-        <dd>
+        </td>
+</tr>
+<tr>
+        <td>Szansa na trafienie</td>
+        <td>
             @Html.DisplayFor(model => model.ChanceToHit)%
-        </dd>
-
-        <dt>Szybkość ataku</dt>
-        <dd>
+        </td>
+</tr>
+<tr>
+        <td>Szybkość ataku</td>
+        <td>
             @Html.DisplayFor(model => model.AttackSpeed)
-        </dd>
-    </dl>
+        </td>
+</tr>
+     </tbody>
+    </table>
 </div>
+</div><!-- end welcome -->	
+}

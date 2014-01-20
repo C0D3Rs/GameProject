@@ -1,26 +1,51 @@
 ﻿<!DOCTYPE html>
-<html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>@ViewBag.Title - Zabójcze Muminki</title>
+    @Styles.Render("~/Content/skeleton")
     @Scripts.Render("~/bundles/modernizr")
+    
+
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
 </head>
 <body>
-    <div class="container body-content">
-        <h1>Game Project</h1>
+	
 
         @Html.Partial("_FlashMessagePartial")
         @RenderBody()
 
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
 
-    @Scripts.Render("~/bundles/jquery")
+        	<footer class="sub-footer">
+			<div class="container">
+				<div class="eleven columns left">
+					<p>Copyright 2014 <a href="#">Muminek Group</a> | Design by <a href="#">Paweł Puchalski, Łukasz Paczyński, Miłosz Osiński, Jacek Gałka</a></p>
+				</div>	
+					
+				<div class="five columns right">
+					<h1 class="logo12"><a href="#" title="Muminki">Muminki</a></h1>
+				</div>	
+			</div>
+	</footer>
+    
+
+
+
+<!-- jQuery -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+
+
+    @Scripts.Render("~/bundles/jq.elastis")
+    @Scripts.Render("~/bundles/responsiveslides")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jq.easing")
     @RenderSection("scripts", required: false)
 </body>
 </html>

@@ -5,19 +5,33 @@
     ViewBag.Title = "Login";
 }
 
-<h2>Login</h2>
 
-<ul>
-    <li>@Html.ActionLink("Zarejestruj się", "Register", "Account")</li>
-    <li>@Html.ActionLink("Zaloguj", "Login", "Account")</li>
-</ul>
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
+
+<div class="wrap-header">
+		<div class="container">
+				<h1 class="logo"><a href="#" title="Muminki">Muminki</a></h1>
+				<nav class="primary">
+					<ul>
+						<li><a href="#" class="active">start</a> / </li>
+						<li><a href="#">rejestracja</a> / </li>
+						<li><a href="#">poradnik</a> / </li>
+						<li><a href="#">kontakt</a></li>
+					</ul>
+				</nav>
+   
+        
     
-    <div class="form-horizontal">
-        <div class="form-group">
+		</div>	
+		
+        
+		<div class="container slides">	
+<div class="four columns left">
+<h1>Logowanie</h1>
+            <div class="form-group">
             <label class="control-label col-md-2">Email</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Username)
@@ -34,9 +48,155 @@
         </div>
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Zaloguj" class="btn btn-default" />
+            <div >
+                <input class="more" type="submit" value="Zaloguj"  />
             </div>
         </div>
-    </div>
+
+        </div>
+<div class="twelve columns">
+				<ul class="rslides clearfix">
+                    <li>
+					<img src="~/images/slajd02.png" alt="" />
+					<p class="desc">Codzienne życie Muminków</p>
+				  </li>
+				  <li>
+				  	<img src="~/images/slajd01.jpg" alt="" />
+					<p class="desc">Tajne zgromadzenie Muminków</p>
+				  </li>
+				   
+				   <li>
+					<img src="~/images/slajd03.jpg" alt="" />
+					<p class="desc">Galeria sław</p>
+				  </li>
+				</ul>
+				<h2>Zakon Muminków</h2>
+		</div>
+        </div>
+	</div><!-- end wrap-header -->
+	<div class="container welcome">
+			<h1>Wstąp do mrocznego świata i stań się jednym z
+                wojowniczych <span class="green">Muminków</span>, gdzie każdy dzień to
+                nowe przygody pełne niebezpieczeństw
+                i fantastycznych nagród,
+                Od dziś na słowo <span class="green">Buka</span> już nigdy  nie
+                uśmiechniesz sie z politowaniem.</h1>
+			<span class="graphic"><img src="images/graphic1.png" alt="" /></span>
+	</div><!-- end welcome -->		
+		
+		
+	<div class="container service">	
+		<div class="one-third column">
+			<h2>Potwory</h2>
+			<p>W tej krainie  nie ma spokoju. Ani czas nie stoi w miejscu, ani nie ma bezpiecznego m iejsca na wylegiwanie się i objadanie smakołykami przygotowanymi prze Mame Muminka. Stwory żądne krwi, dusz i wina porzeczkowego nie spoczną aż sych pragnienień nie spełnią.
+            </p>
+			<a href="#" class="more">Czytaj więcej</a>
+		</div>
+		
+		<div class="one-third column">
+			<h2>Przygody</h2>
+			<p>Świat choć niebezpieczny jest tak ciekawy, że trudno usiedzieć w jednym miejscu zbyt długo. Każde ucztowanie kiedyś się kończy. Trzeba więc zakasać rękawy i ruszyć w poszukiwaniu skarbów dla Panny Mogotki, dla zdobycia chwały, dla wygłupów i innych takich tam.
+            </p>
+			<a href="#" class="more">Czytaj więcej</a>
+		</div>
+		
+		<div class="one-third column">
+			<h2>Ekwipunek</h2>
+			<p>Czasy są różne. Pory roku również. Nie tylko więc o modę się rozbija jakie gacie masz na sobie, ale i jak twardy czerep musisz ubrać by złośliwe filofagi rzucając kamieniami nie rozwaliły ci łba. I dbaj o broń. Tutaj wszystkie wskazówki jak to robić. Potwory czekają.
+            </p>
+			<a href="#" class="more">Czytaj więcej</a>
+		</div>
+	</div><!-- end service -->
+		
+	<div class="container recent-projects">
+	<h2>Screeny... ale nie z gry.</h2>
+	
+		<!-- Elastislide Carousel -->
+				<div id="carousel" class="es-carousel-wrapper">
+					<div class="es-carousel">
+						<ul>
+							<li><a href="#"><img src="~/images/project-1.jpg" alt="" /></a></li>
+							<li><a href="#"><img src="~/images/project-2.jpg" alt="" /></a></li>
+							<li><a href="#"><img src="~/images/project-3.jpg" alt="" /></a></li>
+							<li><a href="#"><img src="~/images/project-4.jpg" alt="" /></a></li>
+							<li><a href="#"><img src="~/images/project-5.jpg" alt="" /></a></li>
+							<li><a href="#"><img src="~/images/project-6.jpg" alt="" /></a></li>
+                            <li><a href="#"><img src="~/images/project-7.jpg" alt="" /></a></li>
+						</ul>
+					</div>
+				</div>
+				<!-- End Elastislide Carousel -->
+	</div><!-- end recent-projects -->
+
+	<div class="container testimonial">
+		<img src="~/images/MK.jpg" alt=""/>
+		<blockquote>
+			<p>W pewnej norze ziemnej mieszkał sobie pewien hobbit. Nie była to szkaradna, brudna, wilgotna nora, rojąca się od robaków i cuchnąca błotem, ani też sucha, naga, piaszczysta nora bez stołka, na którym by można usiąść, i bez dobrze zaopatrzonej spiżarni; była to nora hobbita, a to znaczy: nora z wygodami.</p>
+			<cite><strong>J.R.R. Tolkien</strong></cite>
+			<a href="#" target="_blank">ale to chyba inna bajka</a>
+		</blockquote>
+	</div><!-- end testimonial -->
+	
+	
+	<footer>	
+		<div class="container widgets">
+			<div class="one-third column  about">
+				<h2>O autorce</h2>
+				<img src="~/images/autorka.jpg" alt="" class="thumb"/>
+				<div>
+					<p>Tove Marika Jansson (ur. 9 sierpnia 1914 w Helsinkach, zm. 27 czerwca 2001 tamże) – fińska pisarka szwedzkojęzyczna, malarka, ilustratorka i rysowniczka komiksowa, znana najbardziej jako autorka książek o Muminkach. </p>
+					<ul>
+						<li><a href="#" target="_blank"><img src="~/images/facebook.png" alt="" /></a></li>
+						<li><a href="#" target="_blank"><img src="~/images/twitter.png" alt="" /></a></li>
+						<li><a href="#" target="_blank"><img src="~/images/rss.png" alt="" /></a></li>
+					</ul>
+				</div>
+			</div>
+			
+			<div class="one-third column  blog">
+				<h2>Nowości</h2>
+				<ul>
+					<li>
+						<p>Obecnie to wszystko jest jeszcze w fazie wstępnej a już trzeba prezentować bo termin</p>
+						<small>11.12.13 - Nowe pomysły</small>
+					</li>
+					<li>
+						<p>I jeszcze więcej nowych pomysłów, i jeszcze więcej...</p>
+						<small>12.13.14 - Termin ostateczny</small>
+					</li>
+				</ul>
+				<a class="dark-more">więcej</a>
+			</div>
+			
+			<div class="one-third column  tweet">
+				<h2>GitHub</h2>
+				<ul>
+					<li>
+						<p>Tam umieściliśmy wszystko  - <a href="https://github.com/C0D3Rs/GameProject">gitek</a></p>
+						<small>jakiś czas temu</small>
+					</li>
+					<li>
+						<p>Jak masz jakieś pytania odnośnie realizacji gry napisz - <a mail="andoryt@poczta.onet.pl">tutaj</a></p>
+						<small>też napisane jakiś czas temu, tylko wcześniej</small>
+					</li>
+				</ul>
+				<a class="dark-more">inne wpisy</a>
+			</div>
+		</div>
+	</footer>
+
+<script>
+    $(function () {
+        $(".rslides").responsiveSlides({
+            pager: true,
+            nav: true
+
+        });
+        $('#carousel').elastislide({
+            imageW: 300,
+            minItems: 3
+        });
+    });
+</script>
+
 }

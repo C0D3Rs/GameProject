@@ -5,7 +5,9 @@
 
 <h2>Obrazki</h2>
 <p>
-    @Html.ActionLink("Dodaj Obrazek", "Create", "Image" )
+    <a type="button" class="btn btn-success" href="@Url.Action("Create","Image")">
+        <i class="glyphicon glyphicon-plus"></i> Dodaj zdjęcie
+    </a>
 </p>
 <div class="row">
 @foreach (var image in Model) {
@@ -16,4 +18,3 @@
   </div>
 }
 </div>
-</table>

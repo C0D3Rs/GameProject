@@ -1,0 +1,77 @@
+﻿body {
+    background: url(../Images/tlo_bg.jpg) repeat;
+}
+.Menu1 {
+    border: 0px solid black;
+    display: block;
+    font-size: 12px;
+}
+
+.admin_menu {
+    color: white;
+}
+
+a.submenu, a.dropmenu {
+    color: white;
+}
+
+.main-menu-span {
+    margin-top: 50px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.body_container {
+    background: url(../Images/content_bg.jpg) repeat;
+    border-radius: 0px 0px 10px 10px;
+    float: left;
+    border: 0px solid black;
+    margin-top: 3%;
+}
+
+.hidden-sm {
+    display: inline-block;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.pool_grey {
+    background-color: lightgrey;
+}
+
+.img-rounded {
+    border: 3px solid black;
+}
+
+@media (min-width: 768px) {
+    .col-sm-10 {
+        width: 83.33333333333334%;
+    }
+}
+
+.breadcrumb {
+margin: -20px 0;
+border: 0;
+color: #aaa;
+background: transparent;
+-webkit-box-shadow: none;
+-moz-box-shadow: none;
+box-shadow: none;
+-webkit-border-radius: 2px;
+-moz-border-radius: 2px;
+border-radius: 2px;
+}
+
+.breadcrumb {
+padding: 8px 15px;
+margin-bottom: 20px;
+list-style: none;
+background-color: #f5f5f5;
+border-radius: 4px;
+}
+
+.hrPath {
+    border: 1px solid lightgrey;
+}

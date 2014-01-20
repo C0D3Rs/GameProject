@@ -55,7 +55,7 @@ $(document).ready(function () {
 
         <div class="form-group">
             <div class="col-md-offset-4 col-md-6">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Wstaw" class="btn btn-default" />
             </div>
         </div>
     </div>
@@ -66,5 +66,9 @@ $(document).ready(function () {
 </div>
 
 <div>
-    @Html.ActionLink("Wróć do listy", "Index")
+    <p>
+        <a type="button" class="btn btn-default" href="@Url.Action("Index", "Image")">
+            <i class="glyphicon glyphicon-arrow-left"></i> Wróć do listy
+        </a>
+    </p>
 </div>

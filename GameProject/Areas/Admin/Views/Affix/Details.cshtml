@@ -109,6 +109,7 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    <a type="button" class="btn btn-default" href="@Url.Action("Index", "Affix")">
+        <i class="glyphicon glyphicon-arrow-left"></i> Wróć do listy
+    </a>
 </p>

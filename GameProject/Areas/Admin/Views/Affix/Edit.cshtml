@@ -150,5 +150,9 @@
 }
 
 <div>
-    @Html.ActionLink("Wróć do listy", "Index")
+    <p>
+        <a type="button" class="btn btn-default" href="@Url.Action("Index", "Affix")">
+            <i class="glyphicon glyphicon-arrow-left"></i> Wróć do listy
+        </a>
+    </p>
 </div>

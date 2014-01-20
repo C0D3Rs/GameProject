@@ -22,8 +22,6 @@
 
         <div class="form-group">
             <label class="control-label col-md-2">Opis</label>
-
-            @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Description)
                 @Html.ValidationMessageFor(model => model.Description)
@@ -39,5 +37,7 @@
 }
 
 <div>
-    @Html.ActionLink("Wróć do listy", "Index")
+    <a type="button" class="btn btn-default" href="@Url.Action("Index", "Location")">
+        <i class="glyphicon glyphicon-arrow-left"></i> Wróć do listy
+    </a>
 </div>

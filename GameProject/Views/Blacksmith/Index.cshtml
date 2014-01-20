@@ -4,15 +4,22 @@
     ViewBag.Title = "Kowal";
 }
 
-<h2>Kowal</h2>
 
-<table class="table">
-    <tr>
+<div class="container welcome">
+<h2>Kowal</h2>
+<div class="container">
+    <table class="tabela_statystyk_postaci">
+<tbody>
+<tr>
         <th>Nazwa</th>
         <th>Wytrzymałość</th>
         <th>Cena</th>
         <th></th>
     </tr>
+
+
+
+    
 
 @foreach (var item in Model) {
     <tr>
@@ -38,5 +45,7 @@
         </td>
     </tr>
 }
-
+</tbody>
 </table>
+</div>
+</div>

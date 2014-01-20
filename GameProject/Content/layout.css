@@ -234,6 +234,13 @@ ul.rslides_tabs li.rslides_here a, ul.rslides_tabs li a:hover{
 	right: 0;
 	bottom: -7px;
 }
+.welcome1{
+	position: relative;
+	padding: 15px 0;
+
+	margin: 40px auto;
+}
+
 /* END WELCOME */
 
 

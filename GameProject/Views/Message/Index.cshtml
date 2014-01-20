@@ -13,7 +13,7 @@
         });
     });
 </script>
-
+<div class="container welcome">
 <h2>Ilość wszystkich wiadomości: (@ViewData["count_messages"]/10)</h2>
 <p>
     <a type="button" class="btn btn-success" href="@Url.Action("Create", "Message")">
@@ -21,8 +21,11 @@
     </a>
 </p>
 <br />
+</div>
+
 @using (Html.BeginForm("Delete", "Message", FormMethod.Post))
 {
+<div class="container welcome_bez">
     <table class="table">
         <tr id="tr_message">
             <th>
@@ -84,4 +87,5 @@
         }
     </table>
     <input type="submit" value="Usuń wiadomości" class="btn btn-primary" />
+</div>
 }

@@ -30,6 +30,19 @@ namespace GameProject
             bundles.Add(new StyleBundle("~/Content/admin-css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/admin-site.css"));
+            bundles.Add(new ScriptBundle("~/bundles/responsiveslides").Include(
+          "~/Scripts/responsiveslides.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/jq.easing").Include(
+                      "~/Scripts/jquery.easing.1.3.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/jq.elastis").Include(
+                      "~/Scripts/jquery.elastislide.js"));
+
+            bundles.Add(new StyleBundle("~/Content/skeleton").Include(
+                      "~/Content/base.css",
+                      "~/Content/skeleton.css",
+                      "~/Content/layout.css"));
         }
     }
 }

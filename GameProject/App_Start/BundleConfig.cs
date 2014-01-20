@@ -40,6 +40,7 @@ namespace GameProject
                       "~/Scripts/jquery.elastislide.js"));
 
             bundles.Add(new StyleBundle("~/Content/skeleton").Include(
+                      "~/Content/bootstrap.css", 
                       "~/Content/base.css",
                       "~/Content/skeleton.css",
                       "~/Content/layout.css"));

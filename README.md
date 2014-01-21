@@ -2,7 +2,7 @@
 #### Pomysł
 Opis projektu
 #### Architektura
-Projekt napisany jest w ASP.NET MVC3 Razor
+Projekt napisany jest w ASP.NET MVC5 Razor
 #### Hosting
 Darmowy hosting dla aplikacji ASP.NET z opcją automatycznego deploy-u z repo
 <p align="center" >
@@ -26,4 +26,3 @@ Pluginy:
 - [Łukasz Paczyński](https://github.com/luki00765)
 - [Miłosz Osiński](https://github.com/mosinski)
 - [Paweł Puchalski](https://github.com/defis)
-- [Robert Tomczak](https://github.com/roberttomczak)

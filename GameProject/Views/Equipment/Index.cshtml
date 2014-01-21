@@ -95,7 +95,7 @@
     {
         @Html.Partial("_Jewelry", item)
     }
-    <button class="btn btn-large btn-block btn-success" type="button" onclick="location.href='@Url.Action("ChangeStatusToChest", "Equipment", new { id = item.GeneratedItem.Id })'">
+    <button class="btn btn-large btn-block btn-success" type="button" onclick="location.href='@Url.Action("ChangeStatusToEquipped", "Equipment", new { id = item.GeneratedItem.Id })'">
         <i class="glyphicon glyphicon-resize-full"></i> Załóż
     </button>
     <br />

@@ -11,7 +11,7 @@
         <a href="@Url.Action("Details", "Location", new { id=model.Location.ID })">
             <div class="col-xs-12 col-md-3">
                 <div class="panel panel-primary">
-                 <img src="@Url.Action("Show","Image", new { imageName = model.Image.FileName })" />
+                 <img src="@Url.Action("Show","Image", new { imageName = model.Image.FileName })" width="220px" />
                     <div class="panel-footer">
                        @Html.DisplayFor(modelLocation => model.Location.Name)
                     </div>

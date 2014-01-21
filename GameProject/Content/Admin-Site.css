@@ -73,11 +73,22 @@ a.dropmenu:hover {
 
 .logo_title {
     font-size: 30px;
-    margin-left: 10px;
     color: white;
+    float: left;
 }
 
 a.logo_title, a.logo_title:hover {
     text-decoration: none;
     color: white;
+}
+
+.nawigacja {
+    position: absolute !important;
+}
+
+.footer_admin {
+    border: 0px solid red;
+    text-align: center;
+    color: white;
+    font-size: 20px;
 }

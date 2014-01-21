@@ -168,7 +168,7 @@
         @foreach(var one_monster in Model.Monsters) 
         {
         <tr id="@one_monster.Monster.Id" class="Monster">
-          <td><img src="@Url.Action("Show","Image", new { imageName = one_monster.Image.FileName })" class="img-rounded col-md-4" width="150px" /></td>
+          <td><img src="@Url.Action("Show","Image", new { imageName = one_monster.Image.FileName })" class="img-rounded col-md-4" width="150" /></td>
           <td>@Html.DisplayFor(model => one_monster.Monster.Name)</td>
           <td>@Html.DisplayFor(model => one_monster.Monster.Level)</td>
         </tr>

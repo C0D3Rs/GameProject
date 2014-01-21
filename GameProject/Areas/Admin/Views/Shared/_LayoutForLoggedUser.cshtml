@@ -7,12 +7,15 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/admin-css")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <a class="logo_title" href="@Url.Action("Index", "Dashboard")">GameProject</a>
-        <div class="container">
+    <div class="navbar navbar-inverse navbar-fixed-top nawigacja">
+
             <div class="navbar-header">
+                <a class="logo_title" href="@Url.Action("Index", "Dashboard")">GameProject</a>
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -21,8 +24,6 @@
 
             </div>
         </div>
-    </div>
-
 
     <div class="Menu1">
         <!-- start: Main Menu -->
@@ -79,11 +80,6 @@
         <!-- End Menu -->
     </div>
 
-
-
-
-
-
     <div class="body_container col-sm-10">
         <br />
         <hr class="hrPath" />
@@ -92,13 +88,10 @@
         @Html.Partial("_FlashMessagePartial")
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+        <footer class="footer_admin">
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
 </body>
 </html>
